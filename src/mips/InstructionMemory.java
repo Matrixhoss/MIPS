@@ -21,7 +21,7 @@ public class InstructionMemory {
 
     
 
-    public InstructionMemory(String instruction) {
+    public InstructionMemory(int[] Instruction) {
        
         
     }

@@ -128,6 +128,9 @@ public class Instruction {
         if (of.equals("IFormate")) {
             IFormateSet(instruction, i);
         }// end if of Iformate
+        if (of.equals("JFormate")) {
+            JFormateSet(instruction, i);
+        }// end if of Jformate
 
     }
     // set RForamte values
@@ -358,6 +361,7 @@ public class Instruction {
             i++;
         }
         line=Integer.parseInt(getString(LineChar));
+        System.out.println("Jump to line " + line);
     }
             
     // function to convert ArrayList of char to string 

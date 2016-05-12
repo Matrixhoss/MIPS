@@ -13,7 +13,7 @@ public class Console {
     private int numofins = 0;
     private String read = "";
     Scanner sc = new Scanner(System.in);
-    private int selectionCode =0;
+    private int selectionCode =1;
 
     public Console() {
 
@@ -23,7 +23,9 @@ public class Console {
         address = sc.nextInt();
         FileOrConsole();
         System.out.println(InstructionMemory.Instruction[address]);
-        InstructionMemory m = new InstructionMemory(InstructionMemory.Instruction[address]);
+        for (int i = 0; i < ins.size(); i++) {
+            Instruction m = new Instruction(ins.get(i));
+        }
     }
 
     // check the user use file or console to run the programe 
