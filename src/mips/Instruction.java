@@ -12,14 +12,16 @@ public class Instruction {
     int rtAddress = 0;
     int rdAddress = 0;
     int line = 0;
-    int[] ControlSignal = new int[6];
-    static int address;
+    int[] ControlSignal=new int[6];
+    static  int address;
+    String of;
     //binary for Reg
-    int[] rsAddressBinary = new int[5];
-    int[] rtAddressBinary = new int[5];
-    int[] rdAddressBinary = new int[5];
-    int[] constantBinary = new int[16];
-
+    int[] rsAddressBinary=new int[5];
+    int[] rtAddressBinary=new int[5];
+    int[] rdAddressBinary=new int[5];
+    int[] constantBinary=new int[16];
+    int[] shiftBinary={0,0,0,0,0};  
+    
     // constant in iFormate
     int IFormateConstant = 0;
 
@@ -48,6 +50,8 @@ public class Instruction {
         address = FAddress;
         Constants.Instruction[0] = "firstInstruction";
         ReadIns(instruction.toCharArray());
+        operationToBinary();
+        RegToBinary();
     }
 
     //for other instructions
@@ -56,13 +60,15 @@ public class Instruction {
         address += 4;
         Constants.Instruction[(address - FAddress) / 4] = "Instruction";
         ReadIns(instruction.toCharArray());
+        operationToBinary();
+        RegToBinary();
     }
 
     //for all operations in instruction 
     private void ReadIns(char[] instruction) {
         // create array of char to contan the opration
 
-        String of = "";
+        of = "";
         int i = 0;
         // while the char != " " (in the opration)
         while (instruction[i] != ' ') {
@@ -371,7 +377,58 @@ public class Instruction {
         line = Integer.parseInt(getString(LineChar));
         System.out.println("Jump to line " + line + '\n');
     }
-
+    //Operation to binary
+    private void operationToBinary(){
+        switch(opration){
+            case"add":
+                break;
+            case"addi":
+                break;    
+            case"sub":
+                break;    
+            case"lw":
+                break;
+            case"sw":
+                break;
+            case"sll":
+                break;
+            case"and":
+                break;
+            case"or":
+                break;
+            case"nor":
+                break;
+            case"bne":
+                break;
+            case"j":
+                break;
+            case"jal":
+                break;
+            case"jr":
+                break;
+            case"slt":
+                break;
+            case"slti":
+                break;
+            case"sltu":
+                break;
+            case"sltui":
+                break;    
+        }
+            
+    }
+    //transfer Reg to binary
+    private void RegToBinary(){
+      if(!of.equals("JFormate")){  
+        if(of.equals("RFormate")){
+            rdAddressBinary=Constants.getBin(rdAddress,5);
+        }
+        rsAddressBinary=Constants.getBin(rsAddress,5);
+        rtAddressBinary=Constants.getBin(rtAddress,5);
+        constantBinary=Constants.getBin(Constant,16);
+      }
+        
+    }
     // function to convert ArrayList of char to string 
     String getString(ArrayList<Character> list) {
         StringBuilder builder = new StringBuilder(list.size());
