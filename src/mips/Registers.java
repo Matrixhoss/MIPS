@@ -36,16 +36,16 @@ public class Registers {
    public static int $sp =0;
    public static int $fp =0;
    public static int $ra =0;
-   
+   private int ReadData1;
+   private int ReadData2;
    public Registers(int[]Reg1, int[]Reg2,int[]WrtReg, int[]WrtData){
        int LocReg1=Constants.BinToInt(Reg1);
        int LocReg2=Constants.BinToInt(Reg2);
 
-       int ReadData1;
-       int ReadData2;
+      
         for (int i=0;i<=Constants.reg.length;i++){
             if (i== LocReg1){
-            ReadData1=getValue(i);
+            this.ReadData1=getValue(i);
             }
                 
         }
@@ -59,7 +59,7 @@ public class Registers {
    }
    public int getValue(int Loc){
        for(int i=0;i<=Constants.reg.length;i++){
-       switch(Constants.reg[i]){
+       switch(Constants.reg[Loc]){
            case "$0":
                return $0;             
             case"$at":
@@ -132,5 +132,10 @@ public class Registers {
        return -1;
    }
    
-
+public int ReturnData1(){
+return this.ReadData1;
+}
+public int ReturnData2(){
+return this.ReadData2;
+}
 }
