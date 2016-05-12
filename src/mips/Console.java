@@ -13,7 +13,7 @@ public class Console {
     private int numofins = 0;
     private String read = "";
     Scanner sc = new Scanner(System.in);
-    private int selectionCode = 1;
+    private int selectionCode = 0;
 
     public Console() {
 
