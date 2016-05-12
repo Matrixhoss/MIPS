@@ -13,6 +13,8 @@ public class ControlUnit {
     public boolean ALUSrc;
     public boolean MemWrite;
     public boolean RegWrite;
+    public boolean Jump;
+    public boolean JumpReturn;
 
 //        this.RegDest;
 //        this.Branch;
@@ -26,6 +28,8 @@ ControlUnit(){
     
 }
 ControlUnit(int[] input){
+    this.JumpReturn=false;
+    this.Jump=false;
     generateSignals(input);
 }
     public void generateSignals(int[] input){
@@ -73,7 +77,17 @@ ControlUnit(int[] input){
         this.Branch=false;
         this.MemRead=false;
         this.MemtoReg=false;
-        //this.ALUOp;
+        this.ALUOp="00";
+        this.ALUSrc=true;
+        this.MemWrite=false;
+        this.RegWrite=true;
+    }
+    void GenerateJaLSignals(){
+        this.RegDest=false;
+        this.Branch=false;
+        this.MemRead=false;
+        this.MemtoReg=false;
+        this.ALUOp="00";
         this.ALUSrc=true;
         this.MemWrite=false;
         this.RegWrite=true;
@@ -108,6 +122,17 @@ ControlUnit(int[] input){
         this.MemWrite=false;
         this.RegWrite=false;
     }
+    void GenerateJumpSignals(){
+        this.RegDest=false;
+        this.Branch=false;
+        this.MemRead=false;
+        this.MemtoReg=false;
+        this.ALUOp="00";
+        this.ALUSrc=false;
+        this.MemWrite=false;
+        this.RegWrite=false;
+        this.Jump=true;
+    }
     void GenerateBneSignals(){
 //        this.RegDest=false;
 //        this.Branch=true;
@@ -118,5 +143,19 @@ ControlUnit(int[] input){
 //        this.MemWrite=false;
 //        this.RegWrite=false;
     }
-    // "nor", "j", "jal", "jr"
+    void GenerateJumpRSignals(){
+        this.RegDest=false;
+        this.Branch=false;
+        this.MemRead=false;
+        this.MemtoReg=false;
+        this.ALUOp="00";
+        this.ALUSrc=false;
+        this.MemWrite=false;
+        this.RegWrite=false;
+        this.Jump=true;
+        this.JumpReturn=true;
+    }
+    
+    
+    // "nor" , "bne"
 }
