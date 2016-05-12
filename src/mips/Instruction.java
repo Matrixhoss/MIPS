@@ -17,12 +17,12 @@ public class Instruction {
     static int address=0;
     String of;
     //binary for all ins
-    int[] OperationBinary = new int[6];
+    int[] OperationBinary=new int[6];
     int[] rsAddressBinary = new int[5];
     int[] rtAddressBinary = new int[5];
     int[] rdAddressBinary = new int[5];
     int[] constantBinary = new int[16];
-    int[] FunctionBinary = new int[6];
+    int[] FunctionBinary=new int[6];
     int[] shiftBinary = {0, 0, 0, 0, 0};
 
     // constant in iFormate
@@ -416,38 +416,71 @@ public class Instruction {
     private void operationToBinary() {
         switch (opration) {
             case "add":
+               OperationBinary=Constants.getBin(0, 6);
+               FunctionBinary=Constants.getBin(32, 6);
                 break;
             case "addi":
+                OperationBinary=Constants.getBin(8, 6);
+               FunctionBinary=Constants.getBin(0, 6);
                 break;
             case "sub":
+                OperationBinary=Constants.getBin(0, 6);
+               FunctionBinary=Constants.getBin(34, 6);
                 break;
             case "lw":
+                OperationBinary=Constants.getBin(35, 6);
+               FunctionBinary=Constants.getBin(0, 6);
                 break;
             case "sw":
+                OperationBinary=Constants.getBin(43, 6);
+               FunctionBinary=Constants.getBin(0, 6);
                 break;
             case "sll":
+                OperationBinary=Constants.getBin(0, 6);
+               FunctionBinary=Constants.getBin(0, 6);
                 break;
             case "and":
+                OperationBinary=Constants.getBin(0, 6);
+               FunctionBinary=Constants.getBin(36, 6);
                 break;
             case "or":
+                OperationBinary=Constants.getBin(0, 6);
+               FunctionBinary=Constants.getBin(37, 6);
                 break;
             case "nor":
+                
                 break;
             case "bne":
+                OperationBinary=Constants.getBin(5, 6);
+               FunctionBinary=Constants.getBin(0, 6);
                 break;
             case "j":
+                OperationBinary=Constants.getBin(2, 6);
+               FunctionBinary=Constants.getBin(0, 6);
                 break;
             case "jal":
+                OperationBinary=Constants.getBin(3, 6);
+               FunctionBinary=Constants.getBin(0, 6);
                 break;
             case "jr":
+                OperationBinary=Constants.getBin(8, 6);
+               FunctionBinary=Constants.getBin(0, 6);
                 break;
             case "slt":
+                OperationBinary=Constants.getBin(0, 6);
+               FunctionBinary=Constants.getBin(42, 6);
                 break;
             case "slti":
+                OperationBinary=Constants.getBin(10, 6);
+               FunctionBinary=Constants.getBin(0, 6);
                 break;
             case "sltu":
+                OperationBinary=Constants.getBin(0, 6);
+               FunctionBinary=Constants.getBin(41, 6);
                 break;
             case "sltui":
+                OperationBinary=Constants.getBin(9, 6);
+               FunctionBinary=Constants.getBin(0, 6);
                 break;
         }
 
