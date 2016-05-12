@@ -38,10 +38,10 @@ public class Registers {
    public static int $ra =0;
    private int ReadData1;
    private int ReadData2;
-   public Registers(int[]Reg1, int[]Reg2,int[]WrtReg, int[]WrtData){
+   public Registers(int[]Reg1, int[]Reg2,int[]WrtReg, int WrtData,int RegWrite){
        int LocReg1=Constants.BinToInt(Reg1);
        int LocReg2=Constants.BinToInt(Reg2);
-
+       int LocWrtReg=Constants.BinToInt(WrtReg);
       
         for (int i=0;i<=Constants.reg.length;i++){
             if (i== LocReg1){
@@ -51,7 +51,12 @@ public class Registers {
         }
         for (int i=0;i<=Constants.reg.length;i++){
             if (i== LocReg2){
-            ReadData2=getValue(i);
+            this.ReadData2=getValue(i);
+            }      
+        }
+        for (int i=0;i<=Constants.reg.length;i++){
+            if (i== LocWrtReg){
+            setValue(LocWrtReg,WrtData);
             }
                 
         }
@@ -130,6 +135,75 @@ public class Registers {
        
        }
        return -1;
+   }
+   public void setValue(int Loc, int x){
+       for(int i=0;i<=Constants.reg.length;i++){
+       switch(Constants.reg[Loc]){
+                        
+            case"$at":
+              $at=x;
+            case"$v0":
+                $v0=x;
+            case"$v1":
+                $v1=x;
+            case"$a0":
+                $a0=x;
+            case"$a1":
+                $a1=x;
+            case"$a2":
+                $a2=x;
+            case "$a3":
+                $a3=x;
+            case "$t0":
+                $t0=x;
+            case"$t1":
+                $t1=x;
+            case "$t2":
+                $t2=x;
+            case "$t3":
+                $t3=x;
+            case "$t4":
+                $t4=x;
+            case "$t5":
+                $t5=x;
+            case "$t6":
+                $t6=x;
+            case "$t7":
+                $t7=x;
+            case "$s0":
+                $s0=x;
+            case "$s1":
+                $s1=x;
+            case "$s2":
+                $s2=x;
+            case "$s3":
+                $s3=x;
+            case "$s4":
+                $s4=x;
+            case "$s5":
+                $s5=x;
+            case "$s6":
+                $s6=x;
+            case "$s7":
+                $s7=x;
+            case "$t8":
+                $t8=x;
+            case"$t9":
+                $t9=x;
+            case "$gp":
+                $gp=x;
+            case "$sp":
+                $sp=x;
+            case "$fp":
+                $fp=x;
+            case "$ra":
+                $ra=x;
+ 
+       }
+       
+       
+       }
+      
    }
    
 public int ReturnData1(){
