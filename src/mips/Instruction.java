@@ -5,6 +5,7 @@ import java.util.ArrayList;
 public class Instruction {
 
     String instruction;
+    int[] InstructionBinary=new int[32];
     int[] BinaryCode=new int[32];
     int FAddress;
     int Constant;
@@ -15,11 +16,13 @@ public class Instruction {
     int[] ControlSignal=new int[6];
     static  int address;
     String of;
-    //binary for Reg
+    //binary for all ins
+    int[] OperationBinary=new int[6];
     int[] rsAddressBinary=new int[5];
     int[] rtAddressBinary=new int[5];
     int[] rdAddressBinary=new int[5];
     int[] constantBinary=new int[16];
+    int[] FunctionBinary=new int[6]; 
     int[] shiftBinary={0,0,0,0,0};  
     
     // constant in iFormate
@@ -64,7 +67,32 @@ public class Instruction {
         RegToBinary();
         
     }
-
+    private void InsToBinary(){
+        int j=0;
+        for(int i=0;i<6;i++,j++){
+            InstructionBinary[j]=OperationBinary[i];
+        }
+        if(!of.equals("JFormat")){
+        for(int i=0;i<5;i++,j++)
+            InstructionBinary[j]=rsAddressBinary[i];
+        for(int i=0;i<5;i++,j++)
+            InstructionBinary[j]=rtAddressBinary[i];
+        if(of.equals("Rformat")){
+            for(int i=0;i<5;i++,j++)
+                InstructionBinary[j]=rdAddressBinary[i];
+            for(int i=0;i<5;i++,j++)
+                InstructionBinary[j]=shiftBinary[i];
+            for(int i=0;i<6;i++,j++)
+                InstructionBinary[j]=FunctionBinary[i];
+        }
+        else if(of.equals("IFormat")){
+            for(int i=0;i<16;i++,j++)
+                InstructionBinary[j]=constantBinary[i];
+        }
+      }
+      
+        
+    }
     //for all operations in instruction 
     private void ReadIns(char[] instruction) {
         // create array of char to contan the opration
