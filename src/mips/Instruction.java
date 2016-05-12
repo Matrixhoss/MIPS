@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class Instruction {
 
     String instruction;
-    int[] BinaryCode = new int[32];
+    int[] BinaryCode=new int[32];
     int FAddress;
     int Constant;
     int rsAddress = 0;
@@ -24,14 +24,14 @@ public class Instruction {
     
     // constant in iFormate
     int IFormateConstant = 0;
-
+    
     ArrayList<Character> oprationChar = new ArrayList<Character>();
     ArrayList<Character> rsChar = new ArrayList<Character>();
     ArrayList<Character> rtChar = new ArrayList<Character>();
     ArrayList<Character> rdChar = new ArrayList<Character>();
     ArrayList<Character> addressChar = new ArrayList<Character>();
     ArrayList<Character> LineChar = new ArrayList<Character>();
-
+    
     // Check found boolean
     boolean opFound = false;
     boolean rsFound = false;
@@ -429,6 +429,7 @@ public class Instruction {
       }
         
     }
+    
     // function to convert ArrayList of char to string 
     String getString(ArrayList<Character> list) {
         StringBuilder builder = new StringBuilder(list.size());
