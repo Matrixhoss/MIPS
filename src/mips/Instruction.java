@@ -14,7 +14,7 @@ public class Instruction {
     int rdAddress = 0;
     int line = 0;
     int[] ControlSignal = new int[6];
-    static int address;
+    static int address=0;
     String of;
     //binary for all ins
     int[] OperationBinary = new int[6];
@@ -46,26 +46,20 @@ public class Instruction {
     String rt;
     String rd;
 
-    //for put first address
+
     public Instruction(int FAddress, String ins) {
+        //for the first instruction
+        if(this.FAddress==0){
+            FAddress = FAddress;
+            address = FAddress;
+        }
+        else//for other instruction
+            address+=4;
         instruction = ins;
-        FAddress = FAddress;
-        address = FAddress;
 //        Constants.Instruction[0] = "firstInstruction";
         ReadIns(instruction.toCharArray());
         operationToBinary();
         RegToBinary();
-    }
-
-    //for other instructions
-    public Instruction(String ins) {
-        instruction = ins;
-        address += 4;
-        //Constants.Instruction[(address - FAddress) / 4] = "Instruction";
-        ReadIns(instruction.toCharArray());
-        operationToBinary();
-        RegToBinary();
-
     }
 
     private void InsToBinary() {
