@@ -103,6 +103,7 @@ public class Instruction {
 
         of = "";
         int i = 0;
+        System.out.println(Constants.ANSI_BLUE+this.instruction+Constants.ANSI_RESET);
         // while the char != " " (in the opration)
         while (instruction[i] != ' ') {
 
