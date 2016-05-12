@@ -125,6 +125,7 @@ public class InstructionMemory {
         for (int j = 0; j < Constants.reg.length; j++) {
             if (rs.equals(Constants.reg[j])) {
                 rsFound = true;
+                rsAddress = j ;
                 System.out.println("Reg is found rs in line " + (line + 1));
                 break;
             }
@@ -153,6 +154,7 @@ public class InstructionMemory {
         for (int j = 0; j < Constants.reg.length; j++) {
             if (rt.equals(Constants.reg[j])) {
                 rtFound = true;
+                rtAddress = j;
                 System.out.println("Reg is found rt in line " + (line + 1));
                 break;
             }
@@ -187,6 +189,7 @@ public class InstructionMemory {
         for (int j = 0; j < Constants.reg.length; j++) {
             if (rd.equals(Constants.reg[j])) {
                 rdFound = true;
+                rdAddress = j ;
                 System.out.println("Reg is found rd in line " + (line + 1));
                 break;
             }
@@ -218,6 +221,7 @@ public class InstructionMemory {
         for (int j = 0; j < Constants.reg.length; j++) {
             if (rs.equals(Constants.reg[j])) {
                 rsFound = true;
+                rsAddress = j ;
                 System.out.println("Reg is found rs in line " + (line + 1));
                 break;
             }
@@ -258,6 +262,7 @@ public class InstructionMemory {
             for (int j = 0; j < Constants.reg.length; j++) {
                 if (rt.equals(Constants.reg[j])) {
                     rtFound = true;
+                    rtAddress = j ;
                     System.out.println("Reg is found rt in line " + (line + 1));
                     break;
                 }
@@ -289,6 +294,7 @@ public class InstructionMemory {
             for (int j = 0; j < Constants.reg.length; j++) {
                 if (rt.equals(Constants.reg[j])) {
                     rtFound = true;
+                    rtAddress = j ;
                     System.out.println("Reg is found rt in line " + (line + 1));
                     break;
                 }
@@ -315,7 +321,7 @@ public class InstructionMemory {
                 }
             
             }
-            
+            // set the IFormat Constant 
             IFormateConstant = Integer.parseInt(getString(addressChar));
             
         }
