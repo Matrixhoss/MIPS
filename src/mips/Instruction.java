@@ -16,7 +16,7 @@ public class Instruction {
     int[] ControlSignal=new int[6];
     static  int address;
     //binary for Reg
-    int[] rsAddressBinary=new int[5];
+    int[] rsAdsBinadresry=new int[5];
     int[] rtAddressBinary=new int[5];
     int[] rdAddressBinary=new int[5];
     int[] constantBinary=new int[16];  
