@@ -23,7 +23,7 @@ public class Console {
         FAdress = sc.nextInt();
         FileOrConsole();
         for (int i = 0; i < ins.size(); i++) {
-            Constants.Instructions[i] = new Instruction(FAdress,ins.getLast());
+            Constants.Instructions[i] = new Instruction(FAdress,ins.get(i));
         }
     }
 
