@@ -31,6 +31,37 @@ public class Constants {
             return 0;
         }
     }
-    
+    public static int[] IntToBin(int x,String Type){
+     int size=0;
+     int [] y= new int[size];
+     switch (Type){
+         case"5bits":
+            size=5;
+         break;
+         case"6bits":  
+            size=6;
+          break;
+         case"16bits":
+            size=16;
+          break;
+         case"32bits":
+            size=32;
+          break;
+     }
+     y=getBin(x,size);
+    return y;
+    }
+    public static int[] getBin(int n,int size){
+        int [] a =new int [size];
+        while(n>0){
+              a[size-1]=n%2;
+              n=n/2;
+              size--;   
+        }
+        return a;
+    }
 }
+
+        
+
 
