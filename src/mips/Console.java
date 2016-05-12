@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.util.*;
 
 public class Console {
-
+    private int FAdress;
     private int address = 0;
     private LinkedList<String> ins = new LinkedList<String>();
     private int numofins = 0;
@@ -20,11 +20,10 @@ public class Console {
         // Scanner s = new Scanner (System.in);
         System.out.println("Initializing Mips Simolator ");
         System.out.println("Enter the frist address ");
-        address = sc.nextInt();
+        FAdress = sc.nextInt();
         FileOrConsole();
-        System.out.println(InstructionMemory.Instruction[address]);
         for (int i = 0; i < ins.size(); i++) {
-            Instruction m = new Instruction(ins.get(i));
+            Constants.Instructions[i] = new Instruction(FAdress,ins.getLast());
         }
     }
 
@@ -43,7 +42,7 @@ public class Console {
                         break;
                     }
                     ins.add(read + " ");
-                    Constants.Instructions[address] = new Instruction(ins.getLast());
+                    
                     numofins++;
                 }
                 br.close();
