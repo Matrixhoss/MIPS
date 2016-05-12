@@ -54,12 +54,14 @@ public class Registers {
             this.ReadData2=getValue(i);
             }      
         }
+        if (RegWrite==1){
         for (int i=0;i<=Constants.reg.length;i++){ //Writing the data in the Write register
             if (i== LocWrtReg){
             setValue(LocWrtReg,WrtData);    
             }
                 
         }
+       }
    
    }
    public int getValue(int Loc){
