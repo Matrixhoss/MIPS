@@ -43,20 +43,20 @@ public class Registers {
        int LocReg2=Constants.BinToInt(Reg2);
        int LocWrtReg=Constants.BinToInt(WrtReg);
       
-        for (int i=0;i<=Constants.reg.length;i++){
+        for (int i=0;i<=Constants.reg.length;i++){//Obtaining the value of ReadData1
             if (i== LocReg1){
             this.ReadData1=getValue(i);
             }
                 
         }
-        for (int i=0;i<=Constants.reg.length;i++){
+        for (int i=0;i<=Constants.reg.length;i++){ //Obatining the value of ReadData2
             if (i== LocReg2){
             this.ReadData2=getValue(i);
             }      
         }
-        for (int i=0;i<=Constants.reg.length;i++){
+        for (int i=0;i<=Constants.reg.length;i++){ //Writing the data in the Write register
             if (i== LocWrtReg){
-            setValue(LocWrtReg,WrtData);
+            setValue(LocWrtReg,WrtData);    
             }
                 
         }
@@ -64,7 +64,7 @@ public class Registers {
    }
    public int getValue(int Loc){
        for(int i=0;i<=Constants.reg.length;i++){
-       switch(Constants.reg[Loc]){
+       switch(Constants.reg[Loc]){  //To determine which register's value would be set as ReadData1 or ReadData2
            case "$0":
                return $0;             
             case"$at":
@@ -138,7 +138,7 @@ public class Registers {
    }
    public void setValue(int Loc, int x){
        for(int i=0;i<=Constants.reg.length;i++){
-       switch(Constants.reg[Loc]){
+       switch(Constants.reg[Loc]){ //To determine which register are we going to write the data into
                         
             case"$at":
               $at=x;
