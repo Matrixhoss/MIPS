@@ -11,10 +11,11 @@ public class MIPS {
     //  TheFrame f = new TheFrame() ;
     
     Console c = new Console();
-    //int []x={0};
-    //x=Constants.IntToBin(7,"5bits");
-     //   for (int i = 0; i < 5; i++) {
-     //      System.out.print(x[i]);
+    
+    
+    //x=Constants.IntToBin(7,"7bits");
+      //  for (int i = 0; i < 6; i++) {
+      //    System.out.print(x[i]);
       //  }
     
     }

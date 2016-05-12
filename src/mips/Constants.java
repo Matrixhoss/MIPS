@@ -12,7 +12,7 @@ public class Constants {
     public static final String[] IFormate = {"addi", "lw", "sw", "beq", "bne", "stli", "stlui", "sll"};
     public static final String[] RFormate = {"add", "sub", "and", "or", "nor", "slt", "sltu"};
     public static final String[] JFormate = {"j", "jal", "jr"};
-    public static String [] Instruction  = new String [1000];
+    public static Instruction [] Instructions  = new Instruction [1000];
     public static int [] Memory = new int [1000] ;
 
     public static int Mux(int x, int y, int selection) {

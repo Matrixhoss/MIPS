@@ -5,36 +5,36 @@ import java.util.ArrayList;
 public class Instruction {
 
     String instruction;
-    int[] InstructionBinary=new int[32];
-    int[] BinaryCode=new int[32];
+    int[] InstructionBinary = new int[32];
+    int[] BinaryCode = new int[32];
     int FAddress;
     int Constant;
     int rsAddress = 0;
     int rtAddress = 0;
     int rdAddress = 0;
     int line = 0;
-    int[] ControlSignal=new int[6];
-    static  int address;
+    int[] ControlSignal = new int[6];
+    static int address;
     String of;
     //binary for all ins
-    int[] OperationBinary=new int[6];
-    int[] rsAddressBinary=new int[5];
-    int[] rtAddressBinary=new int[5];
-    int[] rdAddressBinary=new int[5];
-    int[] constantBinary=new int[16];
-    int[] FunctionBinary=new int[6]; 
-    int[] shiftBinary={0,0,0,0,0};  
-    
+    int[] OperationBinary = new int[6];
+    int[] rsAddressBinary = new int[5];
+    int[] rtAddressBinary = new int[5];
+    int[] rdAddressBinary = new int[5];
+    int[] constantBinary = new int[16];
+    int[] FunctionBinary = new int[6];
+    int[] shiftBinary = {0, 0, 0, 0, 0};
+
     // constant in iFormate
     int IFormateConstant = 0;
-    
+
     ArrayList<Character> oprationChar = new ArrayList<Character>();
     ArrayList<Character> rsChar = new ArrayList<Character>();
     ArrayList<Character> rtChar = new ArrayList<Character>();
     ArrayList<Character> rdChar = new ArrayList<Character>();
     ArrayList<Character> addressChar = new ArrayList<Character>();
     ArrayList<Character> LineChar = new ArrayList<Character>();
-    
+
     // Check found boolean
     boolean opFound = false;
     boolean rsFound = false;
@@ -51,7 +51,7 @@ public class Instruction {
         instruction = ins;
         FAddress = FAddress;
         address = FAddress;
-        Constants.Instruction[0] = "firstInstruction";
+//        Constants.Instruction[0] = "firstInstruction";
         ReadIns(instruction.toCharArray());
         operationToBinary();
         RegToBinary();
@@ -61,38 +61,48 @@ public class Instruction {
     public Instruction(String ins) {
         instruction = ins;
         address += 4;
-        Constants.Instruction[(address - FAddress) / 4] = "Instruction";
+        //Constants.Instruction[(address - FAddress) / 4] = "Instruction";
         ReadIns(instruction.toCharArray());
         operationToBinary();
         RegToBinary();
-        
+
     }
-    private void InsToBinary(){
-        int j=0;
-        for(int i=0;i<6;i++,j++){
-            InstructionBinary[j]=OperationBinary[i];
+
+    private void InsToBinary() {
+        int j = 0;
+        // set frist 6 bit in instruction as opration
+        for (int i = 0; i < 6; i++, j++) {
+            InstructionBinary[j] = OperationBinary[i];
         }
-        if(!of.equals("JFormat")){
-        for(int i=0;i<5;i++,j++)
-            InstructionBinary[j]=rsAddressBinary[i];
-        for(int i=0;i<5;i++,j++)
-            InstructionBinary[j]=rtAddressBinary[i];
-        if(of.equals("Rformat")){
-            for(int i=0;i<5;i++,j++)
-                InstructionBinary[j]=rdAddressBinary[i];
-            for(int i=0;i<5;i++,j++)
-                InstructionBinary[j]=shiftBinary[i];
-            for(int i=0;i<6;i++,j++)
-                InstructionBinary[j]=FunctionBinary[i];
+        if (!of.equals("JFormat")) {
+            // if instruction is Jformat set next 5 bit for rs and next 5 bit for rt
+            for (int i = 0; i < 5; i++, j++) {
+                InstructionBinary[j] = rsAddressBinary[i];
+            }
+            for (int i = 0; i < 5; i++, j++) {
+                InstructionBinary[j] = rtAddressBinary[i];
+            }
+            if (of.equals("Rformat")) {
+                // if instruction is Rformat set next 5 bit for rt address and next 5 for rd and next 6 for function     
+                for (int i = 0; i < 5; i++, j++) {
+                    InstructionBinary[j] = rdAddressBinary[i];
+                }
+                for (int i = 0; i < 5; i++, j++) {
+                    InstructionBinary[j] = shiftBinary[i];
+                }
+                for (int i = 0; i < 6; i++, j++) {
+                    InstructionBinary[j] = FunctionBinary[i];
+                }
+            } // if instruction is Iformat set next 16 bit for the constant 
+            else if (of.equals("IFormat")) {
+                for (int i = 0; i < 16; i++, j++) {
+                    InstructionBinary[j] = constantBinary[i];
+                }
+            }
         }
-        else if(of.equals("IFormat")){
-            for(int i=0;i<16;i++,j++)
-                InstructionBinary[j]=constantBinary[i];
-        }
-      }
-      
-        
+
     }
+
     //for all operations in instruction 
     private void ReadIns(char[] instruction) {
         // create array of char to contan the opration
@@ -406,59 +416,70 @@ public class Instruction {
         line = Integer.parseInt(getString(LineChar));
         System.out.println("Jump to line " + line + '\n');
     }
+
     //Operation to binary
-    private void operationToBinary(){
-        switch(opration){
-            case"add":
+    private void operationToBinary() {
+        switch (opration) {
+            case "add":
                 break;
-            case"addi":
-                break;    
-            case"sub":
-                break;    
-            case"lw":
+            case "addi":
                 break;
-            case"sw":
+            case "sub":
                 break;
-            case"sll":
+            case "lw":
                 break;
-            case"and":
+            case "sw":
                 break;
-            case"or":
+            case "sll":
                 break;
-            case"nor":
+            case "and":
                 break;
-            case"bne":
+            case "or":
                 break;
-            case"j":
+            case "nor":
                 break;
-            case"jal":
+            case "bne":
                 break;
-            case"jr":
+            case "j":
                 break;
-            case"slt":
+            case "jal":
                 break;
-            case"slti":
+            case "jr":
                 break;
-            case"sltu":
+            case "slt":
                 break;
-            case"sltui":
-                break;    
+            case "slti":
+                break;
+            case "sltu":
+                break;
+            case "sltui":
+                break;
         }
-            
+
     }
+
     //transfer Reg to binary
-    private void RegToBinary(){
-      if(!of.equals("JFormate")){  
-        if(of.equals("RFormate")){
-            rdAddressBinary=Constants.getBin(rdAddress,5);
+    private void RegToBinary() {
+        if (!of.equals("JFormate")) {
+            if (of.equals("RFormate")) {
+                rdAddressBinary = Constants.getBin(rdAddress, 5);
+            }
+            rsAddressBinary = Constants.getBin(rsAddress, 5);
+            rtAddressBinary = Constants.getBin(rtAddress, 5);
+            constantBinary = Constants.getBin(IFormateConstant, 16);
         }
-        rsAddressBinary=Constants.getBin(rsAddress,5);
-        rtAddressBinary=Constants.getBin(rtAddress,5);
-        constantBinary=Constants.getBin(IFormateConstant,16);
-      }
-        
+
+    }
+
+    // return the instruction in binary 
+    public int[] getInstructionBinary() {
+        return InstructionBinary;
     }
     
+    public void setInstruction(String instruction){
+    this.instruction = instruction ;
+    }
+
     // function to convert ArrayList of char to string 
     String getString(ArrayList<Character> list) {
         StringBuilder builder = new StringBuilder(list.size());
@@ -468,4 +489,3 @@ public class Instruction {
         return builder.toString();
     }
 }
-
