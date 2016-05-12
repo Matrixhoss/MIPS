@@ -300,7 +300,7 @@ public class InstructionMemory {
                 System.out.println(rs.length());
                 return;
             } // end if
-            System.out.println(addressChar.isEmpty());
+            
             
             // find constant of iformat
             while (true) {
