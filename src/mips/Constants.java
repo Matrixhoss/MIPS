@@ -59,7 +59,15 @@ public class Constants {
               size--;   
         }
         return a;
-    } 
+    }
+    
+    public static int BinToInt (int [] x){
+        int y = 0 ;
+        for (int i = 0; i < x.length; i++) {
+            y =(int) (y + (x[i]*Math.pow(2, i)));
+        }
+    return y ;
+    }
 }
 
         
