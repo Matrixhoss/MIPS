@@ -118,4 +118,5 @@ ControlUnit(int[] input){
 //        this.MemWrite=false;
 //        this.RegWrite=false;
     }
+    // "nor", "j", "jal", "jr"
 }
