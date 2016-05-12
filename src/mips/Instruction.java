@@ -98,7 +98,7 @@ public class Instruction {
     }
 
     //for all operations in instruction 
-    private void ReadIns(char[] instruction) {
+   private void ReadIns(char[] instruction) {
         // create array of char to contan the opration
 
         of = "";
@@ -120,14 +120,14 @@ public class Instruction {
         for (int j = 0; j < Constants.oprations.length; j++) {
             if (opration.equals(Constants.oprations[j])) {
                 opFound = true;
-                System.out.println("opration is found");
+                System.out.println(Constants.ANSI_GREEN + "opration is found" + Constants.ANSI_RESET);
                 // the opration is right 
                 // 1 - check if the opration is IFormate
                 for (int k = 0; k < Constants.IFormate.length; k++) {
                     if (opration.equals(Constants.IFormate[k])) {
                         // set opration formate   
-                        of = "IFormate";
-                        System.out.println("opration is IFormate");
+                        of = "IFormat";
+                        System.out.println("opration is IFormat");
                         // brack from the big loop 
                         break Lo;
                     }
@@ -135,8 +135,8 @@ public class Instruction {
                 for (int k = 0; k < Constants.RFormate.length; k++) {
                     if (opration.equals(Constants.RFormate[k])) {
                         // set opration formate  
-                        of = "RFormate";
-                        System.out.println("opration is RFormate");
+                        of = "RFormat";
+                        System.out.println("opration is RFormat");
                         // brack from the big loop 
                         break Lo;
                     }
@@ -144,13 +144,12 @@ public class Instruction {
                 for (int k = 0; k < Constants.JFormate.length; k++) {
                     if (opration.equals(Constants.JFormate[k])) {
                         // set opration formate  
-                        of = "JFormate";
-                        System.out.println("opration is JFormate");
+                        of = "JFormat";
+                        System.out.println("opration is JFormat");
                         // brack from the big loop 
                         break Lo;
                     }
-                } 
-                
+                }
 
             }// opration is not found in opration list 
 
@@ -159,18 +158,19 @@ public class Instruction {
         // if opration not found in Constant oprations 
         if (opFound == false) {
 
-            System.err.println("The optation is Not found in line " + (line + 1));
+            System.out.println(Constants.ANSI_RED + "The optation is Not found in line " + (line + 1) + Constants.ANSI_RESET);
+            System.out.println(Constants.ANSI_RED + "Error in " + opration + Constants.ANSI_RESET);
             return;
         }
 
-        if (of.equals("RFormate")) {
+        if (of.equals("RFormat")) {
             RFormateSet(instruction, i);
         }// end if of Rformate
 
-        if (of.equals("IFormate")) {
+        if (of.equals("IFormat")) {
             IFormateSet(instruction, i);
         }// end if of Iformate
-        if (of.equals("JFormate")) {
+        if (of.equals("JFormat")) {
             JFormateSet(instruction, i);
         }// end if of Jformate
 
@@ -194,13 +194,13 @@ public class Instruction {
             if (rs.equals(Constants.reg[j])) {
                 rsFound = true;
                 rsAddress = j;
-                System.out.println("Reg is found rs in line " + (line + 1));
+                System.out.println("Reg rs is found in line " + (line + 1));
                 break;
             }
 
         } // end for 
         if (rsFound = false) {
-            System.err.println("Reg rs is not found in line " + (line + 1));
+            System.out.println(Constants.ANSI_RED + "Reg rs is not found in line " + (line + 1) + Constants.ANSI_RED);
             System.out.println(rs);
             System.out.println(rs.length());
             return;
@@ -223,13 +223,13 @@ public class Instruction {
             if (rt.equals(Constants.reg[j])) {
                 rtFound = true;
                 rtAddress = j;
-                System.out.println("Reg is found rt in line " + (line + 1));
+                System.out.println("Reg rt is found in line " + (line + 1));
                 break;
             }
 
         } // end for 
         if (rtFound = false) {
-            System.out.println("Reg rs is not found in line " + (line + 1));
+            System.out.println(Constants.ANSI_RED + "Reg rs is not found in line " + (line + 1) + Constants.ANSI_RED);
             System.out.println(rs);
             System.out.println(rs.length());
             return;
@@ -245,7 +245,7 @@ public class Instruction {
                 i++;
             } else {
                 if (rdChar.size() < 3) {
-                    System.err.println("Error in Line " + line);
+                    System.out.println(Constants.ANSI_RED + "Error in Line " + (line + 1) + Constants.ANSI_RESET);
                 }
                 break;
             }
@@ -264,9 +264,7 @@ public class Instruction {
 
         } // end for 
         if (rdFound = false) {
-            System.out.println("Reg rd is not found in line " + (line + 1));
-            System.out.println(rs);
-            System.out.println(rs.length());
+            System.out.println(Constants.ANSI_RED + "Reg rd is not found in line " + (line + 1) + Constants.ANSI_RESET);
 
         }
 
@@ -297,9 +295,8 @@ public class Instruction {
         } // end for 
         // if the reg not found 
         if (rsFound = false) {
-            System.err.println("Reg rs is not found in line " + (line + 1));
-            System.out.println(rs);
-            System.out.println(rs.length());
+            System.out.println(Constants.ANSI_RED + "Reg rd is not found in line " + (line + 1) + Constants.ANSI_RESET);
+            System.out.println(Constants.ANSI_RED + rs + Constants.ANSI_RESET);
             return;
         } // end if 
 
@@ -337,9 +334,8 @@ public class Instruction {
 
             } // end for 
             if (rtFound = false) {
-                System.err.println("Reg rs is not found in line " + (line + 1));
-                System.out.println(rs);
-                System.out.println(rs.length());
+                System.out.println(Constants.ANSI_RED + "Reg rd is not found in line " + (line + 1) + Constants.ANSI_RESET);
+                System.out.println(Constants.ANSI_RED+rt+Constants.ANSI_RESET);
                 return;
             } // end if
 
@@ -369,9 +365,8 @@ public class Instruction {
 
             } // end for 
             if (rtFound = false) {
-                System.out.println("Reg rs is not found in line " + (line + 1));
-                System.out.println(rs);
-                System.out.println(rs.length());
+            System.out.println(Constants.ANSI_RED + "Reg rd is not found in line " + (line + 1) + Constants.ANSI_RESET);
+            System.out.println(Constants.ANSI_RED+rt+Constants.ANSI_RESET);
                 return;
             } // end if
 
@@ -389,8 +384,11 @@ public class Instruction {
 
             }
             // set the IFormat Constant 
+            try{
             IFormateConstant = Integer.parseInt(getString(addressChar));
             System.out.println("The Constant is " + IFormateConstant + " in line " + (line + 1) + '\n');
+            }catch(NumberFormatException e){System.out.println(Constants.ANSI_RED+"Constant must be number in line "+(line+1)+Constants.ANSI_RESET);}
+            
         }
 
     }
@@ -408,7 +406,9 @@ public class Instruction {
             }
 
         }
-        line = Integer.parseInt(getString(LineChar));
+        try{
+            line = Integer.parseInt(getString(LineChar));
+            }catch(ExceptionInInitializerError e){System.out.println(Constants.ANSI_RED+"Jump address must be number in line"+(line+1)+Constants.ANSI_RESET);}
         System.out.println("Jump to line " + line + '\n');
     }
 
