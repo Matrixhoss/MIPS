@@ -1,4 +1,3 @@
-
 package mips;
 
 import java.util.ArrayList;
@@ -63,6 +62,7 @@ public class Instruction {
         ReadIns(instruction.toCharArray());
         operationToBinary();
         RegToBinary();
+        
     }
 
     //for all operations in instruction 
@@ -426,7 +426,7 @@ public class Instruction {
         }
         rsAddressBinary=Constants.getBin(rsAddress,5);
         rtAddressBinary=Constants.getBin(rtAddress,5);
-        constantBinary=Constants.getBin(Constant,16);
+        constantBinary=Constants.getBin(IFormateConstant,16);
       }
         
     }
@@ -440,3 +440,4 @@ public class Instruction {
         return builder.toString();
     }
 }
+
