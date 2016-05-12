@@ -241,7 +241,7 @@ public class InstructionMemory {
                 i++;
             }
             i++;
-            IFormateConstant = Integer.valueOf(getString(addressChar));
+            IFormateConstant = Integer.parseInt(getString(addressChar));
             System.out.println("The Constant " + IFormateConstant);
 
             while (instruction[i] != ')') {
@@ -273,7 +273,7 @@ public class InstructionMemory {
         } // end of if of check lw and sw
         // if not lw or sw
         else {
-            // rt Check 
+            // find rt
             while (instruction[i] != ',') {
 
                 if (instruction[i] != ' ') {
@@ -300,13 +300,12 @@ public class InstructionMemory {
                 System.out.println(rs.length());
                 return;
             } // end if
-            System.out.println(instruction[i]);
-             System.out.println(instruction[i+1]);
-              System.out.println(instruction[i+2]);
-               System.out.println(instruction[i+3]);
+            System.out.println(addressChar.isEmpty());
+            
+            // find constant of iformat
             while (true) {
                 
-                if (instruction[i] == ' ' && rdChar.isEmpty()) {
+                if (instruction[i] == ' ' && addressChar.isEmpty()) {
                     i++;
                 } else if (instruction[i] != ' ') {
                     addressChar.add(instruction[i]);
@@ -314,10 +313,11 @@ public class InstructionMemory {
                 } else if (instruction[i] == ' ') {
                     break;
                 }
-
+            
             }
-            IFormateConstant = Integer.valueOf(getString(addressChar));
-            System.out.println("The Costant " + (line+1));
+            
+            IFormateConstant = Integer.parseInt(getString(addressChar));
+            
         }
         
 
