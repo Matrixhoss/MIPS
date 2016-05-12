@@ -18,7 +18,7 @@ public class Console {
     public Console() {
 
         // Scanner s = new Scanner (System.in);
-        System.out.println("Hallo in Mips Simolator ");
+        System.out.println("Initializing Mips Simolator ");
         System.out.println("Enter the frist address ");
         address = sc.nextInt();
         FileOrConsole();
@@ -33,7 +33,7 @@ public class Console {
             try {
                 FileReader fr = new FileReader("test.txt");
                 BufferedReader br = new BufferedReader(fr);
-                System.out.println("Enter the instructions and when you end tybe end");
+                System.out.println("Enter the instructions and when you're done type end");
                 //while the user dont type end the system take the line and pt it on LinkedList 
                 while (true) {
                     read = br.readLine();
@@ -55,7 +55,7 @@ public class Console {
 
         } // if the selectionCode = 0 then the user use console system 
         else if (selectionCode == 0) {
-            System.out.println("Enter the instructions and when you end tybe end");
+            System.out.println("Enter the instructions and you're done type end");
             //while the user dont type end the system take the line and pt it on LinkedList 
             while (true) {
                 read = sc.nextLine();
