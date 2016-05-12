@@ -61,6 +61,7 @@ public class Constants {
         return a;
     }
     
+    
     public static int BinToInt (int [] x){
         int y = 0 ;
         for (int i = x.length-1; i >=0; i--) {
