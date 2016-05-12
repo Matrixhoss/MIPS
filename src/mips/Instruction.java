@@ -1,10 +1,9 @@
-
 package mips;
 
 import java.util.ArrayList;
 
-
 public class Instruction {
+
     String instruction;
     int[] BinaryCode=new int[32];
     int FAddress;
@@ -15,11 +14,13 @@ public class Instruction {
     int line = 0;
     int[] ControlSignal=new int[6];
     static  int address;
+    String of;
     //binary for Reg
-    int[] rsAdsBinadresry=new int[5];
+    int[] rsAddressBinary=new int[5];
     int[] rtAddressBinary=new int[5];
     int[] rdAddressBinary=new int[5];
-    int[] constantBinary=new int[16];  
+    int[] constantBinary=new int[16];
+    int[] shiftBinary={0,0,0,0,0};  
     
     // constant in iFormate
     int IFormateConstant = 0;
@@ -41,26 +42,33 @@ public class Instruction {
     String rs;
     String rt;
     String rd;
-    //for put first address
-    public Instruction(int FAddress,String ins){
-        instruction=ins;
-        FAddress=FAddress;
-        address=FAddress;
-        Constants.Instruction[0]="firstInstruction";
-        ReadIns(instruction.toCharArray());
-    }
-    //for other instructions
-    public Instruction(String ins){
-        instruction=ins;
-        address+=4;
-        Constants.Instruction[(address-FAddress)/4]="Instruction";
-        ReadIns(instruction.toCharArray());
-    }
-    //for all operations in instruction 
-    private void ReadIns(char[] instruction){
-     // create array of char to contan the opration
 
-        String of = "";
+    //for put first address
+    public Instruction(int FAddress, String ins) {
+        instruction = ins;
+        FAddress = FAddress;
+        address = FAddress;
+        Constants.Instruction[0] = "firstInstruction";
+        ReadIns(instruction.toCharArray());
+        operationToBinary();
+        RegToBinary();
+    }
+
+    //for other instructions
+    public Instruction(String ins) {
+        instruction = ins;
+        address += 4;
+        Constants.Instruction[(address - FAddress) / 4] = "Instruction";
+        ReadIns(instruction.toCharArray());
+        operationToBinary();
+        RegToBinary();
+    }
+
+    //for all operations in instruction 
+    private void ReadIns(char[] instruction) {
+        // create array of char to contan the opration
+
+        of = "";
         int i = 0;
         // while the char != " " (in the opration)
         while (instruction[i] != ' ') {
@@ -133,6 +141,7 @@ public class Instruction {
         }// end if of Jformate
 
     }
+
     // set RForamte values
     private void RFormateSet(char[] instruction, int i) {
         // rs check 
@@ -150,7 +159,7 @@ public class Instruction {
         for (int j = 0; j < Constants.reg.length; j++) {
             if (rs.equals(Constants.reg[j])) {
                 rsFound = true;
-                rsAddress = j ;
+                rsAddress = j;
                 System.out.println("Reg is found rs in line " + (line + 1));
                 break;
             }
@@ -214,8 +223,8 @@ public class Instruction {
         for (int j = 0; j < Constants.reg.length; j++) {
             if (rd.equals(Constants.reg[j])) {
                 rdFound = true;
-                rdAddress = j ;
-                System.out.println("Reg is found rd in line " + (line + 1));
+                rdAddress = j;
+                System.out.println("Reg is found rd in line " + (line + 1) + '\n');
                 break;
             }
 
@@ -246,7 +255,7 @@ public class Instruction {
         for (int j = 0; j < Constants.reg.length; j++) {
             if (rs.equals(Constants.reg[j])) {
                 rsFound = true;
-                rsAddress = j ;
+                rsAddress = j;
                 System.out.println("Reg is found rs in line " + (line + 1));
                 break;
             }
@@ -287,8 +296,8 @@ public class Instruction {
             for (int j = 0; j < Constants.reg.length; j++) {
                 if (rt.equals(Constants.reg[j])) {
                     rtFound = true;
-                    rtAddress = j ;
-                    System.out.println("Reg is found rt in line " + (line + 1));
+                    rtAddress = j;
+                    System.out.println("Reg is found rt in line " + (line + 1) + '\n');
                     break;
                 }
 
@@ -319,7 +328,7 @@ public class Instruction {
             for (int j = 0; j < Constants.reg.length; j++) {
                 if (rt.equals(Constants.reg[j])) {
                     rtFound = true;
-                    rtAddress = j ;
+                    rtAddress = j;
                     System.out.println("Reg is found rt in line " + (line + 1));
                     break;
                 }
@@ -331,11 +340,10 @@ public class Instruction {
                 System.out.println(rs.length());
                 return;
             } // end if
-            
-            
+
             // find constant of iformat
             while (true) {
-                
+
                 if (instruction[i] == ' ' && addressChar.isEmpty()) {
                     i++;
                 } else if (instruction[i] != ' ') {
@@ -344,26 +352,84 @@ public class Instruction {
                 } else if (instruction[i] == ' ') {
                     break;
                 }
-            
+
             }
             // set the IFormat Constant 
             IFormateConstant = Integer.parseInt(getString(addressChar));
-            
+            System.out.println("The Constant is " + IFormateConstant + " in line " + (line + 1) + '\n');
         }
-        
 
     }
-    
-    private void JFormateSet(char[] instruction, int i){
-        
-        while(instruction[i]!=' '){
-            LineChar.add(instruction[i]);
-            i++;
+
+    private void JFormateSet(char[] instruction, int i) {
+        while (true) {
+
+            if (instruction[i] == ' ' && LineChar.isEmpty()) {
+                i++;
+            } else if (instruction[i] != ' ') {
+                LineChar.add(instruction[i]);
+                i++;
+            } else if (instruction[i] == ' ') {
+                break;
+            }
+
         }
-        line=Integer.parseInt(getString(LineChar));
-        System.out.println("Jump to line " + line);
+        line = Integer.parseInt(getString(LineChar));
+        System.out.println("Jump to line " + line + '\n');
     }
+    //Operation to binary
+    private void operationToBinary(){
+        switch(opration){
+            case"add":
+                break;
+            case"addi":
+                break;    
+            case"sub":
+                break;    
+            case"lw":
+                break;
+            case"sw":
+                break;
+            case"sll":
+                break;
+            case"and":
+                break;
+            case"or":
+                break;
+            case"nor":
+                break;
+            case"bne":
+                break;
+            case"j":
+                break;
+            case"jal":
+                break;
+            case"jr":
+                break;
+            case"slt":
+                break;
+            case"slti":
+                break;
+            case"sltu":
+                break;
+            case"sltui":
+                break;    
+        }
             
+    }
+    //transfer Reg to binary
+    private void RegToBinary(){
+      if(!of.equals("JFormate")){  
+        if(of.equals("RFormate")){
+            rdAddressBinary=Constants.getBin(rdAddress,5);
+        }
+        rsAddressBinary=Constants.getBin(rsAddress,5);
+        rtAddressBinary=Constants.getBin(rtAddress,5);
+        constantBinary=Constants.getBin(Constant,16);
+      }
+        
+    }
+    
     // function to convert ArrayList of char to string 
     String getString(ArrayList<Character> list) {
         StringBuilder builder = new StringBuilder(list.size());
@@ -373,5 +439,3 @@ public class Instruction {
         return builder.toString();
     }
 }
-    
-
