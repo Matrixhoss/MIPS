@@ -63,6 +63,7 @@ public class Console {
                     break;
                 }
                 ins.add(read + " ");
+                InstructionMemory.Instruction[address] = ins.getLast();
                 numofins++;
             }
 
