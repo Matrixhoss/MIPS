@@ -63,8 +63,8 @@ public class Constants {
     
     public static int BinToInt (int [] x){
         int y = 0 ;
-        for (int i = 0; i < x.length; i++) {
-            y =(int) (y + (x[i]*Math.pow(2, i)));
+        for (int i = x.length-1; i >=0; i--) {
+            y +=x[i]*Math.pow(2, x.length-i-1);
         }
     return y ;
     }
