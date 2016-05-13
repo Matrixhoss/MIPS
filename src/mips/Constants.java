@@ -28,13 +28,12 @@ public class Constants {
     public static final String ANSI_WHITE = "\u001B[37m";
 
     public static int[] Mux(int x[], int y[], boolean selection) {
-        int [] ErrrorArray = {-1}; 
         if (selection == false) {
             return x;
         } else if (selection == true) {
             return y;
         }
-        return ErrrorArray ;
+        return null ;
     }
 
     public static int AndGate(int x, int y) {
@@ -83,7 +82,7 @@ public class Constants {
         }
         return y;
     }
-    public static int [] add (int x[] , int y []){
+    public static int [] and (int x[] , int y []){
         int  Result []  = new int [x.length]; 
         if (x.length != y.length){return null; }
         for (int i = 0; i < x.length; i++) {

@@ -11,14 +11,14 @@ public class ALU {
     private String ALUControl;
     private int Data1;
     private int Data2;
-    private final int ZreoFlag = 0;
+    private int ZreoFlag = 0;
     private int ALUResult;
 
     private int Data1InBinary[];
     private int Data2InBinary[];
 
     final String ALUand = "0000";
-    final String ALUor  = "0001";
+    final String ALUor = "0001";
     final String ALUadd = "0010";
     final String ALUsub = "0110";
     final String ALUslt = "0111";
@@ -31,10 +31,14 @@ public class ALU {
         this.Data1InBinary = Constants.getBin(Data1, 5);
         this.Data2InBinary = Constants.getBin(Data2, 5);
 
+        if (Data1 - Data2 == 0) {
+            this.ZreoFlag = 1;
+        }
+        
         switch (ALUControl) {
 
             case ALUand:
-                ALUResult = Constants.BinToInt(Constants.add(Data1InBinary, Data2InBinary));
+                ALUResult = Constants.BinToInt(Constants.and(Data1InBinary, Data2InBinary));
                 break;
             case ALUor:
                 ALUResult = Constants.BinToInt(Constants.or(Data1InBinary, Data2InBinary));
@@ -56,21 +60,22 @@ public class ALU {
                 ALUResult = Constants.BinToInt(Constants.nor(Data1InBinary, Data2InBinary));
                 break;
             default:
-                ALUResult = ZreoFlag;
+                System.out.println("Error in inputs in ALU ");
                 break;
         }
+        
+    }
 
+    public int getALUResult() {
+        return this.ALUResult;
     }
-    
-    public int getALUResult (){
-    return this.ALUResult;
+
+    public int[] getALUResultInBinary() {
+        return Constants.getBin(this.ALUResult, 5);
     }
-    
-    public int[] getALUResultInBinary(){
-    return Constants.getBin(this.ALUResult, 5);
-    }
-    public int getZeroFlag (){
-    return this.ZreoFlag;
+
+    public int getZeroFlag() {
+        return this.ZreoFlag;
     }
 
 }

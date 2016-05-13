@@ -26,15 +26,12 @@ public class Console {
         FileOrConsole();
         for (int i = 0; i < ins.size(); i++) {
             Constants.Instructions[i] = new Instruction(FAdress, ins.get(i), i);
-            InstructionMemory c = new InstructionMemory(i);
-
-          
-            //System.out.println("");
-            //ControlUnit cont = new ControlUnit(c.getControlUnit())  
-            Registers r = new Registers(c.getRS(), c.getRT(),Constants.Mux(c.getRT(), c.getRD(),true), 1,1);
-            ALU cm = new ALU (r.ReturnData1() ,r.ReturnData2() , "1100");
-            System.out.println(r.ReturnData1() +"\n" +r.ReturnData2());
-            System.out.println(cm.getALUResult());
+            InstructionMemory m = new InstructionMemory(i);
+            Registers g = new Registers(m.getRS(), m.getRT(), 1);
+            ALU alu  = new ALU(g.ReturnData1(), g.ReturnData2(), "0010");
+            g.setWrtData(alu.getALUResult(), Constants.Mux(m.getRT(), m.getRD(), true));
+            System.out.println(Registers.$s2);
+            
             
         }
     }

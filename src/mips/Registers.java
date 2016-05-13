@@ -38,10 +38,14 @@ public class Registers {
    public static int $ra =32;
    private int ReadData1;
    private int ReadData2;
-   public Registers(int[]Reg1, int[]Reg2,int[]WrtReg, int WrtData,int RegWrite){
+    int WrtData ;
+    int [] WrtReg ;
+    int RegWrt ;
+   public Registers(int[]Reg1, int[]Reg2 ,int RegWrite){
+       RegWrt = RegWrite ;
        int LocReg1=Constants.BinToInt(Reg1);
        int LocReg2=Constants.BinToInt(Reg2);
-       int LocWrtReg=Constants.BinToInt(WrtReg);
+      // int LocWrtReg=Constants.BinToInt(WrtReg);
       
         for (int i=0;i<=Constants.reg.length;i++){//Obtaining the value of ReadData1
             if (i== LocReg1){
@@ -54,14 +58,14 @@ public class Registers {
             this.ReadData2=getValue(i);
             }      
         }
-        if (RegWrite==1){
+       /* if (RegWrite==1){
         for (int i=0;i<=Constants.reg.length;i++){ //Writing the data in the Write register
             if (i== LocWrtReg){
             setValue(LocWrtReg,WrtData);    
             }
                 
         }
-       }
+       }*/
    
    }
    public int getValue(int Loc){
@@ -139,7 +143,6 @@ public class Registers {
        return -1;
    }
    public void setValue(int Loc, int x){
-       for(int i=0;i<=Constants.reg.length;i++){
        switch(Constants.reg[Loc]){ //To determine which register are we going to write the data into
                         
             case"$at":
@@ -206,12 +209,25 @@ public class Registers {
        
        }
       
-   }
+   
    
 public int ReturnData1(){
 return this.ReadData1;
 }
 public int ReturnData2(){
 return this.ReadData2;
+}
+public void setWrtData(int data , int[]WrtReg){
+ this.WrtData = data;
+ this.WrtReg = WrtReg;
+ if(this.RegWrt == 1){
+    for (int i = 0; i < Constants.reg.length; i++) {
+        if (Constants.reg[i].equals(Constants.reg[Constants.BinToInt(WrtReg)])) {
+            setValue(i, WrtData);
+        }
+    }
+ 
+}
+ 
 }
 }
