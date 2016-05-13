@@ -65,38 +65,37 @@ public class Instruction {
     }
 
     private void InsToBinary() {
-        int j =0;
         // set frist 6 bit in instruction as opration
-        for (int i = 0; i < 6; i++, j++) {
+        for (int i = 0,j=26; i < 6; i++, j++) {
             InstructionBinary[j] = OperationBinary[i];
         }
         if (!of.equals("JFormat")) {
             // if instruction is Jformat set next 5 bit for rs and next 5 bit for rt
-  
-            for (int i = 0; i < 5; i++, j++) {
+            //set 5 bit for the rs
+            for (int i = 0,j=21; i < 5; i++, j++) {
                 InstructionBinary[j] = rsAddressBinary[i];
             }
-          
-            for (int i = 0; i < 5; i++, j++) {
+            //set 5 bit for the rt
+            for (int i = 0,j=16; i < 5; i++, j++) {
                 InstructionBinary[j] = rtAddressBinary[i];
             }
             if (of.equals("Rformat")) {
                 // if instruction is Rformat set next 5 bit for rt address and next 5 for rd and next 6 for function
                
-                for (int i = 0; i < 5; i++, j++) {
+                for (int i = 0,j=11; i < 5; i++, j++) {
                     InstructionBinary[j] = rdAddressBinary[i];    
                 }
-               
-                for (int i = 0; i < 5; i++, j++) {
+               //set 5 bit for the shift
+                for (int i = 0,j=6; i < 5; i++, j++) {
                     InstructionBinary[j] = shiftBinary[i];
                 }
-               
-                for (int i = 0; i < 6; i++, j++) {
+               //set next 6 bit for the function
+                for (int i = 0,j=0; i < 6; i++, j++) {
                     InstructionBinary[j] = FunctionBinary[i];
                 }
             } // if instruction is Iformat set next 16 bit for the constant 
             else if (of.equals("IFormat")) {
-                for (int i = 0; i < 16; i++, j++) {
+                for (int i = 0,j=0; i < 16; i++, j++) {
                     InstructionBinary[j] = constantBinary[i];
                 }
             }
