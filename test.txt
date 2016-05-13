@@ -12,5 +12,5 @@ slti $s1,$s2,88
 sltui $s1,$s2,4
 sll $s1,$s2,4
 lw $s1,30($s2)
-sw $s1,43($s4)
+sw $s1,43($s4
 end

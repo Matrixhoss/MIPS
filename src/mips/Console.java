@@ -28,7 +28,7 @@ public class Console {
             Constants.Instructions[i] = new Instruction(FAdress, ins.get(i),i);
             InstructionMemory c = new InstructionMemory(address);
            // ControlUnit cont = new ControlUnit(c.getControlUnit());
-           // Registers r = new Registers(c.getRS(), c.getRT(), Constants.Mux(c.getRT(), c.getRD(),cont.RegDest ), 1, 2);
+            //Registers r = new Registers(c.getRS(), c.getRT(), Constants.Mux(c.getRT(), c.getRD(),cont.RegDest ), 1, cont.RegWrite);
         }
     }
 

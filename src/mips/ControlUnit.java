@@ -4,6 +4,7 @@ package mips;
 import java.util.Arrays;
 
 public class ControlUnit {
+    // anta leh 3mlha boolean ya 3bdo ?? // hossam
     public String input;
     public boolean RegDest;
     public boolean Branch;

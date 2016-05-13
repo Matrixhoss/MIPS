@@ -330,7 +330,7 @@ public class Instruction {
                 i++;
 
             }
-        }catch (ArrayIndexOutOfBoundsException e){System.out.println(Constants.ANSI_RED+"Error in sentence may be forget () \n"+Constants.ANSI_RESET);
+        }catch (ArrayIndexOutOfBoundsException e){System.out.println(Constants.ANSI_RED+"Error in sentence may be forget () in line "+(line +1)+"\n"+Constants.ANSI_RESET);
         return ;}
             rt = getString(rtChar);
             for (int j = 0; j < Constants.reg.length; j++) {
