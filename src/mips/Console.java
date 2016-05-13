@@ -26,17 +26,7 @@ public class Console {
         for (int i = 0; i < ins.size(); i++) {
             Constants.Instructions[i] = new Instruction(FAdress, ins.get(i));
             InstructionMemory c = new InstructionMemory(Constants.Instructions[i].getInstructionBinary());
-            System.out.println(Constants.Instructions[i].rtAddress);
-            System.out.println(Constants.Instructions[i].opration);
-            for (int j = 0; j < c.ins.length; j++) {
-                System.out.print(c.ins[j]);
-            }
-            System.out.println("");
-          //  System.out.println(Constants.Instructions[i].rtAddress);
-            //System.out.println("");
-            Registers r = new Registers(c.getRT(), c.getRD(), c.getRS(), 20, 1);
-          //  System.out.println("");
-          //  System.out.println(r.ReturnData1()+"  "+r.ReturnData2());
+          
         }
     }
 

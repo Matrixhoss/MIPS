@@ -206,10 +206,9 @@ public class Instruction {
             }
 
         } // end for 
-        if (rsFound = false) {
+        if (rsFound == false) {
             System.out.println(Constants.ANSI_RED + "Reg rs is not found in line " + (line + 1) + Constants.ANSI_RED);
-            System.out.println(rs);
-            System.out.println(rs.length());
+            System.out.println(Constants.ANSI_RED +rs+ Constants.ANSI_RED);
             return;
         } // end if 
 
@@ -235,7 +234,7 @@ public class Instruction {
             }
 
         } // end for 
-        if (rtFound = false) {
+        if (rtFound == false) {
             System.out.println(Constants.ANSI_RED + "Reg rs is not found in line " + (line + 1) + Constants.ANSI_RED);
             System.out.println(rs);
             System.out.println(rs.length());
@@ -270,7 +269,7 @@ public class Instruction {
             }
 
         } // end for 
-        if (rdFound = false) {
+        if (rdFound == false) {
             System.out.println(Constants.ANSI_RED + "Reg rd is not found in line " + (line + 1) + Constants.ANSI_RESET);
 
         }
@@ -340,7 +339,7 @@ public class Instruction {
                 }
 
             } // end for 
-            if (rtFound = false) {
+            if (rtFound == false) {
                 System.out.println(Constants.ANSI_RED + "Reg rd is not found in line " + (line + 1) + Constants.ANSI_RESET);
                 System.out.println(Constants.ANSI_RED+rt+Constants.ANSI_RESET);
                 return;
@@ -371,7 +370,7 @@ public class Instruction {
                 }
 
             } // end for 
-            if (rtFound = false) {
+            if (rtFound == false) {
             System.out.println(Constants.ANSI_RED + "Reg rd is not found in line " + (line + 1) + Constants.ANSI_RESET);
             System.out.println(Constants.ANSI_RED+rt+Constants.ANSI_RESET);
                 return;
@@ -415,8 +414,9 @@ public class Instruction {
         }
         try{
             line = Integer.parseInt(getString(LineChar));
-            }catch(ExceptionInInitializerError e){System.out.println(Constants.ANSI_RED+"Jump address must be number in line"+(line+1)+Constants.ANSI_RESET);}
-        System.out.println("Jump to line " + line + '\n');
+            System.out.println("Jump to line " + line +1+ '\n');
+            }catch(NumberFormatException e){System.out.println(Constants.ANSI_RED+"Jump address must be number in line"+(line+1)+Constants.ANSI_RESET);}
+        
     }
 
     //Operation to binary
