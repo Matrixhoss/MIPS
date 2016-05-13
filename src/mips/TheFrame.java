@@ -34,24 +34,24 @@ class InstractionPanel extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 String s = (String) oprationCb.getSelectedItem();
                 String check = "";
-                for (int i = 0; i < Constants.IFormate.length; i++) {
-                    if (s.equals(Constants.IFormate[i])) {
-                        check = "IFormate";
+                for (int i = 0; i < Constants.IFormat.length; i++) {
+                    if (s.equals(Constants.IFormat[i])) {
+                        check = "Ifoemat";
                     }
                 }
-                for (int i = 0; i < Constants.RFormate.length; i++) {
-                    if (s.equals(Constants.RFormate[i])) {
+                for (int i = 0; i < Constants.RFormat.length; i++) {
+                    if (s.equals(Constants.RFormat[i])) {
                         check = "RFormate";
                     }
                 }
-                for (int i = 0; i < Constants.JFormate.length; i++) {
-                    if (s.equals(Constants.JFormate[i])) {
-                        check = "IFormate";
+                for (int i = 0; i < Constants.JFormat.length; i++) {
+                    if (s.equals(Constants.JFormat[i])) {
+                        check = "Ifoemat";
                     }
                 }
 
                 switch (check) {
-                    case "IFormate":
+                    case "Ifoemat":
                         if (s.equals("lw") || s.endsWith("sw")){
                         removeAll();
                         add(oprationCb);

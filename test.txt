@@ -1,2 +1,2 @@
-addi $s1,$s2,63624
+sub $s1,$s2,$s3
 end

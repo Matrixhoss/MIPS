@@ -9,9 +9,9 @@ public class Constants {
 
     public static final String[] oprations = {"add", "addi", "sub", "lw", "sw", "sll", "and", "or", "nor", "beq", "bne", "j", "jal", "jr", "slt", "slti", "sltu", "sltui"};
     public static final String[] reg = {"$0", "$at", "$v0", "$v1", "$a0", "$a1", "$a2", "$a3", "$t0", "$t1", "$t2", "$t3", "$t4", "$t5", "$t6", "$t7", "$s0", "$s1", "$s2", "$s3", "$s4", "$s5", "$s6", "$s7", "$t8", "$t9", "$k0", "$k1", "$gp", "$sp", "$fp", "$ra"};
-    public static final String[] IFormate = {"addi", "lw", "sw", "beq", "bne", "stli", "stlui", "sll"};
-    public static final String[] RFormate = {"add", "sub", "and", "or", "nor", "slt", "sltu"};
-    public static final String[] JFormate = {"j", "jal", "jr"};
+    public static final String[] IFormat = {"addi", "lw", "sw", "beq", "bne", "stli", "stlui", "sll"};
+    public static final String[] RFormat = {"add", "sub", "and", "or", "nor", "slt", "sltu"};
+    public static final String[] JFormat = {"j", "jal", "jr"};
     public static Instruction[] Instructions = new Instruction[1000];
     public static int[] Memory = new int[1000];
 

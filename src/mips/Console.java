@@ -7,13 +7,14 @@ import java.io.IOException;
 import java.util.*;
 
 public class Console {
+
     private int FAdress;
     private int address = 0;
     private LinkedList<String> ins = new LinkedList<String>();
     private int numofins = 0;
     private String read = "";
     Scanner sc = new Scanner(System.in);
-    private int selectionCode =1;
+    private int selectionCode = 1;
 
     public Console() {
 
@@ -23,7 +24,19 @@ public class Console {
         FAdress = sc.nextInt();
         FileOrConsole();
         for (int i = 0; i < ins.size(); i++) {
-            Constants.Instructions[i] = new Instruction(FAdress,ins.get(i));
+            Constants.Instructions[i] = new Instruction(FAdress, ins.get(i));
+            InstructionMemory c = new InstructionMemory(Constants.Instructions[i].getInstructionBinary());
+            System.out.println(Constants.Instructions[i].rtAddress);
+            System.out.println(Constants.Instructions[i].opration);
+            for (int j = 0; j < c.ins.length; j++) {
+                System.out.print(c.ins[j]);
+            }
+            System.out.println("");
+          //  System.out.println(Constants.Instructions[i].rtAddress);
+            //System.out.println("");
+            Registers r = new Registers(c.getRT(), c.getRD(), c.getRS(), 20, 1);
+          //  System.out.println("");
+          //  System.out.println(r.ReturnData1()+"  "+r.ReturnData2());
         }
     }
 
@@ -42,7 +55,7 @@ public class Console {
                         break;
                     }
                     ins.add(read + " ");
-                    
+
                     numofins++;
                 }
                 br.close();

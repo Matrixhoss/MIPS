@@ -7,7 +7,7 @@ public class Instruction {
     String instruction;
     int[] InstructionBinary = new int[32];
     int[] BinaryCode = new int[32];
-    int FAddress;
+    int FAddress ;
     int Constant;
     int rsAddress = 0;
     int rtAddress = 0;
@@ -25,8 +25,8 @@ public class Instruction {
     int[] FunctionBinary=new int[6];
     int[] shiftBinary = {0, 0, 0, 0, 0};
 
-    // constant in iFormate
-    int IFormateConstant = 0;
+    // constant in iFormat
+    int IFormatConstant = 0;
 
     ArrayList<Character> oprationChar = new ArrayList<Character>();
     ArrayList<Character> rsChar = new ArrayList<Character>();
@@ -60,30 +60,36 @@ public class Instruction {
         ReadIns(instruction.toCharArray());
         operationToBinary();
         RegToBinary();
+        InsToBinary();
     }
 
     private void InsToBinary() {
-        int j = 0;
+        int j =0;
         // set frist 6 bit in instruction as opration
         for (int i = 0; i < 6; i++, j++) {
             InstructionBinary[j] = OperationBinary[i];
         }
         if (!of.equals("JFormat")) {
             // if instruction is Jformat set next 5 bit for rs and next 5 bit for rt
+  
             for (int i = 0; i < 5; i++, j++) {
                 InstructionBinary[j] = rsAddressBinary[i];
             }
+          
             for (int i = 0; i < 5; i++, j++) {
                 InstructionBinary[j] = rtAddressBinary[i];
             }
             if (of.equals("Rformat")) {
-                // if instruction is Rformat set next 5 bit for rt address and next 5 for rd and next 6 for function     
+                // if instruction is Rformat set next 5 bit for rt address and next 5 for rd and next 6 for function
+               
                 for (int i = 0; i < 5; i++, j++) {
-                    InstructionBinary[j] = rdAddressBinary[i];
+                    InstructionBinary[j] = rdAddressBinary[i];    
                 }
+               
                 for (int i = 0; i < 5; i++, j++) {
                     InstructionBinary[j] = shiftBinary[i];
                 }
+               
                 for (int i = 0; i < 6; i++, j++) {
                     InstructionBinary[j] = FunctionBinary[i];
                 }
@@ -123,28 +129,28 @@ public class Instruction {
                 opFound = true;
                 System.out.println(Constants.ANSI_GREEN + "opration is found" + Constants.ANSI_RESET);
                 // the opration is right 
-                // 1 - check if the opration is IFormate
-                for (int k = 0; k < Constants.IFormate.length; k++) {
-                    if (opration.equals(Constants.IFormate[k])) {
-                        // set opration formate   
+                // 1 - check if the opration is IFormat
+                for (int k = 0; k < Constants.IFormat.length; k++) {
+                    if (opration.equals(Constants.IFormat[k])) {
+                        // set opration format
                         of = "IFormat";
                         System.out.println("opration is IFormat");
                         // brack from the big loop 
                         break Lo;
                     }
-                } // 2 - check if the opration is RFormate 
-                for (int k = 0; k < Constants.RFormate.length; k++) {
-                    if (opration.equals(Constants.RFormate[k])) {
-                        // set opration formate  
+                } // 2 - check if the opration is RFormat 
+                for (int k = 0; k < Constants.RFormat.length; k++) {
+                    if (opration.equals(Constants.RFormat[k])) {
+                        // set opration format  
                         of = "RFormat";
                         System.out.println("opration is RFormat");
                         // brack from the big loop 
                         break Lo;
                     }
-                }// 3 - check if the opration is JFormate
-                for (int k = 0; k < Constants.JFormate.length; k++) {
-                    if (opration.equals(Constants.JFormate[k])) {
-                        // set opration formate  
+                }// 3 - check if the opration is JFormat
+                for (int k = 0; k < Constants.JFormat.length; k++) {
+                    if (opration.equals(Constants.JFormat[k])) {
+                        // set opration format  
                         of = "JFormat";
                         System.out.println("opration is JFormat");
                         // brack from the big loop 
@@ -165,20 +171,20 @@ public class Instruction {
         }
 
         if (of.equals("RFormat")) {
-            RFormateSet(instruction, i);
-        }// end if of Rformate
+            RFormatSet(instruction, i);
+        }// end if of Rformat
 
         if (of.equals("IFormat")) {
-            IFormateSet(instruction, i);
-        }// end if of Iformate
+            IFormatSet(instruction, i);
+        }// end if of Iformat
         if (of.equals("JFormat")) {
-            JFormateSet(instruction, i);
-        }// end if of Jformate
+            JFormatSet(instruction, i);
+        }// end if of Jformat
 
     }
 
     // set RForamte values
-    private void RFormateSet(char[] instruction, int i) {
+    private void RFormatSet(char[] instruction, int i) {
         // rs check 
         while (instruction[i] != ',') {
             if (instruction[i] != ' ') {
@@ -271,7 +277,7 @@ public class Instruction {
 
     }
 
-    private void IFormateSet(char[] instruction, int i) {
+    private void IFormatSet(char[] instruction, int i) {
 
         // rs check 
         while (instruction[i] != ',') {
@@ -311,8 +317,8 @@ public class Instruction {
                 i++;
             }
             i++;
-            IFormateConstant = Integer.parseInt(getString(addressChar));
-            System.out.println("The Constant " + IFormateConstant);
+            IFormatConstant = Integer.parseInt(getString(addressChar));
+            System.out.println("The Constant " + IFormatConstant);
 
             while (instruction[i] != ')') {
 
@@ -386,15 +392,15 @@ public class Instruction {
             }
             // set the IFormat Constant 
             try{
-            IFormateConstant = Integer.parseInt(getString(addressChar));
-            System.out.println("The Constant is " + IFormateConstant + " in line " + (line + 1) + '\n');
+            IFormatConstant = Integer.parseInt(getString(addressChar));
+            System.out.println("The Constant is " + IFormatConstant + " in line " + (line + 1) + '\n');
             }catch(NumberFormatException e){System.out.println(Constants.ANSI_RED+"Constant must be number in line "+(line+1)+Constants.ANSI_RESET);}
             
         }
 
     }
 
-    private void JFormateSet(char[] instruction, int i) {
+    private void JFormatSet(char[] instruction, int i) {
         while (true) {
 
             if (instruction[i] == ' ' && LineChar.isEmpty()) {
@@ -489,13 +495,13 @@ public class Instruction {
 
     //transfer Reg to binary
     private void RegToBinary() {
-        if (!of.equals("JFormate")) {
-            if (of.equals("RFormate")) {
+        if (!of.equals("JFormat")) {
+            if (of.equals("RFormat")) {
                 rdAddressBinary = Constants.getBin(rdAddress, 5);
             }
             rsAddressBinary = Constants.getBin(rsAddress, 5);
             rtAddressBinary = Constants.getBin(rtAddress, 5);
-            constantBinary = Constants.getBin(IFormateConstant, 16);
+            constantBinary = Constants.getBin(IFormatConstant, 16);
         }
 
     }
