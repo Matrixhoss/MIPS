@@ -68,18 +68,18 @@ public class Instruction {
         System.out.println(Constants.BinToInt(rtAddressBinary));
         System.out.println(Constants.BinToInt(OperationBinary));
         System.out.println(Constants.BinToInt(FunctionBinary));
-        for(int i=0;i<6;i++){
-            System.out.print(OperationBinary[i]);
-        }
-        for(int i=0;i<5;i++){
-            System.out.print(rsAddressBinary[i]);
-        }
-        for(int i=0;i<5;i++){
-            System.out.print(rtAddressBinary[i]);
-        }
-        for(int i=0;i<16;i++){
-            System.out.print(constantBinary[i]);
-        }
+//        for(int i=0;i<6;i++){
+//            System.out.print(OperationBinary[i]);
+//        }
+//        for(int i=0;i<5;i++){
+//            System.out.print(rsAddressBinary[i]);
+//        }
+//        for(int i=0;i<5;i++){
+//            System.out.print(rtAddressBinary[i]);
+//        }
+//        for(int i=0;i<16;i++){
+//            System.out.print(constantBinary[i]);
+//        }
         System.out.println();
         for(int i=0;i<32;i++){
             System.out.print(InstructionBinary[i]);
