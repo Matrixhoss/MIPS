@@ -31,7 +31,7 @@ public class Console {
             ALU alu  = new ALU(g.ReturnData1(), g.ReturnData2(), "0010");
             g.setWrtData(alu.getALUResult(), Constants.Mux(m.getRT(), m.getRD(), true));
             System.out.println(Registers.$s2);
-            
+         //   
             
         }
     }
