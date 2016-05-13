@@ -22,11 +22,13 @@ public class Console {
         System.out.println("Initializing Mips Simolator ");
         System.out.println("Enter the frist address ");
         FAdress = sc.nextInt();
+        Constants.FristAddress = FAdress;
         FileOrConsole();
         for (int i = 0; i < ins.size(); i++) {
             Constants.Instructions[i] = new Instruction(FAdress, ins.get(i),i);
-            InstructionMemory c = new InstructionMemory(Constants.Instructions[i].getInstructionBinary());
-          
+            InstructionMemory c = new InstructionMemory(address);
+           // ControlUnit cont = new ControlUnit(c.getControlUnit());
+           // Registers r = new Registers(c.getRS(), c.getRT(), Constants.Mux(c.getRT(), c.getRD(),cont.RegDest ), 1, 2);
         }
     }
 

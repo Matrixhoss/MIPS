@@ -14,6 +14,7 @@ public class Constants {
     public static final String[] JFormat = {"j", "jal", "jr"};
     public static Instruction[] Instructions = new Instruction[1000];
     public static int[] Memory = new int[1000];
+    public static int FristAddress = 0 ;
 
     //Console Color
     public static final String ANSI_RESET = "\u001B[0m";
@@ -26,13 +27,14 @@ public class Constants {
     public static final String ANSI_CYAN = "\u001B[36m";
     public static final String ANSI_WHITE = "\u001B[37m";
 
-    public static int Mux(int x, int y, int selection) {
-        if (selection == 0) {
+    public static int[] Mux(int x[], int y[], boolean selection) {
+        int [] ErrrorArray = {-1}; 
+        if (selection == false) {
             return x;
-        } else if (selection == 1) {
+        } else if (selection == true) {
             return y;
         }
-        return -1;
+        return ErrrorArray ;
     }
 
     public static int AndGate(int x, int y) {

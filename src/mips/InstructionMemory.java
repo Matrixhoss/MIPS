@@ -8,38 +8,48 @@ public class InstructionMemory {
     int line = 0;
 
     // address of reg in the memory
-    int[] rsAddress = new int[5];
-    int[] rtAddress = new int[5];
-    int[] rdAddress = new int[5];
-    int[] SignExtend = new int[16];
-    int[] ControlUnit = new int[6];
-    int[] ALUControl = new int[6];
-    
-    int [] ins = new int [32] ;
+    private int[] rsAddress = new int[5];
+    private int[] rtAddress = new int[5];
+    private int[] rdAddress = new int[5];
+    private int[] SignExtend = new int[16];
+    private int[] ControlUnit = new int[6];
+    private int[] ALUControl = new int[6];
+    private int address ;
 
-    public InstructionMemory(int[] Instruction) {
-        this.ins = Instruction;
+    int[] ins = new int[32];
+
+    public InstructionMemory(int address) {
+       this.address = address;
+        if (address==0) 
+              this.ins = Constants.Instructions[address].getInstructionBinary();
+        else
+              this.ins = Constants.Instructions[(address-Constants.FristAddress)/4].getInstructionBinary();
+        
+         // Set frist 16 bit to sigeExtend
         for (int i = 0; i < 16; i++) {
             SignExtend[i] = ins[i];
         }
+        // set frist  5 bit for ALU control [0 - 5]
         for (int i = 0; i < 6; i++) {
             ALUControl[i] = ins[i];
         }
+        // set [11 - 15 ] for rd
         for (int i = 11; i < 16; i++) {
             int j = 0;
             rsAddress[j] = ins[i];
             j++;
         }
+        // set [16 - 20] for  rt 
         for (int i = 16; i < 21; i++) {
-            int j = 0;
-            rdAddress[j] = ins[i];
-            j++;
-        }
-        for (int i = 21; i < 26; i++) {
             int j = 0;
             rtAddress[j] = ins[i];
             j++;
-        }
+        } // set [16 - 20] for  rt 
+        for (int i = 21; i < 26; i++) {
+            int j = 0;
+            rsAddress[j] = ins[i];
+            j++;
+        } // set [26 - 31] for ControlUnit
         for (int i = 26; i < 32; i++) {
             int j = 0;
             ControlUnit[j] = ins[i];
@@ -48,26 +58,30 @@ public class InstructionMemory {
 
     }
 
-    public int [] getRT() {
+    public int[] getRT() {
         return this.rtAddress;
     }
 
     public int[] getRD() {
-        return this.rdAddress ;
+        return this.rdAddress;
     }
 
-    public int [] getRS() {
+    public int[] getRS() {
         return this.rsAddress;
     }
 
     public int[] getALUControl() {
         return this.ALUControl;
     }
-    public int [] getSignExtend (){
-    return this.SignExtend;
-    }
-    public int [] getControlUnit (){
-    return this.ControlUnit;
+
+    public int[] getSignExtend() {
+        return this.SignExtend;
     }
 
+    public int[] getControlUnit() {
+        return this.ControlUnit;
+    }
+    public int getAddress (){
+    return this.address ;
+    }
 }
