@@ -189,6 +189,34 @@ public class Instruction {
         // rs check 
         while (instruction[i] != ',') {
             if (instruction[i] != ' ') {
+                rdChar.add(instruction[i]);
+            }
+
+            i++;
+
+        }
+        i++;
+
+        rd = getString(rdChar);
+        for (int j = 0; j < Constants.reg.length; j++) {
+            if (rd.equals(Constants.reg[j])) {
+                rdFound = true;
+                rdAddress = j;
+                System.out.println("Reg rd is found in line " + (line + 1));
+                break;
+            }
+
+        } // end for 
+        if (rdFound == false) {
+            System.out.println(Constants.ANSI_RED + "Reg rd is not found in line " + (line + 1) + Constants.ANSI_RED);
+            System.out.println(Constants.ANSI_RED +rs+ Constants.ANSI_RED);
+            return;
+        } // end if 
+
+        // rt Check 
+        while (instruction[i] != ',') {
+
+            if (instruction[i] != ' ') {
                 rsChar.add(instruction[i]);
             }
 
@@ -209,13 +237,49 @@ public class Instruction {
         } // end for 
         if (rsFound == false) {
             System.out.println(Constants.ANSI_RED + "Reg rs is not found in line " + (line + 1) + Constants.ANSI_RED);
-            System.out.println(Constants.ANSI_RED +rs+ Constants.ANSI_RED);
+            System.out.println(rs);
             return;
-        } // end if 
+        } // end if
 
-        // rt Check 
+        //rt check
+        while (true) {
+            //   if (instruction[i] != ' ') {
+            if (instruction[i] == ' ' && rtChar.isEmpty()) {
+                i++;
+            } else if (instruction[i] != ' ') {
+                rtChar.add(instruction[i]);
+                i++;
+            } else {
+                if (rtChar.size() < 3) {
+                    System.out.println(Constants.ANSI_RED + "Error in Line " + (line + 1) + Constants.ANSI_RESET);
+                }
+                break;
+            }
+
+            //   }
+        }
+        rt = getString(rtChar);
+
+        for (int j = 0; j < Constants.reg.length; j++) {
+            if (rt.equals(Constants.reg[j])) {
+                rtFound = true;
+                rtAddress = j;
+                System.out.println("Reg is found rt in line " + (line + 1) + '\n');
+                break;
+            }
+
+        } // end for 
+        if (rtFound == false) {
+            System.out.println(Constants.ANSI_RED + "Reg rt is not found in line " + (line + 1) + Constants.ANSI_RESET);
+
+        }
+
+    }
+
+    private void IFormatSet(char[] instruction, int i) {
+
+        // rt check 
         while (instruction[i] != ',') {
-
             if (instruction[i] != ' ') {
                 rtChar.add(instruction[i]);
             }
@@ -230,79 +294,14 @@ public class Instruction {
             if (rt.equals(Constants.reg[j])) {
                 rtFound = true;
                 rtAddress = j;
-                System.out.println("Reg rt is found in line " + (line + 1));
-                break;
-            }
-
-        } // end for 
-        if (rtFound == false) {
-            System.out.println(Constants.ANSI_RED + "Reg rs is not found in line " + (line + 1) + Constants.ANSI_RED);
-            System.out.println(rs);
-            System.out.println(rs.length());
-            return;
-        } // end if
-
-        //rd check
-        while (true) {
-            //   if (instruction[i] != ' ') {
-            if (instruction[i] == ' ' && rdChar.isEmpty()) {
-                i++;
-            } else if (instruction[i] != ' ') {
-                rdChar.add(instruction[i]);
-                i++;
-            } else {
-                if (rdChar.size() < 3) {
-                    System.out.println(Constants.ANSI_RED + "Error in Line " + (line + 1) + Constants.ANSI_RESET);
-                }
-                break;
-            }
-
-            //   }
-        }
-        rd = getString(rdChar);
-
-        for (int j = 0; j < Constants.reg.length; j++) {
-            if (rd.equals(Constants.reg[j])) {
-                rdFound = true;
-                rdAddress = j;
-                System.out.println("Reg is found rd in line " + (line + 1) + '\n');
-                break;
-            }
-
-        } // end for 
-        if (rdFound == false) {
-            System.out.println(Constants.ANSI_RED + "Reg rd is not found in line " + (line + 1) + Constants.ANSI_RESET);
-
-        }
-
-    }
-
-    private void IFormatSet(char[] instruction, int i) {
-
-        // rs check 
-        while (instruction[i] != ',') {
-            if (instruction[i] != ' ') {
-                rsChar.add(instruction[i]);
-            }
-
-            i++;
-
-        }
-        i++;
-
-        rs = getString(rsChar);
-        for (int j = 0; j < Constants.reg.length; j++) {
-            if (rs.equals(Constants.reg[j])) {
-                rsFound = true;
-                rsAddress = j;
-                System.out.println("Reg is found rs in line " + (line + 1));
+                System.out.println("Reg is found rt in line " + (line + 1));
                 break;
             }
 
         } // end for 
         // if the reg not found 
-        if (rsFound = false) {
-            System.out.println(Constants.ANSI_RED + "Reg rd is not found in line " + (line + 1) + Constants.ANSI_RESET);
+        if (rtFound = false) {
+            System.out.println(Constants.ANSI_RED + "Reg rt is not found in line " + (line + 1) + Constants.ANSI_RESET);
             System.out.println(Constants.ANSI_RED + rs + Constants.ANSI_RESET);
             return;
         } // end if 
@@ -324,7 +323,7 @@ public class Instruction {
             while (instruction[i] != ')') {
 
                 if (instruction[i] != ' ') {
-                    rtChar.add(instruction[i]);
+                    rsChar.add(instruction[i]);
                 }
 
                 i++;
@@ -332,18 +331,18 @@ public class Instruction {
             }
         }catch (ArrayIndexOutOfBoundsException e){System.out.println(Constants.ANSI_RED+"Error in sentence may be forget () in line "+(line +1)+"\n"+Constants.ANSI_RESET);
         return ;}
-            rt = getString(rtChar);
+            rs = getString(rsChar);
             for (int j = 0; j < Constants.reg.length; j++) {
-                if (rt.equals(Constants.reg[j])) {
-                    rtFound = true;
-                    rtAddress = j;
-                    System.out.println("Reg is found rt in line " + (line + 1) + '\n');
+                if (rs.equals(Constants.reg[j])) {
+                    rsFound = true;
+                    rsAddress = j;
+                    System.out.println("Reg is found rs in line " + (line + 1) + '\n');
                     break;
                 }
 
             } // end for 
-            if (rtFound == false) {
-                System.out.println(Constants.ANSI_RED + "Reg rd is not found in line " + (line + 1) + Constants.ANSI_RESET);
+            if (rsFound == false) {
+                System.out.println(Constants.ANSI_RED + "Reg rs is not found in line " + (line + 1) + Constants.ANSI_RESET);
                 System.out.println(Constants.ANSI_RED+rt+Constants.ANSI_RESET);
                 return;
             } // end if
@@ -355,7 +354,7 @@ public class Instruction {
             while (instruction[i] != ',') {
 
                 if (instruction[i] != ' ') {
-                    rtChar.add(instruction[i]);
+                    rsChar.add(instruction[i]);
                 }
 
                 i++;
@@ -363,18 +362,18 @@ public class Instruction {
             }
             i++;
 
-            rt = getString(rtChar);
+            rs = getString(rsChar);
             for (int j = 0; j < Constants.reg.length; j++) {
-                if (rt.equals(Constants.reg[j])) {
-                    rtFound = true;
-                    rtAddress = j;
-                    System.out.println("Reg is found rt in line " + (line + 1));
+                if (rs.equals(Constants.reg[j])) {
+                    rsFound = true;
+                    rsAddress = j;
+                    System.out.println("Reg is found rs in line " + (line + 1));
                     break;
                 }
 
             } // end for 
-            if (rtFound == false) {
-            System.out.println(Constants.ANSI_RED + "Reg rd is not found in line " + (line + 1) + Constants.ANSI_RESET);
+            if (rsFound == false) {
+            System.out.println(Constants.ANSI_RED + "Reg rs is not found in line " + (line + 1) + Constants.ANSI_RESET);
             System.out.println(Constants.ANSI_RED+rt+Constants.ANSI_RESET);
                 return;
             } // end if
