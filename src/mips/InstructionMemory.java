@@ -14,48 +14,21 @@ public class InstructionMemory {
     private int[] SignExtend = new int[16];
     private int[] ControlUnit = new int[6];
     private int[] ALUControl = new int[6];
-    private int address ;
+    private int address;
 
-    int[] ins = new int[32];
+    Instruction ins;
 
     public InstructionMemory(int address) {
-       this.address = address;
-        if (address==0) 
-              this.ins = Constants.Instructions[address].getInstructionBinary();
-        else
-              this.ins = Constants.Instructions[(address-Constants.FristAddress)/4].getInstructionBinary();
-        
-         // Set frist 16 bit to sigeExtend
-        for (int i = 0; i < 16; i++) {
-            SignExtend[i] = ins[i];
-        }
-        // set frist  5 bit for ALU control [0 - 5]
-        for (int i = 0; i < 6; i++) {
-            ALUControl[i] = ins[i];
-        }
-        // set [11 - 15 ] for rd
-        for (int i = 11; i < 16; i++) {
-            int j = 0;
-            rsAddress[j] = ins[i];
-            j++;
-        }
-        // set [16 - 20] for  rt 
-        for (int i = 16; i < 21; i++) {
-            int j = 0;
-            rtAddress[j] = ins[i];
-            j++;
-        } // set [16 - 20] for  rt 
-        for (int i = 21; i < 26; i++) {
-            int j = 0;
-            rsAddress[j] = ins[i];
-            j++;
-        } // set [26 - 31] for ControlUnit
-        for (int i = 26; i < 32; i++) {
-            int j = 0;
-            ControlUnit[j] = ins[i];
-            j++;
-        }
 
+        this.ins = Constants.Instructions[address];
+        this.rsAddress = ins.rsAddressBinary;
+        this.rdAddress = ins.rdAddressBinary;
+        this.rtAddress = ins.rtAddressBinary;
+        this.ALUControl = ins.FunctionBinary;
+        this.ControlUnit = ins.OperationBinary;
+        for (int i = 31,j = 15; i > 16;j--, i--) {
+            this.SignExtend[j] = ins.InstructionBinary[i];
+        }
     }
 
     public int[] getRT() {
@@ -81,7 +54,9 @@ public class InstructionMemory {
     public int[] getControlUnit() {
         return this.ControlUnit;
     }
-    public int getAddress (){
-    return this.address ;
+
+    public int getAddress() {
+        return this.address;
     }
+
 }

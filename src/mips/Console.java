@@ -25,10 +25,17 @@ public class Console {
         Constants.FristAddress = FAdress;
         FileOrConsole();
         for (int i = 0; i < ins.size(); i++) {
-            Constants.Instructions[i] = new Instruction(FAdress, ins.get(i),i);
-            InstructionMemory c = new InstructionMemory(address);
-           // ControlUnit cont = new ControlUnit(c.getControlUnit());
-            //Registers r = new Registers(c.getRS(), c.getRT(), Constants.Mux(c.getRT(), c.getRD(),cont.RegDest ), 1, cont.RegWrite);
+            Constants.Instructions[i] = new Instruction(FAdress, ins.get(i), i);
+            InstructionMemory c = new InstructionMemory(i);
+
+          
+            //System.out.println("");
+            //ControlUnit cont = new ControlUnit(c.getControlUnit())  
+            Registers r = new Registers(c.getRS(), c.getRT(),Constants.Mux(c.getRT(), c.getRD(),true), 1,1);
+            ALU cm = new ALU (r.ReturnData1() ,r.ReturnData2() , "1100");
+            System.out.println(r.ReturnData1() +"\n" +r.ReturnData2());
+            System.out.println(cm.getALUResult());
+            
         }
     }
 

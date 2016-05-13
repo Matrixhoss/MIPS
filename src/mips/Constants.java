@@ -83,4 +83,39 @@ public class Constants {
         }
         return y;
     }
+    public static int [] add (int x[] , int y []){
+        int  Result []  = new int [x.length]; 
+        if (x.length != y.length){return null; }
+        for (int i = 0; i < x.length; i++) {
+            if (x[i] == 1 && y[i] == 1){
+            Result [i] = 1 ;
+            }else{Result[i] = 0 ;} 
+        }
+        return Result ;
+    }
+    
+     public static int [] or (int x[] , int y []){
+        int  Result []  = new int [x.length]; 
+        if (x.length != y.length){return null; }
+        for (int i = 0; i < x.length; i++) {
+            if (x[i] == 1 || y[i] == 1){
+            Result [i] = 1 ;
+            }else{Result[i] = 0 ;} 
+        }
+        return Result ;
+    }
+     
+     public static int [] nor (int x[] , int y []){
+        int  Result []  = new int [x.length]; 
+        if (x.length != y.length){return null; }
+        for (int i = 0; i < x.length; i++) {
+            if (x[i] == 1 && y[i] == 1) {
+                Result [i] = 0 ;
+            }
+            else if (x[i] == 1 || y[i] == 1){
+            Result [i] = 1 ;
+            }else{Result[i] = 0 ;} 
+        }
+        return Result ;
+    }
 }
