@@ -47,7 +47,7 @@ public class Instruction {
     String rd;
 
 
-    public Instruction(int FAddress, String ins) {
+    public Instruction(int FAddress, String ins,int line) {
         //for the first instruction
         if(this.FAddress==0){
             FAddress = FAddress;
@@ -56,6 +56,7 @@ public class Instruction {
         else//for other instruction
             address+=4;
         instruction = ins;
+        this.line=line;
 //        Constants.Instruction[0] = "firstInstruction";
         ReadIns(instruction.toCharArray());
         operationToBinary();
@@ -308,6 +309,7 @@ public class Instruction {
 
         if (opration.equals("lw") || opration.equals("sw")) {
             // address of lw or sw Check 
+            try{
             while (instruction[i] != '(') {
 
                 if (instruction[i] != ' ') {
@@ -328,7 +330,8 @@ public class Instruction {
                 i++;
 
             }
-
+        }catch (ArrayIndexOutOfBoundsException e){System.out.println(Constants.ANSI_RED+"Error in sentence may be forget () \n"+Constants.ANSI_RESET);
+        return ;}
             rt = getString(rtChar);
             for (int j = 0; j < Constants.reg.length; j++) {
                 if (rt.equals(Constants.reg[j])) {
@@ -393,7 +396,7 @@ public class Instruction {
             try{
             IFormatConstant = Integer.parseInt(getString(addressChar));
             System.out.println("The Constant is " + IFormatConstant + " in line " + (line + 1) + '\n');
-            }catch(NumberFormatException e){System.out.println(Constants.ANSI_RED+"Constant must be number in line "+(line+1)+Constants.ANSI_RESET);}
+            }catch(NumberFormatException e){System.out.println(Constants.ANSI_RED+"Constant must be number in line "+(line+1)+'\n'+Constants.ANSI_RESET);}
             
         }
 

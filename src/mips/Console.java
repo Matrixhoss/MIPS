@@ -24,7 +24,7 @@ public class Console {
         FAdress = sc.nextInt();
         FileOrConsole();
         for (int i = 0; i < ins.size(); i++) {
-            Constants.Instructions[i] = new Instruction(FAdress, ins.get(i));
+            Constants.Instructions[i] = new Instruction(FAdress, ins.get(i),i);
             InstructionMemory c = new InstructionMemory(Constants.Instructions[i].getInstructionBinary());
           
         }
