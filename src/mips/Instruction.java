@@ -62,45 +62,68 @@ public class Instruction {
         operationToBinary();
         RegToBinary();
         InsToBinary();
-    }
-
-    private void InsToBinary() {
-        // set frist 6 bit in instruction as opration
-        for (int i = 0,j=26; i < 6; i++, j++) {
-            InstructionBinary[j] = OperationBinary[i];
+        System.out.println(rsAddress);
+        System.out.println(Constants.BinToInt(rdAddressBinary));
+        System.out.println(Constants.BinToInt(rsAddressBinary));
+        System.out.println(Constants.BinToInt(rtAddressBinary));
+        System.out.println(Constants.BinToInt(OperationBinary));
+        System.out.println(Constants.BinToInt(FunctionBinary));
+        for(int i=0;i<6;i++){
+            System.out.print(OperationBinary[i]);
         }
-        if (!of.equals("JFormat")) {
-            // if instruction is Jformat set next 5 bit for rs and next 5 bit for rt
-            //set 5 bit for the rs
-            for (int i = 0,j=21; i < 5; i++, j++) {
-                InstructionBinary[j] = rsAddressBinary[i];
-            }
-            //set 5 bit for the rt
-            for (int i = 0,j=16; i < 5; i++, j++) {
-                InstructionBinary[j] = rtAddressBinary[i];
-            }
-            if (of.equals("Rformat")) {
-                // if instruction is Rformat set next 5 bit for rt address and next 5 for rd and next 6 for function
-               
-                for (int i = 0,j=11; i < 5; i++, j++) {
-                    InstructionBinary[j] = rdAddressBinary[i];    
-                }
-               //set 5 bit for the shift
-                for (int i = 0,j=6; i < 5; i++, j++) {
-                    InstructionBinary[j] = shiftBinary[i];
-                }
-               //set next 6 bit for the function
-                for (int i = 0,j=0; i < 6; i++, j++) {
-                    InstructionBinary[j] = FunctionBinary[i];
-                }
-            } // if instruction is Iformat set next 16 bit for the constant 
-            else if (of.equals("IFormat")) {
-                for (int i = 0,j=0; i < 16; i++, j++) {
+        for(int i=0;i<5;i++){
+            System.out.print(rsAddressBinary[i]);
+        }
+        for(int i=0;i<5;i++){
+            System.out.print(rtAddressBinary[i]);
+        }
+        for(int i=0;i<16;i++){
+            System.out.print(constantBinary[i]);
+        }
+        System.out.println();
+        for(int i=0;i<32;i++){
+            System.out.print(InstructionBinary[i]);
+        }
+        System.out.println();
+    }
+    private void InsToBinary() {
+        int j=0;
+        // set frist 6 bit in instruction as opration
+        for(int i=0;i<6;i++,j++){
+            InstructionBinary[j]=OperationBinary[i];
+        }
+        // if instruction is Jformat set next 5 bit for rs and next 5 bit for rt
+        //set 5 bit for the rs
+        if (!of.equals("JFormat")){
+        for(int i=0;i<5;i++,j++){
+            InstructionBinary[j]=rsAddressBinary[i];
+        }
+        //set 5 bit for the rt
+        for(int i=0;i<5;i++,j++){
+            InstructionBinary[j]=rtAddressBinary[i];
+        }
+        
+        if(of.equals("RFormat")){
+        // if instruction is Rformat set next 5 bit for rt address and next 5 for rd and next 6 for function
+        for(int i=0;i<5;i++,j++){
+            InstructionBinary[j]=rdAddressBinary[i];
+        }
+        //set 5 bit for the shift
+        for(int i=0;i<5;i++,j++){
+            InstructionBinary[j]=shiftBinary[i];
+        }
+        //set next 6 bit for the function
+        for(int i=0;i<6;i++,j++){
+            InstructionBinary[j]=FunctionBinary[i];
+        }
+        }
+        else{
+            // if instruction is Iformat set next 16 bit for the constant 
+            for (int i = 0; i < 16; i++, j++) {
                     InstructionBinary[j] = constantBinary[i];
                 }
-            }
         }
-
+       }
     }
 
     //for all operations in instruction 
@@ -119,7 +142,9 @@ public class Instruction {
 
         }
         i++;
-
+        if(instruction[i] != ':'){
+            
+        }
         // convart the opration to string 
         opration = getString(oprationChar);
 

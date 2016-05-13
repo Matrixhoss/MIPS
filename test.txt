@@ -1,4 +1,4 @@
-add $s1,$s2,$s3
+add $t0,$s0,$0
 sub $s1,$s2,$s3
 and $s1,$s2,$s3
 or $s1,$s2,$s3
