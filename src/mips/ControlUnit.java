@@ -36,38 +36,8 @@ ControlUnit(String input){
 ControlUnit(int[] input){
     this.JumpReturn=0;
     this.Jump=0;
-    generateSignals(input);
+    generateSignals(this.input=Arrays.toString(input));
 }
-    public void generateSignals(int[] input){
-        this.input= Arrays.toString(input);
-        System.out.println(this.input);
-        
-        switch(this.input.toString()){
-            case "000000":
-                //RFormat
-                break;
-            case "001000":
-                //addi
-                GenerateIFormatSignals();
-                break;
-            case "100011":
-                //Load instruction
-                GenerateLoadSingals();
-                break;
-            case "101011":
-                //save instruction
-                GenerateSaveSignals();
-                break;
-            case "000100":
-                //branch if equal
-                GenerateBeqSignals();
-                break;
-            case "100111":
-                //nor operation
-            case "000101":
-                //branch if not equal
-        }  
-    }
     
     public void generateSignals(String input){
         this.input= input;
