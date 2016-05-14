@@ -34,7 +34,7 @@ public class Console {
             String x2="000000";
             ControlUnit cu = new ControlUnit(x2);
             Registers g = new Registers(m.getRS(), m.getRT(), cu.RegWrite);
-            ALU alu  = new ALU(g.ReturnData1(), g.ReturnData2(), "0110");
+            ALU alu  = new ALU(g.ReturnData1(), g.ReturnData2(), "0000");
             if(m.getOperation().equals("beq")||m.getOperation().equals("bne"))
                 alu.BranchJump(m.getLabel());
             g.setWrtData(alu.getALUResult(), Constants.Mux(m.getRT(), m.getRD(),cu.RegDest));

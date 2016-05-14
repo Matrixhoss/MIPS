@@ -66,12 +66,12 @@ public class Instruction {
         operationToBinary();
         RegToBinary();
         InsToBinary();
-        System.out.println(rsAddress);
         System.out.println(Constants.BinToInt(rdAddressBinary));
         System.out.println(Constants.BinToInt(rsAddressBinary));
         System.out.println(Constants.BinToInt(rtAddressBinary));
         System.out.println(Constants.BinToInt(OperationBinary));
         System.out.println(Constants.BinToInt(FunctionBinary));
+        System.out.println(Registers.$s0);
 //        for(int i=0;i<6;i++){
 //            System.out.print(OperationBinary[i]);
 //        }
