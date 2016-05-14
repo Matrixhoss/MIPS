@@ -28,6 +28,11 @@ public class ControlUnit {
 ControlUnit(){
     
 }
+ControlUnit(String input){
+    this.Jump=0;
+    this.JumpReturn=0;
+    generateSignals(input);
+}
 ControlUnit(int[] input){
     this.JumpReturn=0;
     this.Jump=0;
@@ -62,6 +67,39 @@ ControlUnit(int[] input){
             case "000101":
                 //branch if not equal
         }  
+    }
+    
+    public void generateSignals(String input){
+        this.input= input;
+        System.out.println(this.input);
+        
+        switch(this.input.toString()){
+            case "000000":
+                //RFormat
+                GenerateRFormatSignals();
+                break;
+            case "001000":
+                //addi
+                GenerateIFormatSignals();
+                break;
+            case "100011":
+                //Load instruction
+                GenerateLoadSingals();
+                break;
+            case "101011":
+                //save instruction
+                GenerateSaveSignals();
+                break;
+            case "000100":
+                //branch if equal
+                GenerateBeqSignals();
+                break;
+            case "100111":
+                //nor operation
+            case "000101":
+                //branch if not equal
+        }
+        System.out.println("Signals: RegtDest="+this.RegDest+ " RegWrite="+this.RegWrite);
     }
     void GenerateRFormatSignals(){
         this.RegDest=1;
