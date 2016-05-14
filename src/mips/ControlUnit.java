@@ -31,12 +31,14 @@ ControlUnit(){
 ControlUnit(String input){
     this.Jump=0;
     this.JumpReturn=0;
-    generateSignals(input);
+    this.input=input;
+    generateSignals(this.input);
 }
 ControlUnit(int[] input){
     this.JumpReturn=0;
     this.Jump=0;
-    generateSignals(this.input=Arrays.toString(input));
+    this.input=Arrays.toString(input);
+    generateSignals(this.input);
 }
     
     public void generateSignals(String input){
@@ -66,8 +68,15 @@ ControlUnit(int[] input){
                 break;
             case "100111":
                 //nor operation
+                break;
             case "000101":
                 //branch if not equal
+                break;
+            case "100000":
+                //jump
+                GenerateJumpSignals();
+                break;
+                
         }
         System.out.println("Signals: RegtDest="+this.RegDest+ " RegWrite="+this.RegWrite);
     }
