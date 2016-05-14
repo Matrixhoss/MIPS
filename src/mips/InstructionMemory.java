@@ -15,20 +15,24 @@ public class InstructionMemory {
     private int[] ControlUnit = new int[6];
     private int[] ALUControl = new int[6];
     private int address;
+    private String Operation;
+    private String Label;
 
-    Instruction ins;
+    private Instruction ins;
 
     public InstructionMemory(int address) {
-
-        this.ins = Constants.Instructions[address];
+        this.ins = Constants.Instructions[0];
         this.rsAddress = ins.rsAddressBinary;
         this.rdAddress = ins.rdAddressBinary;
         this.rtAddress = ins.rtAddressBinary;
         this.ALUControl = ins.FunctionBinary;
         this.ControlUnit = ins.OperationBinary;
+        this.Operation=ins.opration;
+        this.Label=ins.label;
         for (int i = 31,j = 15; i > 16;j--, i--) {
             this.SignExtend[j] = ins.InstructionBinary[i];
         }
+        
     }
 
     public int[] getRT() {
@@ -58,5 +62,27 @@ public class InstructionMemory {
     public int getAddress() {
         return this.address;
     }
-
+    
+    public String getOperation() {
+        return this.Operation;
+    }
+    
+    public String getLabel() {
+        return this.Label;
+    }
+    
+    public void getInstruction(int index){
+        
+        this.ins = Constants.Instructions[index];
+        this.rsAddress = ins.rsAddressBinary;
+        this.rdAddress = ins.rdAddressBinary;
+        this.rtAddress = ins.rtAddressBinary;
+        this.ALUControl = ins.FunctionBinary;
+        this.ControlUnit = ins.OperationBinary;
+        this.Operation=ins.opration;
+        this.Label=ins.label;
+        for (int i = 31,j = 15; i > 16;j--, i--) {
+            this.SignExtend[j] = ins.InstructionBinary[i];
+        }
+    }
 }

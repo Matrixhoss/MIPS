@@ -8,8 +8,8 @@ import java.util.*;
 
 public class Console {
 
-    private int FAdress;
-    private int address = 0;
+    private int FAddress;
+    public static int address = 0;
     private LinkedList<String> ins = new LinkedList<String>();
     private int numofins = 0;
     private String read = "";
@@ -21,24 +21,30 @@ public class Console {
         // Scanner s = new Scanner (System.in);
         System.out.println("Initializing Mips Simolator ");
         System.out.println("Enter the frist address ");
-        FAdress = sc.nextInt();
-        Constants.FristAddress = FAdress;
+        FAddress = sc.nextInt();
+        Constants.FristAddress = FAddress;
+        address=FAddress;
         FileOrConsole();
-        for (int i = 0; i < ins.size(); i++) {
-            InstructionMemory m = new InstructionMemory(i);
+       
+            InstructionMemory m = new InstructionMemory(FAddress);
+            while(address<ins.size()*4+FAddress){
+                System.out.println(FAddress+" "+address+" "+(address-FAddress)/4);
+            m.getInstruction((address-FAddress)/4);
             int[] x1 ={0,0,0,0,0,0};
             String x2="000000";
             ControlUnit cu = new ControlUnit(x2);
             Registers g = new Registers(m.getRS(), m.getRT(), cu.RegWrite);
             ALU alu  = new ALU(g.ReturnData1(), g.ReturnData2(), "0110");
+            if(m.getOperation().equals("beq")||m.getOperation().equals("bne"))
+                alu.BranchJump(m.getLabel());
             g.setWrtData(alu.getALUResult(), Constants.Mux(m.getRT(), m.getRD(),cu.RegDest));
             System.out.println(Registers.$s2);
            //System.out.println(Constants.Instructions[i].opration);
-            //System.out.println(Constants.Instructions[i].label);
-            //System.out.println(Constants.Instructions[i].opration.length());
+           //System.out.println(Constants.Instructions[i].label);
+           //System.out.println(Constants.Instructions[i].opration.length());
            // System.out.println(Constants.Instructions[i].label.length());
-         //   
             
+           
         }//
     }
 
@@ -57,7 +63,7 @@ public class Console {
                         break;
                     }
                     ins.add(read + " ");
-                    Constants.Instructions[numofins] = new Instruction(FAdress, ins.get(numofins), numofins);
+                    Constants.Instructions[numofins] = new Instruction(FAddress, ins.get(numofins), numofins);
 
                     numofins++;
                 }

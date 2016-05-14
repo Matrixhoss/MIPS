@@ -66,7 +66,7 @@ public class Registers {
                 
         }
        }*/
-
+        Console.address+=4;
     }
 
     public int getValue(int Loc) {

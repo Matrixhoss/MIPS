@@ -117,4 +117,11 @@ public class Constants {
         }
         return Result ;
     }
+    public static int SearchLabel(String Label){
+        for(int i=0;i<Instructions.length;i++){
+            if(Label.equals(Instructions[i].label))
+                return Instructions[i].address;
+        }
+        return -1;
+    }
 }

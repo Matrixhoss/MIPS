@@ -14,7 +14,7 @@ public class Instruction {
     int rdAddress = 0;
     int line = 0;
     int[] ControlSignal = new int[6];
-    static int address = 0;
+    int address = 0;
     String of;
     //binary for all ins
     int[] OperationBinary = new int[6];
@@ -36,6 +36,9 @@ public class Instruction {
     ArrayList<Character> addressChar = new ArrayList<Character>();
     ArrayList<Character> LineChar = new ArrayList<Character>();
 
+    //to know which label we jump to
+    String JumpTo=null;
+    
     // Check found boolean
     boolean opFound = false;
     boolean rsFound = false;
@@ -468,8 +471,8 @@ public class Instruction {
 
         }
         try {
-            line = Integer.parseInt(getString(LineChar));
-            System.out.println("Jump to line " + line + 1 + '\n');
+            JumpTo=LineChar.toString();
+            System.out.println("Jump to line " + JumpTo + 1 + '\n');
         } catch (NumberFormatException e) {
             System.out.println(Constants.ANSI_RED + "Jump address must be number in line" + (line + 1) + Constants.ANSI_RESET);
         }
@@ -512,7 +515,8 @@ public class Instruction {
                 FunctionBinary = Constants.getBin(37, 6);
                 break;
             case "nor":
-
+                OperationBinary = Constants.getBin(0, 6);
+                FunctionBinary = Constants.getBin(39, 6);
                 break;
             case "bne":
                 OperationBinary = Constants.getBin(5, 6);
