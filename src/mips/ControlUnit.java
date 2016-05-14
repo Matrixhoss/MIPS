@@ -25,27 +25,30 @@ public class ControlUnit {
 //        this.ALUSrc;
 //        this.MemWrite;
 //        this.RegWrite;
-ControlUnit(){
-    
-}
+
 ControlUnit(String input){
     this.Jump=0;
     this.JumpReturn=0;
-    this.input=input;
-    generateSignals(this.input);
+    generateSignals(input);
 }
 ControlUnit(int[] input){
     this.JumpReturn=0;
     this.Jump=0;
-    this.input=Arrays.toString(input);
-    generateSignals(this.input);
-}
     
-    public void generateSignals(String input){
+    generateSignals(IntArrayToString(input));
+}
+        public String IntArrayToString(int[] x){
+            String output="";
+            for(int i=0;i<x.length;i++){
+                output+=x[i];
+            }
+            return output;
+        }
+        public void generateSignals(String input){
         this.input= input;
-        System.out.println(this.input);
+        System.out.println("Current string value:"+this.input);
         
-        switch(this.input.toString()){
+        switch(this.input){
             case "000000":
                 //RFormat
                 GenerateRFormatSignals();
