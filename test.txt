@@ -1,2 +1,2 @@
-S3w:  add $s0,$s1,$s6
+S3w:  add $s0,$s2,$s1
 end
