@@ -25,7 +25,6 @@ public class Console {
         Constants.FristAddress = FAdress;
         FileOrConsole();
         for (int i = 0; i < ins.size(); i++) {
-            Constants.Instructions[i] = new Instruction(FAdress, ins.get(i), i);
             InstructionMemory m = new InstructionMemory(i);
             int[] x1 ={0,0,0,0,0,0};
             String x2="000000";
@@ -58,6 +57,7 @@ public class Console {
                         break;
                     }
                     ins.add(read + " ");
+                    Constants.Instructions[numofins] = new Instruction(FAdress, ins.get(numofins), numofins);
 
                     numofins++;
                 }

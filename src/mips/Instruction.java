@@ -46,7 +46,7 @@ public class Instruction {
     String rs;
     String rt;
     String rd;
-    String label ;
+    String label=null;
     public Instruction(int FAddress, String ins, int line) {
         //for the first instruction
         if (this.FAddress == 0) {
