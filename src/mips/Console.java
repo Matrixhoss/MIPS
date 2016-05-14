@@ -31,14 +31,14 @@ public class Console {
                 System.out.println(FAddress+" "+address+" "+(address-FAddress)/4);
             m.getInstruction((address-FAddress)/4);
             int[] x1 ={0,0,0,0,0,0};
-            String x2="000000";
-            ControlUnit cu = new ControlUnit(x2);
+            
+            ControlUnit cu = new ControlUnit(m.getControlUnit());
             Registers g = new Registers(m.getRS(), m.getRT(), cu.RegWrite);
-            ALU alu  = new ALU(g.ReturnData1(), g.ReturnData2(), "0000");
+            ALU alu  = new ALU(g.ReturnData1(), g.ReturnData2(), "0010");
             if(m.getOperation().equals("beq")||m.getOperation().equals("bne"))
                 alu.BranchJump(m.getLabel());
             g.setWrtData(alu.getALUResult(), Constants.Mux(m.getRT(), m.getRD(),cu.RegDest));
-            System.out.println(Registers.$s2);
+            System.out.println(Registers.$s0);
            //System.out.println(Constants.Instructions[i].opration);
            //System.out.println(Constants.Instructions[i].label);
            //System.out.println(Constants.Instructions[i].opration.length());
