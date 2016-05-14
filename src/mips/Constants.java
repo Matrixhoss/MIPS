@@ -27,10 +27,10 @@ public class Constants {
     public static final String ANSI_CYAN = "\u001B[36m";
     public static final String ANSI_WHITE = "\u001B[37m";
 
-    public static int[] Mux(int x[], int y[], boolean selection) {
-        if (selection == false) {
+    public static int[] Mux(int x[], int y[], int selection) {
+        if (selection == 0) {
             return x;
-        } else if (selection == true) {
+        } else if (selection == 1) {
             return y;
         }
         return null ;

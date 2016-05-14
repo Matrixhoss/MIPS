@@ -1,11 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package mips;
 
-// input 
+
 public class ALU {
 
     private String ALUControl;
@@ -18,7 +14,7 @@ public class ALU {
     private int Data2InBinary[];
 
     final String ALUand = "0000";
-    final String ALUor = "0001";
+    final String ALUor =  "0001";
     final String ALUadd = "0010";
     final String ALUsub = "0110";
     final String ALUslt = "0111";
@@ -65,13 +61,57 @@ public class ALU {
         }
         
     }
+    
+    public ALU(int d1[], int d2[], String ALUControl) {
+        this.Data1 = Constants.BinToInt(d1);
+        this.Data2 = Constants.BinToInt(d2);
+        this.ALUControl = ALUControl;
+        this.Data1InBinary = d1 ;
+        this.Data2InBinary = d2;
+
+        if (Data1 - Data2 == 0) {
+            this.ZreoFlag = 1;
+        }
+        
+        switch (ALUControl) {
+
+            case ALUand:
+                ALUResult = Constants.BinToInt(Constants.and(Data1InBinary, Data2InBinary));
+                break;
+            case ALUor:
+                ALUResult = Constants.BinToInt(Constants.or(Data1InBinary, Data2InBinary));
+                break;
+            case ALUadd:
+                ALUResult = Data1 + Data2;
+                break;
+            case ALUsub:
+                ALUResult = Data1 - Data2;
+                break;
+            case ALUslt:
+                if (Data1 > Data2) {
+                    ALUResult = 1;
+                } else {
+                    ALUResult = 0;
+                }
+                break;
+            case ALUnor:
+                ALUResult = Constants.BinToInt(Constants.nor(Data1InBinary, Data2InBinary));
+                break;
+            default:
+                System.out.println("Error in inputs in ALU ");
+                break;
+        }
+        
+    }
 
     public int getALUResult() {
         return this.ALUResult;
     }
 
     public int[] getALUResultInBinary() {
-        return Constants.getBin(this.ALUResult, 5);
+        if(Data2InBinary.length == 16)
+        return Constants.getBin(this.ALUResult, 16);
+        else return Constants.getBin(this.ALUResult, 5);
     }
 
     public int getZeroFlag() {

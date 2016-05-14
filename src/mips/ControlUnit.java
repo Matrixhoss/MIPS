@@ -4,18 +4,18 @@ package mips;
 import java.util.Arrays;
 
 public class ControlUnit {
-    // anta leh 3mlha boolean ya 3bdo ?? // hossam
+    
     public String input;
-    public boolean RegDest;
-    public boolean Branch;
-    public boolean MemRead;
-    public boolean MemtoReg;
+    public int RegDest;
+    public int Branch;
+    public int MemRead;
+    public int MemtoReg;
     public String ALUOp;
-    public boolean ALUSrc;
-    public boolean MemWrite;
-    public boolean RegWrite;
-    public boolean Jump;
-    public boolean JumpReturn;
+    public int ALUSrc;
+    public int MemWrite;
+    public int RegWrite;
+    public int Jump;
+    public int JumpReturn;
 
 //        this.RegDest;
 //        this.Branch;
@@ -29,8 +29,8 @@ ControlUnit(){
     
 }
 ControlUnit(int[] input){
-    this.JumpReturn=false;
-    this.Jump=false;
+    this.JumpReturn=0;
+    this.Jump=0;
     generateSignals(input);
 }
     public void generateSignals(int[] input){
@@ -64,97 +64,97 @@ ControlUnit(int[] input){
         }  
     }
     void GenerateRFormatSignals(){
-        this.RegDest=true;
-        this.Branch=false;
-        this.MemRead=false;
-        this.MemtoReg=false;
+        this.RegDest=1;
+        this.Branch=0;
+        this.MemRead=0;
+        this.MemtoReg=0;
         this.ALUOp="10";
-        this.ALUSrc=false;
-        this.MemWrite=false;
-        this.RegWrite=true;
+        this.ALUSrc=0;
+        this.MemWrite=0;
+        this.RegWrite=1;
     }
     void GenerateIFormatSignals(){
-        this.RegDest=false;
-        this.Branch=false;
-        this.MemRead=false;
-        this.MemtoReg=false;
+        this.RegDest=0;
+        this.Branch=0;
+        this.MemRead=0;
+        this.MemtoReg=0;
         this.ALUOp="00";
-        this.ALUSrc=true;
-        this.MemWrite=false;
-        this.RegWrite=true;
+        this.ALUSrc=1;
+        this.MemWrite=0;
+        this.RegWrite=1;
     }
     void GenerateJaLSignals(){
-        this.RegDest=false;
-        this.Branch=false;
-        this.MemRead=false;
-        this.MemtoReg=false;
+        this.RegDest=0;
+        this.Branch=0;
+        this.MemRead=0;
+        this.MemtoReg=0;
         this.ALUOp="00";
-        this.ALUSrc=true;
-        this.MemWrite=false;
-        this.RegWrite=true;
+        this.ALUSrc=1;
+        this.MemWrite=0;
+        this.RegWrite=1;
     }
     void GenerateLoadSingals(){
-        this.RegDest=false;
-        this.Branch=false;
-        this.MemRead=true;
-        this.MemtoReg=true;
+        this.RegDest=0;
+        this.Branch=0;
+        this.MemRead=1;
+        this.MemtoReg=1;
         this.ALUOp="00";
-        this.ALUSrc=true;
-        this.MemWrite=true;
-        this.RegWrite=true;
+        this.ALUSrc=1;
+        this.MemWrite=1;
+        this.RegWrite=1;
     }
     void GenerateSaveSignals(){
-        this.RegDest=false;
-        this.Branch=false;
-        this.MemRead=false;
-        this.MemtoReg=true;
+        this.RegDest=0;
+        this.Branch=0;
+        this.MemRead=0;
+        this.MemtoReg=1;
         this.ALUOp="00";
-        this.ALUSrc=true;
-        this.MemWrite=false;
-        this.RegWrite=true;
+        this.ALUSrc=1;
+        this.MemWrite=0;
+        this.RegWrite=1;
     }
     void GenerateBeqSignals(){
-        this.RegDest=false;
-        this.Branch=true;
-        this.MemRead=false;
-        this.MemtoReg=true;
+        this.RegDest=0;
+        this.Branch=1;
+        this.MemRead=0;
+        this.MemtoReg=1;
         this.ALUOp="01";
-        this.ALUSrc=false;
-        this.MemWrite=false;
-        this.RegWrite=false;
+        this.ALUSrc=0;
+        this.MemWrite=0;
+        this.RegWrite=0;
     }
     void GenerateJumpSignals(){
-        this.RegDest=false;
-        this.Branch=false;
-        this.MemRead=false;
-        this.MemtoReg=false;
+        this.RegDest=0;
+        this.Branch=0;
+        this.MemRead=0;
+        this.MemtoReg=0;
         this.ALUOp="00";
-        this.ALUSrc=false;
-        this.MemWrite=false;
-        this.RegWrite=false;
-        this.Jump=true;
+        this.ALUSrc=0;
+        this.MemWrite=0;
+        this.RegWrite=0;
+        this.Jump=1;
     }
     void GenerateBneSignals(){
-//        this.RegDest=false;
-//        this.Branch=true;
-//        this.MemRead=false;
-//        this.MemtoReg=true;
+//        this.RegDest=0;
+//        this.Branch=1;
+//        this.MemRead=0;
+//        this.MemtoReg=1;
 //        this.ALUOp="01";
-//        this.ALUSrc=false;
-//        this.MemWrite=false;
-//        this.RegWrite=false;
+//        this.ALUSrc=0;
+//        this.MemWrite=0;
+//        this.RegWrite=0;
     }
     void GenerateJumpRSignals(){
-        this.RegDest=false;
-        this.Branch=false;
-        this.MemRead=false;
-        this.MemtoReg=false;
+        this.RegDest=0;
+        this.Branch=0;
+        this.MemRead=0;
+        this.MemtoReg=0;
         this.ALUOp="00";
-        this.ALUSrc=false;
-        this.MemWrite=false;
-        this.RegWrite=false;
-        this.Jump=true;
-        this.JumpReturn=true;
+        this.ALUSrc=0;
+        this.MemWrite=0;
+        this.RegWrite=0;
+        this.Jump=1;
+        this.JumpReturn=1;
     }
     
     

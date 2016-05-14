@@ -28,9 +28,13 @@ public class Console {
             Constants.Instructions[i] = new Instruction(FAdress, ins.get(i), i);
             InstructionMemory m = new InstructionMemory(i);
             Registers g = new Registers(m.getRS(), m.getRT(), 1);
-            ALU alu  = new ALU(g.ReturnData1(), g.ReturnData2(), "0010");
-            g.setWrtData(alu.getALUResult(), Constants.Mux(m.getRT(), m.getRD(), true));
+            ALU alu  = new ALU(g.ReturnData1(), g.ReturnData2(), "0110");
+            g.setWrtData(alu.getALUResult(), Constants.Mux(m.getRT(), m.getRD(),1));
             System.out.println(Registers.$s2);
+            System.out.println(Constants.Instructions[i].opration);
+            System.out.println(Constants.Instructions[i].label);
+            System.out.println(Constants.Instructions[i].opration.length());
+            System.out.println(Constants.Instructions[i].label.length());
          //   
             
         }

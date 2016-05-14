@@ -7,28 +7,29 @@ public class Instruction {
     String instruction;
     int[] InstructionBinary = new int[32];
     int[] BinaryCode = new int[32];
-    int FAddress ;
+    int FAddress;
     int Constant;
     int rsAddress = 0;
     int rtAddress = 0;
     int rdAddress = 0;
     int line = 0;
     int[] ControlSignal = new int[6];
-    static int address=0;
+    static int address = 0;
     String of;
     //binary for all ins
-    int[] OperationBinary=new int[6];
+    int[] OperationBinary = new int[6];
     int[] rsAddressBinary = new int[5];
     int[] rtAddressBinary = new int[5];
     int[] rdAddressBinary = new int[5];
     int[] constantBinary = new int[16];
-    int[] FunctionBinary=new int[6];
+    int[] FunctionBinary = new int[6];
     int[] shiftBinary = {0, 0, 0, 0, 0};
 
     // constant in iFormat
     int IFormatConstant = 0;
-
+    ArrayList<Character> fristChar = new ArrayList<Character>();
     ArrayList<Character> oprationChar = new ArrayList<Character>();
+    ArrayList<Character> labelChar = new ArrayList<Character>();
     ArrayList<Character> rsChar = new ArrayList<Character>();
     ArrayList<Character> rtChar = new ArrayList<Character>();
     ArrayList<Character> rdChar = new ArrayList<Character>();
@@ -45,18 +46,18 @@ public class Instruction {
     String rs;
     String rt;
     String rd;
-
-
-    public Instruction(int FAddress, String ins,int line) {
+    String label ;
+    public Instruction(int FAddress, String ins, int line) {
         //for the first instruction
-        if(this.FAddress==0){
+        if (this.FAddress == 0) {
             FAddress = FAddress;
             address = FAddress;
+        } else//for other instruction
+        {
+            address += 4;
         }
-        else//for other instruction
-            address+=4;
         instruction = ins;
-        this.line=line;
+        this.line = line;
 //        Constants.Instruction[0] = "firstInstruction";
         ReadIns(instruction.toCharArray());
         operationToBinary();
@@ -81,73 +82,96 @@ public class Instruction {
 //            System.out.print(constantBinary[i]);
 //        }
         System.out.println();
-        for(int i=0;i<32;i++){
+        for (int i = 0; i < 32; i++) {
             System.out.print(InstructionBinary[i]);
         }
         System.out.println();
     }
+
     private void InsToBinary() {
-        int j=0;
+        int j = 0;
         // set frist 6 bit in instruction as opration
-        for(int i=0;i<6;i++,j++){
-            InstructionBinary[j]=OperationBinary[i];
+        for (int i = 0; i < 6; i++, j++) {
+            InstructionBinary[j] = OperationBinary[i];
         }
         // if instruction is Jformat set next 5 bit for rs and next 5 bit for rt
         //set 5 bit for the rs
-        if (!of.equals("JFormat")){
-        for(int i=0;i<5;i++,j++){
-            InstructionBinary[j]=rsAddressBinary[i];
-        }
-        //set 5 bit for the rt
-        for(int i=0;i<5;i++,j++){
-            InstructionBinary[j]=rtAddressBinary[i];
-        }
-        
-        if(of.equals("RFormat")){
-        // if instruction is Rformat set next 5 bit for rt address and next 5 for rd and next 6 for function
-        for(int i=0;i<5;i++,j++){
-            InstructionBinary[j]=rdAddressBinary[i];
-        }
-        //set 5 bit for the shift
-        for(int i=0;i<5;i++,j++){
-            InstructionBinary[j]=shiftBinary[i];
-        }
-        //set next 6 bit for the function
-        for(int i=0;i<6;i++,j++){
-            InstructionBinary[j]=FunctionBinary[i];
-        }
-        }
-        else{
-            // if instruction is Iformat set next 16 bit for the constant 
-            for (int i = 0; i < 16; i++, j++) {
+        if (!of.equals("JFormat")) {
+            for (int i = 0; i < 5; i++, j++) {
+                InstructionBinary[j] = rsAddressBinary[i];
+            }
+            //set 5 bit for the rt
+            for (int i = 0; i < 5; i++, j++) {
+                InstructionBinary[j] = rtAddressBinary[i];
+            }
+
+            if (of.equals("RFormat")) {
+                // if instruction is Rformat set next 5 bit for rt address and next 5 for rd and next 6 for function
+                for (int i = 0; i < 5; i++, j++) {
+                    InstructionBinary[j] = rdAddressBinary[i];
+                }
+                //set 5 bit for the shift
+                for (int i = 0; i < 5; i++, j++) {
+                    InstructionBinary[j] = shiftBinary[i];
+                }
+                //set next 6 bit for the function
+                for (int i = 0; i < 6; i++, j++) {
+                    InstructionBinary[j] = FunctionBinary[i];
+                }
+            } else {
+                // if instruction is Iformat set next 16 bit for the constant 
+                for (int i = 0; i < 16; i++, j++) {
                     InstructionBinary[j] = constantBinary[i];
                 }
+            }
         }
-       }
     }
 
     //for all operations in instruction 
-   private void ReadIns(char[] instruction) {
+    private void ReadIns(char[] instruction) {
         // create array of char to contan the opration
 
         of = "";
         int i = 0;
-        System.out.println(Constants.ANSI_BLUE+this.instruction+Constants.ANSI_RESET);
-        // while the char != " " (in the opration)
-        while (instruction[i] != ' ') {
+        System.out.println(Constants.ANSI_BLUE + this.instruction + Constants.ANSI_RESET);
 
-            oprationChar.add(instruction[i]);
+        while (true) {
+            if (instruction[i] == ' ' && fristChar.isEmpty()) {
+                i++;
+            }
+             else {
+                if (instruction[i] == ':') {
+                    labelChar = fristChar;
+                    i++;
+                    while (true) {
+                        if (instruction[i] == ' ' && oprationChar.isEmpty()) {
+                            i++;
+                        }
+                        else if (instruction[i] != ' '){
+                        oprationChar.add(instruction[i]);
+                        i++;
+                        }
+                        else if (instruction[i] == ' '){
+                        break;
+                        }
 
-            i++;
+                    }
+                    break;
+                } else if (instruction[i] == ' ') {
+                 oprationChar = fristChar;
+                 break;
+                }
+                fristChar.add(instruction[i]);
+                i++;
+            
 
+        }
         }
         i++;
-        if(instruction[i] != ':'){
-            
-        }
-        // convart the opration to string 
-        opration = getString(oprationChar);
 
+        label = getString(labelChar);
+        opration = getString(oprationChar);
+        
         Lo:
         for (int j = 0; j < Constants.oprations.length; j++) {
             if (opration.equals(Constants.oprations[j])) {
@@ -208,6 +232,7 @@ public class Instruction {
 
     }
 
+     
     // set RForamte values
     private void RFormatSet(char[] instruction, int i) {
         // rs check 
@@ -233,7 +258,7 @@ public class Instruction {
         } // end for 
         if (rdFound == false) {
             System.out.println(Constants.ANSI_RED + "Reg rd is not found in line " + (line + 1) + Constants.ANSI_RED);
-            System.out.println(Constants.ANSI_RED +rs+ Constants.ANSI_RED);
+            System.out.println(Constants.ANSI_RED + rs + Constants.ANSI_RED);
             return;
         } // end if 
 
@@ -332,29 +357,31 @@ public class Instruction {
 
         if (opration.equals("lw") || opration.equals("sw")) {
             // address of lw or sw Check 
-            try{
-            while (instruction[i] != '(') {
+            try {
+                while (instruction[i] != '(') {
 
-                if (instruction[i] != ' ') {
-                    addressChar.add(instruction[i]);
+                    if (instruction[i] != ' ') {
+                        addressChar.add(instruction[i]);
+                    }
+                    i++;
                 }
                 i++;
-            }
-            i++;
-            IFormatConstant = Integer.parseInt(getString(addressChar));
-            System.out.println("The Constant " + IFormatConstant);
+                IFormatConstant = Integer.parseInt(getString(addressChar));
+                System.out.println("The Constant " + IFormatConstant);
 
-            while (instruction[i] != ')') {
+                while (instruction[i] != ')') {
 
-                if (instruction[i] != ' ') {
-                    rsChar.add(instruction[i]);
+                    if (instruction[i] != ' ') {
+                        rsChar.add(instruction[i]);
+                    }
+
+                    i++;
+
                 }
-
-                i++;
-
+            } catch (ArrayIndexOutOfBoundsException e) {
+                System.out.println(Constants.ANSI_RED + "Error in sentence may be forget () in line " + (line + 1) + "\n" + Constants.ANSI_RESET);
+                return;
             }
-        }catch (ArrayIndexOutOfBoundsException e){System.out.println(Constants.ANSI_RED+"Error in sentence may be forget () in line "+(line +1)+"\n"+Constants.ANSI_RESET);
-        return ;}
             rs = getString(rsChar);
             for (int j = 0; j < Constants.reg.length; j++) {
                 if (rs.equals(Constants.reg[j])) {
@@ -367,7 +394,7 @@ public class Instruction {
             } // end for 
             if (rsFound == false) {
                 System.out.println(Constants.ANSI_RED + "Reg rs is not found in line " + (line + 1) + Constants.ANSI_RESET);
-                System.out.println(Constants.ANSI_RED+rt+Constants.ANSI_RESET);
+                System.out.println(Constants.ANSI_RED + rt + Constants.ANSI_RESET);
                 return;
             } // end if
 
@@ -397,8 +424,8 @@ public class Instruction {
 
             } // end for 
             if (rsFound == false) {
-            System.out.println(Constants.ANSI_RED + "Reg rs is not found in line " + (line + 1) + Constants.ANSI_RESET);
-            System.out.println(Constants.ANSI_RED+rt+Constants.ANSI_RESET);
+                System.out.println(Constants.ANSI_RED + "Reg rs is not found in line " + (line + 1) + Constants.ANSI_RESET);
+                System.out.println(Constants.ANSI_RED + rt + Constants.ANSI_RESET);
                 return;
             } // end if
 
@@ -416,11 +443,13 @@ public class Instruction {
 
             }
             // set the IFormat Constant 
-            try{
-            IFormatConstant = Integer.parseInt(getString(addressChar));
-            System.out.println("The Constant is " + IFormatConstant + " in line " + (line + 1) + '\n');
-            }catch(NumberFormatException e){System.out.println(Constants.ANSI_RED+"Constant must be number in line "+(line+1)+'\n'+Constants.ANSI_RESET);}
-            
+            try {
+                IFormatConstant = Integer.parseInt(getString(addressChar));
+                System.out.println("The Constant is " + IFormatConstant + " in line " + (line + 1) + '\n');
+            } catch (NumberFormatException e) {
+                System.out.println(Constants.ANSI_RED + "Constant must be number in line " + (line + 1) + '\n' + Constants.ANSI_RESET);
+            }
+
         }
 
     }
@@ -438,82 +467,84 @@ public class Instruction {
             }
 
         }
-        try{
+        try {
             line = Integer.parseInt(getString(LineChar));
-            System.out.println("Jump to line " + line +1+ '\n');
-            }catch(NumberFormatException e){System.out.println(Constants.ANSI_RED+"Jump address must be number in line"+(line+1)+Constants.ANSI_RESET);}
-        
+            System.out.println("Jump to line " + line + 1 + '\n');
+        } catch (NumberFormatException e) {
+            System.out.println(Constants.ANSI_RED + "Jump address must be number in line" + (line + 1) + Constants.ANSI_RESET);
+        }
+
     }
 
     //Operation to binary
     private void operationToBinary() {
         switch (opration) {
             case "add":
-               OperationBinary=Constants.getBin(0, 6);
-               FunctionBinary=Constants.getBin(32, 6);
+                OperationBinary = Constants.getBin(0, 6);
+                FunctionBinary = Constants.getBin(32, 6);
                 break;
             case "addi":
-                OperationBinary=Constants.getBin(8, 6);
-               FunctionBinary=Constants.getBin(0, 6);
+                OperationBinary = Constants.getBin(8, 6);
+                FunctionBinary = Constants.getBin(0, 6);
                 break;
             case "sub":
-                OperationBinary=Constants.getBin(0, 6);
-               FunctionBinary=Constants.getBin(34, 6);
+                OperationBinary = Constants.getBin(0, 6);
+                FunctionBinary = Constants.getBin(34, 6);
                 break;
             case "lw":
-                OperationBinary=Constants.getBin(35, 6);
-               FunctionBinary=Constants.getBin(0, 6);
+                OperationBinary = Constants.getBin(35, 6);
+                FunctionBinary = Constants.getBin(0, 6);
                 break;
             case "sw":
-                OperationBinary=Constants.getBin(43, 6);
-               FunctionBinary=Constants.getBin(0, 6);
+                OperationBinary = Constants.getBin(43, 6);
+                FunctionBinary = Constants.getBin(0, 6);
                 break;
             case "sll":
-                OperationBinary=Constants.getBin(0, 6);
-               FunctionBinary=Constants.getBin(0, 6);
+                OperationBinary = Constants.getBin(0, 6);
+                FunctionBinary = Constants.getBin(0, 6);
                 break;
             case "and":
-                OperationBinary=Constants.getBin(0, 6);
-               FunctionBinary=Constants.getBin(36, 6);
+                OperationBinary = Constants.getBin(0, 6);
+                FunctionBinary = Constants.getBin(36, 6);
                 break;
             case "or":
-                OperationBinary=Constants.getBin(0, 6);
-               FunctionBinary=Constants.getBin(37, 6);
+                OperationBinary = Constants.getBin(0, 6);
+                FunctionBinary = Constants.getBin(37, 6);
                 break;
             case "nor":
-                
+
                 break;
             case "bne":
-                OperationBinary=Constants.getBin(5, 6);
-               FunctionBinary=Constants.getBin(0, 6);
+                OperationBinary = Constants.getBin(5, 6);
+                FunctionBinary = Constants.getBin(0, 6);
                 break;
             case "j":
-                OperationBinary=Constants.getBin(2, 6);
-               FunctionBinary=Constants.getBin(0, 6);
+                OperationBinary = Constants.getBin(2, 6);
+                FunctionBinary = Constants.getBin(0, 6);
                 break;
             case "jal":
-                OperationBinary=Constants.getBin(3, 6);
-               FunctionBinary=Constants.getBin(0, 6);
+                OperationBinary = Constants.getBin(3, 6);
+                FunctionBinary = Constants.getBin(0, 6);
                 break;
             case "jr":
-                OperationBinary=Constants.getBin(8, 6);
-               FunctionBinary=Constants.getBin(0, 6);
+                OperationBinary = Constants.getBin(8, 6);
+                FunctionBinary = Constants.getBin(0, 6);
                 break;
             case "slt":
-                OperationBinary=Constants.getBin(0, 6);
-               FunctionBinary=Constants.getBin(42, 6);
+                OperationBinary = Constants.getBin(0, 6);
+                FunctionBinary = Constants.getBin(42, 6);
                 break;
             case "slti":
-                OperationBinary=Constants.getBin(10, 6);
-               FunctionBinary=Constants.getBin(0, 6);
+                OperationBinary = Constants.getBin(10, 6);
+                FunctionBinary = Constants.getBin(0, 6);
                 break;
             case "sltu":
-                OperationBinary=Constants.getBin(0, 6);
-               FunctionBinary=Constants.getBin(41, 6);
+                OperationBinary = Constants.getBin(0, 6);
+                FunctionBinary = Constants.getBin(41, 6);
                 break;
             case "sltui":
-                OperationBinary=Constants.getBin(9, 6);
-               FunctionBinary=Constants.getBin(0, 6);
+                OperationBinary = Constants.getBin(9, 6);
+                FunctionBinary = Constants.getBin(0, 6);
                 break;
         }
 
@@ -536,9 +567,9 @@ public class Instruction {
     public int[] getInstructionBinary() {
         return InstructionBinary;
     }
-    
-    public void setInstruction(String instruction){
-    this.instruction = instruction ;
+
+    public void setInstruction(String instruction) {
+        this.instruction = instruction;
     }
 
     // function to convert ArrayList of char to string 
