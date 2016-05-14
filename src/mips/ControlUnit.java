@@ -75,7 +75,7 @@ ControlUnit(int[] input){
             case "000101":
                 //branch if not equal
                 break;
-            case "100000":
+            case "000010":
                 //jump
                 GenerateJumpSignals();
                 break;

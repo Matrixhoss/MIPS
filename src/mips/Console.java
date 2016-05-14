@@ -27,9 +27,7 @@ public class Console {
         for (int i = 0; i < ins.size(); i++) {
             Constants.Instructions[i] = new Instruction(FAdress, ins.get(i), i);
             InstructionMemory m = new InstructionMemory(i);
-            int[] x1 ={0,0,0,0,0,0};
-            String x2="000000";
-            ControlUnit cu = new ControlUnit(x2);
+            ControlUnit cu = new ControlUnit(m.getControlUnit());
             Registers g = new Registers(m.getRS(), m.getRT(), cu.RegWrite);
             ALU alu  = new ALU(g.ReturnData1(), g.ReturnData2(), "0110");
             g.setWrtData(alu.getALUResult(), Constants.Mux(m.getRT(), m.getRD(),cu.RegDest));
