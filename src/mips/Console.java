@@ -27,17 +27,18 @@ public class Console {
         for (int i = 0; i < ins.size(); i++) {
             Constants.Instructions[i] = new Instruction(FAdress, ins.get(i), i);
             InstructionMemory m = new InstructionMemory(i);
-            Registers g = new Registers(m.getRS(), m.getRT(), 1);
+            ControlUnit cu = new ControlUnit(m.getControlUnit());
+            Registers g = new Registers(m.getRS(), m.getRT(), cu.RegWrite);
             ALU alu  = new ALU(g.ReturnData1(), g.ReturnData2(), "0110");
-            g.setWrtData(alu.getALUResult(), Constants.Mux(m.getRT(), m.getRD(),1));
+            g.setWrtData(alu.getALUResult(), Constants.Mux(m.getRT(), m.getRD(),cu.RegDest));
             System.out.println(Registers.$s2);
-            System.out.println(Constants.Instructions[i].opration);
-            System.out.println(Constants.Instructions[i].label);
-            System.out.println(Constants.Instructions[i].opration.length());
-            System.out.println(Constants.Instructions[i].label.length());
+           //System.out.println(Constants.Instructions[i].opration);
+            //System.out.println(Constants.Instructions[i].label);
+            //System.out.println(Constants.Instructions[i].opration.length());
+           // System.out.println(Constants.Instructions[i].label.length());
          //   
             
-        }
+        }//
     }
 
     // check the user use file or console to run the programe 
