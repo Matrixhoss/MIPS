@@ -37,7 +37,7 @@ public class Console {
                 g.setWrtData(alu.getALUResult(), Constants.Mux(m.getRT(), m.getRD(),cu.RegDest));
                 if(m.getOperation().equals("beq")||m.getOperation().equals("bne"))
                     alu.BranchJump(m.getToJump());
-            
+                
                 
             
            //System.out.println(Constants.Instructions[i].opration);
@@ -47,6 +47,7 @@ public class Console {
             
            
         }//
+            Constants.l.printAll();
     }
 
     // check the user use file or console to run the programe 

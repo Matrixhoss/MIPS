@@ -7,14 +7,14 @@ public class Instruction {
     String instruction;
     int[] InstructionBinary = new int[32];
     int[] BinaryCode = new int[32];
-    int FAddress;
+    private static int FAddress;
     int Constant;
     int rsAddress = 0;
     int rtAddress = 0;
     int rdAddress = 0;
     int line = 0;
     int[] ControlSignal = new int[6];
-    int address = 0;
+    private static int address = 0;
     String of;
     //binary for all ins
     int[] OperationBinary = new int[6];
@@ -54,7 +54,7 @@ public class Instruction {
     public Instruction(int FAddress, String ins, int line) {
         //for the first instruction
         if (this.FAddress == 0) {
-            FAddress = FAddress;
+            this.FAddress = FAddress;
             address = FAddress;
         } else//for other instruction
         {
@@ -68,10 +68,11 @@ public class Instruction {
         RegToBinary();
         InsToBinary();
         SaveLabel();
+        System.out.println(address);
         System.out.println(Constants.BinToInt(rdAddressBinary));
         System.out.println(Constants.BinToInt(rsAddressBinary));
         System.out.println(Constants.BinToInt(rtAddressBinary));
-        System.out.println(JumpTo);
+        System.out.println("Label  : "+this.label);
         System.out.println(Constants.BinToInt(FunctionBinary));
         System.out.println(Registers.$s0);
 //        for(int i=0;i<6;i++){
@@ -326,7 +327,7 @@ public class Instruction {
     }
 
     private void SaveLabel(){
-        if(this.label!=""){
+        if(!this.label.equals("")){
             Constants.l.addLabel(label,address);
         }
     }

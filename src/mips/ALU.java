@@ -119,6 +119,7 @@ public class ALU {
     }
     public void BranchJump(String ToJump){
         if(this.ZreoFlag==1){
+            System.out.println("Jump to :: "+Constants.l.SearchAddress("l1"));
             Console.address=Constants.l.SearchAddress(ToJump);
         }
     }

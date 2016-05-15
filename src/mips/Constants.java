@@ -132,10 +132,16 @@ public class Constants {
 class Label{
     private String Label;
     private int address;
-
+    private int Line;
+    
     public Label(String Label, int address) {
         this.Label = Label;
         this.address = address;
+    }
+
+    @Override
+    public String toString() {
+        return "Label is :"+this.Label+" address is :"+this.address; //To change body of generated methods, choose Tools | Templates.
     }
     
     public String getLabel(){
@@ -168,8 +174,15 @@ class TotalLabel{
    
     public int SearchAddress(String Label){
         for(int i=0;i<Total.size();i++)
-            if(Label.equals(this.Total.get(i).getAddress()))
+            if(Label.equals(this.Total.get(i).getLabel()))
                 return this.Total.get(i).getAddress();
+        
         return Console.address;
-    } 
+    }
+    
+    public void printAll(){
+        for(int i=0;i<this.Total.size();i++)
+            System.out.println(Total.get(i));
+    
+    }
 }
