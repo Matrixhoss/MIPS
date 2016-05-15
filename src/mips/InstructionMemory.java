@@ -17,6 +17,7 @@ public class InstructionMemory {
     private int address;
     private String Operation;
     private String Label;
+    private String ToJump;
 
     private Instruction ins;
 
@@ -29,6 +30,7 @@ public class InstructionMemory {
         this.ControlUnit = ins.OperationBinary;
         this.Operation=ins.opration;
         this.Label=ins.label;
+        this.ToJump=ins.JumpTo;
         for (int i = 31,j = 15; i > 16;j--, i--) {
             this.SignExtend[j] = ins.InstructionBinary[i];
         }
@@ -71,6 +73,10 @@ public class InstructionMemory {
         return this.Label;
     }
     
+    public String getToJump() {
+        return this.ToJump;
+    }
+    
     public void getInstruction(int index){
         
         this.ins = Constants.Instructions[index];
@@ -84,5 +90,7 @@ public class InstructionMemory {
         for (int i = 31,j = 15; i > 16;j--, i--) {
             this.SignExtend[j] = ins.InstructionBinary[i];
         }
+        this.ToJump=ins.JumpTo;
+        Console.address+=4;
     }
 }

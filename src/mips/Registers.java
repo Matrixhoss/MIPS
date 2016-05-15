@@ -233,6 +233,6 @@ public class Registers {
             }
 
         }
-        Console.address+=4;
+        
     }
 }

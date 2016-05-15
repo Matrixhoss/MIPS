@@ -117,9 +117,10 @@ public class ALU {
     public int getZeroFlag() {
         return this.ZreoFlag;
     }
-    public void BranchJump(String Label){
+    public void BranchJump(String ToJump){
         if(this.ZreoFlag==1){
-            Console.address=Constants.SearchLabel(Label);
+            Console.address=Constants.SearchLabel(ToJump);
+            System.out.println(Console.address);
         }
     }
 }

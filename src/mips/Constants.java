@@ -66,11 +66,17 @@ public class Constants {
     }
 
     public static int[] getBin(int n, int size) {
-        int[] a = new int[size];
+        
+         int[] a = new int[size];
+        try{
         while (n > 0) {
             a[size - 1] = n % 2;
             n = n / 2;
             size--;
+        }
+        }
+        catch(ArrayIndexOutOfBoundsException ex){
+            
         }
         return a;
     }

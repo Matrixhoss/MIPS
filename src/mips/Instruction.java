@@ -69,7 +69,7 @@ public class Instruction {
         System.out.println(Constants.BinToInt(rdAddressBinary));
         System.out.println(Constants.BinToInt(rsAddressBinary));
         System.out.println(Constants.BinToInt(rtAddressBinary));
-        System.out.println(Constants.BinToInt(OperationBinary));
+        System.out.println(JumpTo);
         System.out.println(Constants.BinToInt(FunctionBinary));
         System.out.println(Registers.$s0);
 //        for(int i=0;i<6;i++){
@@ -447,8 +447,15 @@ public class Instruction {
             }
             // set the IFormat Constant 
             try {
-                IFormatConstant = Integer.parseInt(getString(addressChar));
-                System.out.println("The Constant is " + IFormatConstant + " in line " + (line + 1) + '\n');
+                if(this.opration.equals("beq")&&this.opration.equals("bne")){
+                    IFormatConstant = Integer.parseInt(getString(addressChar));
+                    System.out.println("The Constant is " + IFormatConstant + " in line " + (line + 1) + '\n');
+                }
+                else{
+                    JumpTo = getString(addressChar);
+                    System.out.println("The Instruction is  jump for " + JumpTo +"\n");
+                
+                }
             } catch (NumberFormatException e) {
                 System.out.println(Constants.ANSI_RED + "Constant must be number in line " + (line + 1) + '\n' + Constants.ANSI_RESET);
             }
