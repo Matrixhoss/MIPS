@@ -211,6 +211,23 @@ public class Constants {
         }
         return arr;
     }
+     
+     //shift and signExtend for Instruction[15-0]
+    public static int LineToBranch(int[] Instruction15T0){
+        int[] SignExtend15T0Binary=signExtend(Instruction15T0);
+        int SignExAndShift15T0=BinToInt(SignExtend15T0Binary);
+        SignExAndShift15T0*=4;//for Instruction[15-0] when pass sign extend and shift left 2
+        return SignExAndShift15T0;
+    }
+    
+    public static int makeAddressToBranch(int Address,int[] Instruction15T0){
+        int AddressToBranch,SignExAndShift15T0;
+        SignExAndShift15T0=Constants.LineToBranch(Instruction15T0);
+        AddressToBranch=SignExAndShift15T0+Address;
+        System.out.println("Address to branch: "+AddressToBranch);
+        return AddressToBranch;
+    }
+    
 }
 
 class Label {
@@ -219,14 +236,15 @@ class Label {
     private int address;
     private int Line;
 
-    public Label(String Label, int address) {
+    public Label(String Label, int address,int Line) {
         this.Label = Label;
         this.address = address;
+        this.Line=Line;
     }
 
     @Override
     public String toString() {
-        return "Label is :" + this.Label + " address is :" + this.address; //To change body of generated methods, choose Tools | Templates.
+        return "Label is :" + this.Label + " address is :" + this.address+" Line is:"+this.Line; //To change body of generated methods, choose Tools | Templates.
     }
 
     public String getLabel() {
@@ -236,13 +254,21 @@ class Label {
     public int getAddress() {
         return address;
     }
-
+    
+    public int getLine() {
+        return Line;
+    }
+    
     public void setLabel(String label) {
         this.Label = label;
     }
 
     public void setAddress(int address) {
         this.address = address;
+    }
+    
+    public void setLine(int Line) {
+        this.Line = Line;
     }
 
 }
@@ -255,8 +281,8 @@ class TotalLabel {
 
     }
 
-    public void addLabel(String Label, int address) {
-        this.Total.add(new Label(Label, address));
+    public void addLabel(String Label, int address,int Line) {
+        this.Total.add(new Label(Label, address,Line));
     }
 
     public int SearchAddress(String Label) {
