@@ -67,6 +67,7 @@ public class Instruction {
         operationToBinary();
         RegToBinary();
         InsToBinary();
+        SaveLabel();
         System.out.println(Constants.BinToInt(rdAddressBinary));
         System.out.println(Constants.BinToInt(rsAddressBinary));
         System.out.println(Constants.BinToInt(rtAddressBinary));
@@ -324,6 +325,12 @@ public class Instruction {
 
     }
 
+    private void SaveLabel(){
+        if(this.label!=""){
+            Constants.l.addLabel(label,address);
+        }
+    }
+    
     private void IFormatSet(char[] instruction, int i) {
 
         // rt check 

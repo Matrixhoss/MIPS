@@ -5,6 +5,8 @@
  */
 package mips;
 
+import java.util.LinkedList;
+
 public class Constants {
 
     public static final String[] oprations = {"add", "addi", "sub", "lw", "sw", "sll", "and", "or", "nor", "beq", "bne", "j", "jal", "jr", "slt", "slti", "sltu", "sltui"};
@@ -26,7 +28,10 @@ public class Constants {
     public static final String ANSI_PURPLE = "\u001B[35m";
     public static final String ANSI_CYAN = "\u001B[36m";
     public static final String ANSI_WHITE = "\u001B[37m";
-
+    
+    //to save Labels
+    public static TotalLabel l=new TotalLabel();
+    
     public static int[] Mux(int x[], int y[], int selection) {
         if (selection == 0) {
             return x;
@@ -123,13 +128,48 @@ public class Constants {
         }
         return Result ;
     }
-    public static int SearchLabel(String ToJump){
-        for(int i=0;i<Instructions.length;i++){
-            if(ToJump.equals(Instructions[i].label)){
-                System.out.println("To Jump: "+Instructions[i].JumpTo+"Label :"+Instructions[i].label+"Addrass To Jump: "+Instructions[i].address);
-                return Instructions[i].address;
-            }
-        }
-        return -1;
+}
+class Label{
+    private String Label;
+    private int address;
+
+    public Label(String Label, int address) {
+        this.Label = Label;
+        this.address = address;
     }
+    
+    public String getLabel(){
+        return Label;
+    }
+    
+    public int getAddress(){
+        return address;
+    }
+
+    public void setLabel(String label){
+        this.Label=label;
+    }
+    
+    public void setAddress(int address){
+        this.address=address;
+    }
+    
+}
+class TotalLabel{
+    LinkedList<Label> Total=new LinkedList();
+
+    public TotalLabel() {
+   
+    }
+    
+   public void addLabel(String Label,int address){
+       this.Total.add(new Label(Label, address));
+   }
+   
+    public int SearchAddress(String Label){
+        for(int i=0;i<Total.size();i++)
+            if(Label.equals(this.Total.get(i).getAddress()))
+                return this.Total.get(i).getAddress();
+        return Console.address;
+    } 
 }

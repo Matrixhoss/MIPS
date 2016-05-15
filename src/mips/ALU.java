@@ -119,7 +119,7 @@ public class ALU {
     }
     public void BranchJump(String ToJump){
         if(this.ZreoFlag==1){
-            Console.address=Constants.SearchLabel(ToJump);
+            Console.address=Constants.l.SearchAddress(ToJump);
         }
     }
 }

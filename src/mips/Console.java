@@ -36,7 +36,6 @@ public class Console {
                 ALU alu  = new ALU(g.ReturnData1(), g.ReturnData2(), "0010");
                 g.setWrtData(alu.getALUResult(), Constants.Mux(m.getRT(), m.getRD(),cu.RegDest));
                 if(m.getOperation().equals("beq")||m.getOperation().equals("bne"))
-                    System.out.println("\n"+m.getToJump()+"\n");
                     alu.BranchJump(m.getToJump());
             
                 
