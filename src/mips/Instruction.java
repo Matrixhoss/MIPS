@@ -37,8 +37,8 @@ public class Instruction {
     ArrayList<Character> LineChar = new ArrayList<Character>();
 
     //to know which label we jump to
-    String JumpTo=null;
-    
+    String JumpTo = null;
+
     // Check found boolean
     boolean opFound = false;
     boolean rsFound = false;
@@ -49,7 +49,8 @@ public class Instruction {
     String rs;
     String rt;
     String rd;
-    String label=null;
+    String label = null;
+
     public Instruction(int FAddress, String ins, int line) {
         //for the first instruction
         if (this.FAddress == 0) {
@@ -141,40 +142,36 @@ public class Instruction {
         while (true) {
             if (instruction[i] == ' ' && fristChar.isEmpty()) {
                 i++;
-            }
-             else {
+            } else {
                 if (instruction[i] == ':') {
                     labelChar = fristChar;
                     i++;
                     while (true) {
                         if (instruction[i] == ' ' && oprationChar.isEmpty()) {
                             i++;
-                        }
-                        else if (instruction[i] != ' '){
-                        oprationChar.add(instruction[i]);
-                        i++;
-                        }
-                        else if (instruction[i] == ' '){
-                        break;
+                        } else if (instruction[i] != ' ') {
+                            oprationChar.add(instruction[i]);
+                            i++;
+                        } else if (instruction[i] == ' ') {
+                            break;
                         }
 
                     }
                     break;
                 } else if (instruction[i] == ' ') {
-                 oprationChar = fristChar;
-                 break;
+                    oprationChar = fristChar;
+                    break;
                 }
                 fristChar.add(instruction[i]);
                 i++;
-            
 
-        }
+            }
         }
         i++;
 
         label = getString(labelChar);
         opration = getString(oprationChar);
-        
+
         Lo:
         for (int j = 0; j < Constants.oprations.length; j++) {
             if (opration.equals(Constants.oprations[j])) {
@@ -235,7 +232,6 @@ public class Instruction {
 
     }
 
-     
     // set RForamte values
     private void RFormatSet(char[] instruction, int i) {
         // rs check 
@@ -447,14 +443,13 @@ public class Instruction {
             }
             // set the IFormat Constant 
             try {
-                if(this.opration.equals("beq")&&this.opration.equals("bne")){
+                if (this.opration.equals("beq") && this.opration.equals("bne")) {
                     IFormatConstant = Integer.parseInt(getString(addressChar));
                     System.out.println("The Constant is " + IFormatConstant + " in line " + (line + 1) + '\n');
-                }
-                else{
+                } else {
                     JumpTo = getString(addressChar);
-                    System.out.println("The Instruction is  jump for " + JumpTo +"\n");
-                
+                    System.out.println("The Instruction is  jump for " + JumpTo + "\n");
+
                 }
             } catch (NumberFormatException e) {
                 System.out.println(Constants.ANSI_RED + "Constant must be number in line " + (line + 1) + '\n' + Constants.ANSI_RESET);
@@ -478,7 +473,7 @@ public class Instruction {
 
         }
         try {
-            JumpTo=LineChar.toString();
+            JumpTo = LineChar.toString();
             System.out.println("Jump to line " + JumpTo + 1 + '\n');
         } catch (NumberFormatException e) {
             System.out.println(Constants.ANSI_RED + "Jump address must be number in line" + (line + 1) + Constants.ANSI_RESET);
@@ -527,6 +522,10 @@ public class Instruction {
                 break;
             case "bne":
                 OperationBinary = Constants.getBin(5, 6);
+                FunctionBinary = Constants.getBin(0, 6);
+                break;
+            case "beq":
+                OperationBinary = Constants.getBin(4, 6);
                 FunctionBinary = Constants.getBin(0, 6);
                 break;
             case "j":
