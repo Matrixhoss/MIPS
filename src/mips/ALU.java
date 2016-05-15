@@ -46,7 +46,7 @@ public class ALU {
                 ALUResult = Data1 - Data2;
                 break;
             case ALUslt:
-                if (Data1 > Data2) {
+                if (Data1 < Data2) {
                     ALUResult = 1;
                 } else {
                     ALUResult = 0;
