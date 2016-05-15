@@ -8,7 +8,7 @@ import java.util.*;
 
 public class Console {
 
-    private int FAddress;
+    public static int FAddress;
     public static int address = 0;
     private LinkedList<String> ins = new LinkedList<String>();
     private int numofins = 0;
@@ -17,7 +17,7 @@ public class Console {
     private int selectionCode = 1;
 
     public Console() {
-
+        
         // Scanner s = new Scanner (System.in);
         System.out.println("Initializing Mips Simolator ");
         System.out.println("Enter the frist address ");
@@ -72,9 +72,11 @@ public class Console {
                 br.close();
                 fr.close();
 
-            } catch (FileNotFoundException e) {
+            } 
+            catch (FileNotFoundException e) {
                 System.out.println("error");
-            } catch (IOException e) {
+            }
+            catch (IOException e) {
                 System.out.println("error");
             }
 

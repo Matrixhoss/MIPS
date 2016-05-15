@@ -12,7 +12,8 @@ public class Instruction {
     int rsAddress = 0;
     int rtAddress = 0;
     int rdAddress = 0;
-    int line = 0;
+    int LineToJump=0;//line that branch jump to
+    public static int line = 0;
     int[] ControlSignal = new int[6];
     private static int address = 0;
     String of;
@@ -56,9 +57,11 @@ public class Instruction {
         if (this.FAddress == 0) {
             this.FAddress = FAddress;
             address = FAddress;
+            line=0;
         } else//for other instruction
         {
             address += 4;
+            line++;
         }
         instruction = ins;
         this.line = line;
@@ -69,6 +72,7 @@ public class Instruction {
         InsToBinary();
         SaveLabel();
         System.out.println(address);
+//        System.out.println(this.line);
         System.out.println(Constants.BinToInt(rdAddressBinary));
         System.out.println(Constants.BinToInt(rsAddressBinary));
         System.out.println(Constants.BinToInt(rtAddressBinary));

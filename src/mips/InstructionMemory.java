@@ -18,6 +18,7 @@ public class InstructionMemory {
     private String Operation;
     private String Label;
     private String ToJump;
+    int LineToJump=0; //line that branch jump to
 
     private Instruction ins;
 
@@ -34,7 +35,10 @@ public class InstructionMemory {
         for (int i = 31,j = 15; i > 16;j--, i--) {
             this.SignExtend[j] = ins.InstructionBinary[i];
         }
-        
+        if(Operation.equals("beq")||Operation.equals("bne")){
+            //calculate the line that branch jump to
+            this.LineToJump=ins.LineToJump;
+        }
     }
 
     public int[] getRT() {
@@ -91,6 +95,10 @@ public class InstructionMemory {
             this.SignExtend[j] = ins.InstructionBinary[i];
         }
         this.ToJump=ins.JumpTo;
-        Console.address+=4;
+        if(Operation.equals("beq")||Operation.equals("bne")){
+            ins.LineToJump=address-Constants.l.SearchAddress(ToJump);//calculate the line that branch jump to
+            this.LineToJump=ins.LineToJump;
+        }
+            Console.address+=4;
     }
 }
