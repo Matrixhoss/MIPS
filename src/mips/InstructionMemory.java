@@ -39,6 +39,7 @@ public class InstructionMemory {
             //calculate the line that branch jump to
             this.LineToJump=ins.LineToJump;
         }
+        Console.address+=4;
     }
 
     public int[] getRT() {
