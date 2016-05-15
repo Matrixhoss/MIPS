@@ -70,15 +70,39 @@ public class Constants {
         return y;
     }
 
-    public static int[] getBin(int n, int size) {
-        
-         int[] a = new int[size];
+//    public static int[] getBin(int n, int size) {
+//        
+//         int[] a = new int[size];
+//        try{
+//        while (n > 0) {
+//            a[size - 1] = n % 2;
+//            n = n / 2;
+//            size--;
+//        }
+//        }
+//        catch(ArrayIndexOutOfBoundsException ex){
+//            
+//        }
+//        return a;
+//    }
+    
+        public static int[] getBin(int n, int size) {
+
+        int[] a=new int[size];
+        boolean neg=false;
+        if(n<0){
+            n*=-1;
+        neg=true;}
         try{
         while (n > 0) {
             a[size - 1] = n % 2;
             n = n / 2;
             size--;
         }
+        if(neg)
+            a[0]=1;
+//        else a[0]=0;
+        
         }
         catch(ArrayIndexOutOfBoundsException ex){
             
@@ -86,13 +110,29 @@ public class Constants {
         return a;
     }
 
-    public static int BinToInt(int[] x) {
+//   public static int BinToInt(int[] x) {
+//        int y = 0;
+//        for (int i = x.length - 1; i >= 0; i--) {
+//            y += x[i] * Math.pow(2, x.length - i - 1);
+//        }
+//        return y;
+//    }
+        
+         public static int BinToInt(int[] x) {
         int y = 0;
-        for (int i = x.length - 1; i >= 0; i--) {
+        int numplus=0;
+        int nummul=1;
+        if(x[0]==1 && x.length>6){
+            numplus=1;
+            nummul=-1;
+        }
+        for (int i = x.length - 1; i >= 0+numplus; i--) {
             y += x[i] * Math.pow(2, x.length - i - 1);
         }
+        y*=nummul;
         return y;
     }
+         
     public static int [] and (int x[] , int y []){
         int  Result []  = new int [x.length]; 
         if (x.length != y.length){return null; }
