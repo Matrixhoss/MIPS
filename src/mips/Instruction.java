@@ -52,7 +52,7 @@ public class Instruction {
     String rd;
     String label = null;
 
-    public Instruction(int FAddress, String ins, int line) {
+    public Instruction(int FAddress, String ins) {
         //for the first instruction
         if (this.FAddress == 0) {
             this.FAddress = FAddress;
@@ -64,7 +64,7 @@ public class Instruction {
             line++;
         }
         instruction = ins;
-        this.line = line;
+//        this.line = line;
 //        Constants.Instruction[0] = "firstInstruction";
         ReadIns(instruction.toCharArray());
         operationToBinary();
