@@ -22,7 +22,7 @@ public class InstructionMemory {
 
     private Instruction ins;
 
-    public InstructionMemory(int address) {
+    public void setInstructionMemory(int address) {
         this.ins = Constants.Instructions[0];
         this.rsAddress = ins.rsAddressBinary;
         this.rdAddress = ins.rdAddressBinary;

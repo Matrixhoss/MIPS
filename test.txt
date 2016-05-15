@@ -1,4 +1,2 @@
-beq $s1,$s1,l1
-add $s0,$s3,$s4
-l1: add $s0,$s2,$s1
+add $s1,$s3,$s4
 end

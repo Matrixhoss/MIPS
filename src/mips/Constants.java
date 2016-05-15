@@ -16,7 +16,7 @@ public class Constants {
     public static final String[] JFormat = {"j", "jal", "jr"};
     public static Instruction[] Instructions = new Instruction[1000];
     public static int[] Memory = new int[1000];
-    public static int FristAddress = 0 ;
+    public static int FristAddress = 0;
 
     //Console Color
     public static final String ANSI_RESET = "\u001B[0m";
@@ -28,17 +28,26 @@ public class Constants {
     public static final String ANSI_PURPLE = "\u001B[35m";
     public static final String ANSI_CYAN = "\u001B[36m";
     public static final String ANSI_WHITE = "\u001B[37m";
-    
+
     //to save Labels
-    public static TotalLabel l=new TotalLabel();
-    
+    public static TotalLabel l = new TotalLabel();
+
     public static int[] Mux(int x[], int y[], int selection) {
         if (selection == 0) {
             return x;
         } else if (selection == 1) {
             return y;
         }
-        return null ;
+        return null;
+    }
+    
+    public static int Mux(int x, int y, int selection) {
+        if (selection == 0) {
+            return x;
+        } else if (selection == 1) {
+            return y;
+        }
+        return -1;
     }
 
     public static int AndGate(int x, int y) {
@@ -85,27 +94,27 @@ public class Constants {
 //        }
 //        return a;
 //    }
-    
-        public static int[] getBin(int n, int size) {
+    public static int[] getBin(int n, int size) {
 
-        int[] a=new int[size];
-        boolean neg=false;
-        if(n<0){
-            n*=-1;
-        neg=true;}
-        try{
-        while (n > 0) {
-            a[size - 1] = n % 2;
-            n = n / 2;
-            size--;
+        int[] a = new int[size];
+        boolean neg = false;
+        if (n < 0) {
+            n *= -1;
+            neg = true;
         }
-        if(neg)
-            a[0]=1;
+        try {
+            while (n > 0) {
+                a[size - 1] = n % 2;
+                n = n / 2;
+                size--;
+            }
+            if (neg) {
+                a[0] = 1;
+            }
 //        else a[0]=0;
-        
-        }
-        catch(ArrayIndexOutOfBoundsException ex){
-            
+
+        } catch (ArrayIndexOutOfBoundsException ex) {
+
         }
         return a;
     }
@@ -117,63 +126,99 @@ public class Constants {
 //        }
 //        return y;
 //    }
-        
-         public static int BinToInt(int[] x) {
+    public static int BinToInt(int[] x) {
         int y = 0;
-        int numplus=0;
-        int nummul=1;
-        if(x[0]==1 && x.length>6){
-            numplus=1;
-            nummul=-1;
+        int numplus = 0;
+        int nummul = 1;
+        if (x[0] == 1 && x.length > 6) {
+            numplus = 1;
+            nummul = -1;
         }
-        for (int i = x.length - 1; i >= 0+numplus; i--) {
+        for (int i = x.length - 1; i >= 0 + numplus; i--) {
             y += x[i] * Math.pow(2, x.length - i - 1);
         }
-        y*=nummul;
+        y *= nummul;
         return y;
     }
-         
-    public static int [] and (int x[] , int y []){
-        int  Result []  = new int [x.length]; 
-        if (x.length != y.length){return null; }
-        for (int i = 0; i < x.length; i++) {
-            if (x[i] == 1 && y[i] == 1){
-            Result [i] = 1 ;
-            }else{Result[i] = 0 ;} 
+
+    public static int[] and(int x[], int y[]) {
+        int Result[] = new int[x.length];
+        if (x.length != y.length) {
+            return null;
         }
-        return Result ;
-    }
-    
-     public static int [] or (int x[] , int y []){
-        int  Result []  = new int [x.length]; 
-        if (x.length != y.length){return null; }
-        for (int i = 0; i < x.length; i++) {
-            if (x[i] == 1 || y[i] == 1){
-            Result [i] = 1 ;
-            }else{Result[i] = 0 ;} 
-        }
-        return Result ;
-    }
-     
-     public static int [] nor (int x[] , int y []){
-        int  Result []  = new int [x.length]; 
-        if (x.length != y.length){return null; }
         for (int i = 0; i < x.length; i++) {
             if (x[i] == 1 && y[i] == 1) {
-                Result [i] = 0 ;
+                Result[i] = 1;
+            } else {
+                Result[i] = 0;
             }
-            else if (x[i] == 1 || y[i] == 1){
-            Result [i] = 1 ;
-            }else{Result[i] = 0 ;} 
         }
-        return Result ;
+        return Result;
+    }
+
+    public static int[] or(int x[], int y[]) {
+        int Result[] = new int[x.length];
+        if (x.length != y.length) {
+            return null;
+        }
+        for (int i = 0; i < x.length; i++) {
+            if (x[i] == 1 || y[i] == 1) {
+                Result[i] = 1;
+            } else {
+                Result[i] = 0;
+            }
+        }
+        return Result;
+    }
+
+    public static int[] nor(int x[], int y[]) {
+        int Result[] = new int[x.length];
+        if (x.length != y.length) {
+            return null;
+        }
+        for (int i = 0; i < x.length; i++) {
+            if (x[i] == 1 && y[i] == 1) {
+                Result[i] = 0;
+            } else if (x[i] == 1 || y[i] == 1) {
+                Result[i] = 1;
+            } else {
+                Result[i] = 0;
+            }
+        }
+        return Result;
+    }
+     public static String BinaryToString(int x[]) {
+        StringBuilder builder = new StringBuilder();
+        for (int i : x) {
+            builder.append(i);
+        }
+        String text = builder.toString();
+        return text;
+    }
+     public static int[] signExtend(int[] a) {
+        int x = Constants.BinToInt(a);
+        int arr[] = {0};
+        if (a.length == 16) {
+            arr = Constants.getBin(x, 32);
+            if (a[0] == 1) {
+                for (int i = 0; i < 16; i++) {
+                    arr[i] = 1;
+                }
+            }
+            return arr;
+        } else {
+            System.out.println("Binary must be 16 bits");
+        }
+        return arr;
     }
 }
-class Label{
+
+class Label {
+
     private String Label;
     private int address;
     private int Line;
-    
+
     public Label(String Label, int address) {
         this.Label = Label;
         this.address = address;
@@ -181,48 +226,57 @@ class Label{
 
     @Override
     public String toString() {
-        return "Label is :"+this.Label+" address is :"+this.address; //To change body of generated methods, choose Tools | Templates.
+        return "Label is :" + this.Label + " address is :" + this.address; //To change body of generated methods, choose Tools | Templates.
     }
-    
-    public String getLabel(){
+
+    public String getLabel() {
         return Label;
     }
-    
-    public int getAddress(){
+
+    public int getAddress() {
         return address;
     }
 
-    public void setLabel(String label){
-        this.Label=label;
+    public void setLabel(String label) {
+        this.Label = label;
     }
-    
-    public void setAddress(int address){
-        this.address=address;
+
+    public void setAddress(int address) {
+        this.address = address;
     }
-    
+
 }
-class TotalLabel{
-    LinkedList<Label> Total=new LinkedList();
+
+class TotalLabel {
+
+    LinkedList<Label> Total = new LinkedList();
 
     public TotalLabel() {
-   
+
     }
-    
-   public void addLabel(String Label,int address){
-       this.Total.add(new Label(Label, address));
-   }
-   
-    public int SearchAddress(String Label){
-        for(int i=0;i<Total.size();i++)
-            if(Label.equals(this.Total.get(i).getLabel()))
+
+    public void addLabel(String Label, int address) {
+        this.Total.add(new Label(Label, address));
+    }
+
+    public int SearchAddress(String Label) {
+        for (int i = 0; i < Total.size(); i++) {
+            if (Label.equals(this.Total.get(i).getLabel())) {
                 return this.Total.get(i).getAddress();
-        
+            }
+        }
+
         return Console.address;
     }
-    
-    public void printAll(){
-        for(int i=0;i<this.Total.size();i++)
+
+    public void printAll() {
+        for (int i = 0; i < this.Total.size(); i++) {
             System.out.println(Total.get(i));
-    
+        }
+
     }
+
+    
+
+   
 }

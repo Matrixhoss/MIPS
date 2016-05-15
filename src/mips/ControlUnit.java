@@ -26,12 +26,12 @@ public class ControlUnit {
 //        this.MemWrite;
 //        this.RegWrite;
 
-ControlUnit(String input){
+public void setControlUnit(String input){
     this.Jump=0;
     this.JumpReturn=0;
     generateSignals(input);
 }
-ControlUnit(int[] input){
+public void setControlUnit(int[] input){
     this.JumpReturn=0;
     this.Jump=0;
     

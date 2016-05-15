@@ -20,7 +20,7 @@ public class ALU {
     final String ALUslt = "0111";
     final String ALUnor = "1100";
 
-    public ALU(int Data1, int Data2, String ALUControl) {
+    public void setALU(int Data1, int Data2, String ALUControl) {
         this.Data1 = Data1;
         this.Data2 = Data2;
         this.ALUControl = ALUControl;
@@ -62,7 +62,7 @@ public class ALU {
         
     }
     
-    public ALU(int d1[], int d2[], String ALUControl) {
+    public void setALU(int d1[], int d2[], String ALUControl) {
         this.Data1 = Constants.BinToInt(d1);
         this.Data2 = Constants.BinToInt(d2);
         this.ALUControl = ALUControl;
@@ -117,6 +117,8 @@ public class ALU {
     public int getZeroFlag() {
         return this.ZreoFlag;
     }
+    
+     
     public void BranchJump(String ToJump){
         if(this.ZreoFlag==1){
             

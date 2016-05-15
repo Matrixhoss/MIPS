@@ -41,7 +41,7 @@ public class Registers {
     private int[] WrtReg;
     private int RegWrt;
 
-    public Registers(int[] Reg1, int[] Reg2, int RegWrite) {
+    public void setRegisters(int[] Reg1, int[] Reg2, int RegWrite) {
         RegWrt = RegWrite;
         int LocReg1 = Constants.BinToInt(Reg1);
         int LocReg2 = Constants.BinToInt(Reg2);
@@ -50,12 +50,14 @@ public class Registers {
         for (int i = 0; i <= Constants.reg.length; i++) {//Obtaining the value of ReadData1
             if (i == LocReg1) {
                 this.ReadData1 = getValue(i);
+                break;
             }
 
         }
         for (int i = 0; i <= Constants.reg.length; i++) { //Obatining the value of ReadData2
             if (i == LocReg2) {
                 this.ReadData2 = getValue(i);
+                break;
             }
         }
         /* if (RegWrite==1){

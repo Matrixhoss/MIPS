@@ -6,9 +6,8 @@ public class ALUControl {
     private String function;
     private String aluinput;
 
-    public ALUControl(String op, String function) {
-        this.function = function;
-        this.op = op;
+    public ALUControl() {
+        
 
     }
     

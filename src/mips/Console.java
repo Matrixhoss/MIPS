@@ -15,6 +15,13 @@ public class Console {
     private String read = "";
     Scanner sc = new Scanner(System.in);
     private int selectionCode = 1;
+    
+    private InstructionMemory IM = new InstructionMemory();
+    private Registers Reg = new Registers();
+    private ALU ALU = new ALU ();
+    private ControlUnit cu= new ControlUnit();
+    private ALUControl ALUcontrol = new ALUControl();
+    private DataMemory DM = new DataMemory();
 
     public Console() {
         
@@ -25,26 +32,18 @@ public class Console {
         Constants.FristAddress = FAddress;
         address=FAddress;
         FileOrConsole();
-       
-            InstructionMemory m = new InstructionMemory(FAddress);
+        
+            
             while(address<ins.size()*4+FAddress){
-                System.out.println(FAddress+" "+address+" "+(address-FAddress)/4);
-                m.getInstruction((address-FAddress)/4);
-                System.out.println(m.getOperation());
-                ControlUnit cu = new ControlUnit(m.getControlUnit());
-                Registers g = new Registers(m.getRS(), m.getRT(), cu.RegWrite);
-                ALU alu  = new ALU(g.ReturnData1(), g.ReturnData2(), "0010");
-                g.setWrtData(alu.getALUResult(), Constants.Mux(m.getRT(), m.getRD(),cu.RegDest));
-                if(m.getOperation().equals("beq")||m.getOperation().equals("bne"))
-                    alu.BranchJump(m.getToJump());
+            IM.setInstructionMemory(address);
+            cu.setControlUnit(IM.getControlUnit());
+            Reg.setRegisters(IM.getRS(), IM.getRT(), cu.RegWrite);
+            ALUcontrol.setSALUControl(cu.ALUOp, Constants.BinaryToString(IM.getALUControl()));
+            ALU.setALU(Reg.ReturnData1(), Constants.BinToInt(Constants.signExtend(IM.getSignExtend())), ALUcontrol.getALUOutput());
+            DM.setDataMemory(ALU.getALUResult(), Reg.ReturnData2(), cu.MemRead, cu.MemRead);
+            Reg.setWrtData(Constants.Mux(ALU.getALUResult(),DM.getReadData(),cu.MemtoReg), Constants.Mux(IM.getRT(),IM.getRD(),cu.RegDest));
                 
-                
-            
-           //System.out.println(Constants.Instructions[i].opration);
-           //System.out.println(Constants.Instructions[i].label);
-           //System.out.println(Constants.Instructions[i].opration.length());
-           // System.out.println(Constants.Instructions[i].label.length());
-            
+            System.out.println(Registers.$s1);
            
         }//
             Constants.l.printAll();
@@ -65,7 +64,7 @@ public class Console {
                         break;
                     }
                     ins.add(read + " ");
-                    Constants.Instructions[numofins] = new Instruction(FAddress, ins.get(numofins), numofins);
+                    Constants.Instructions[numofins] = new Instruction(FAddress, ins.get(numofins));
                     
                     numofins++;
                 }
