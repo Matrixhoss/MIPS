@@ -443,13 +443,12 @@ public class Instruction {
             }
             // set the IFormat Constant 
             try {
-                if (this.opration.equals("beq") && this.opration.equals("bne")) {
-                    IFormatConstant = Integer.parseInt(getString(addressChar));
-                    System.out.println("The Constant is " + IFormatConstant + " in line " + (line + 1) + '\n');
-                } else {
+                if (this.opration.equals("beq") || this.opration.equals("bne")) {
                     JumpTo = getString(addressChar);
                     System.out.println("The Instruction is  jump for " + JumpTo + "\n");
-
+                } else {
+                    IFormatConstant = Integer.parseInt(getString(addressChar));
+                    System.out.println("The Constant is " + IFormatConstant + " in line " + (line + 1) + '\n');
                 }
             } catch (NumberFormatException e) {
                 System.out.println(Constants.ANSI_RED + "Constant must be number in line " + (line + 1) + '\n' + Constants.ANSI_RESET);

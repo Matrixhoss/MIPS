@@ -29,14 +29,15 @@ public class Console {
             InstructionMemory m = new InstructionMemory(FAddress);
             while(address<ins.size()*4+FAddress){
                 System.out.println(FAddress+" "+address+" "+(address-FAddress)/4);
-            m.getInstruction((address-FAddress)/4);
-            System.out.println(m.getOperation());
-            ControlUnit cu = new ControlUnit(m.getControlUnit());
-            Registers g = new Registers(m.getRS(), m.getRT(), cu.RegWrite);
-            ALU alu  = new ALU(g.ReturnData1(), g.ReturnData2(), "0010");
-            g.setWrtData(alu.getALUResult(), Constants.Mux(m.getRT(), m.getRD(),cu.RegDest));
-            if(m.getOperation().equals("beq")||m.getOperation().equals("bne"))
-                alu.BranchJump(m.getToJump());
+                m.getInstruction((address-FAddress)/4);
+                System.out.println(m.getOperation());
+                ControlUnit cu = new ControlUnit(m.getControlUnit());
+                Registers g = new Registers(m.getRS(), m.getRT(), cu.RegWrite);
+                ALU alu  = new ALU(g.ReturnData1(), g.ReturnData2(), "0010");
+                g.setWrtData(alu.getALUResult(), Constants.Mux(m.getRT(), m.getRD(),cu.RegDest));
+                if(m.getOperation().equals("beq")||m.getOperation().equals("bne"))
+                    System.out.println("\n"+m.getToJump()+"\n");
+                    alu.BranchJump(m.getToJump());
             
                 
             
@@ -65,7 +66,7 @@ public class Console {
                     }
                     ins.add(read + " ");
                     Constants.Instructions[numofins] = new Instruction(FAddress, ins.get(numofins), numofins);
-
+                    
                     numofins++;
                 }
                 br.close();

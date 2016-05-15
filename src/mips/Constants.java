@@ -123,10 +123,12 @@ public class Constants {
         }
         return Result ;
     }
-    public static int SearchLabel(String Label){
+    public static int SearchLabel(String ToJump){
         for(int i=0;i<Instructions.length;i++){
-            if(Label.equals(Instructions[i].label))
+            if(ToJump.equals(Instructions[i].label)){
+                System.out.println("To Jump: "+Instructions[i].JumpTo+"Label :"+Instructions[i].label+"Addrass To Jump: "+Instructions[i].address);
                 return Instructions[i].address;
+            }
         }
         return -1;
     }
