@@ -38,6 +38,7 @@ public class Console {
             IM.setInstructionMemory(address);
             cu.setControlUnit(IM.getControlUnit());
             Reg.setRegisters(IM.getRS(), IM.getRT(), cu.RegWrite);
+            int x=Constants.makeAddressToBranch(address, IM.getSignExtend());
             ALUcontrol.setSALUControl(cu.ALUOp, Constants.BinaryToString(IM.getALUControl()));
             ALU.setALU(Reg.ReturnData1(), Constants.Mux(Reg.ReturnData2(),Constants.BinToInt(Constants.signExtend(IM.getSignExtend())),cu.ALUSrc), ALUcontrol.getALUOutput());
             DM.setDataMemory(ALU.getALUResult(), Reg.ReturnData2(), cu.MemRead, cu.MemRead);
@@ -64,7 +65,7 @@ public class Console {
                         break;
                     }
                     ins.add(read + " ");
-                    Constants.Instructions[numofins] = new Instruction(FAddress, ins.get(numofins));
+                    Constants.Instructions[numofins] = new Instruction(FAddress, ins.get(numofins),numofins);
                     
                     numofins++;
                 }

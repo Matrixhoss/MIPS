@@ -18,6 +18,7 @@ public class InstructionMemory {
     private String Operation;
     private String Label;
     private String ToJump;
+
     int LineToJump=0; //line that branch jump to
 
     private Instruction ins;
@@ -92,6 +93,7 @@ public class InstructionMemory {
         this.ControlUnit = ins.OperationBinary;
         this.Operation=ins.opration;
         this.Label=ins.label;
+        this.line=ins.line;
         for (int i = 31,j = 15; i > 16;j--, i--) {
             this.SignExtend[j] = ins.InstructionBinary[i];
         }

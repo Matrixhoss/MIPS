@@ -13,7 +13,7 @@ public class Instruction {
     int rtAddress = 0;
     int rdAddress = 0;
     int LineToJump=0;//line that branch jump to
-    public static int line = 0;
+    public  int line = 0;
     int[] ControlSignal = new int[6];
     private static int address = 0;
     String of;
@@ -52,19 +52,19 @@ public class Instruction {
     String rd;
     String label = null;
 
-    public Instruction(int FAddress, String ins) {
+    public Instruction(int FAddress, String ins,int Line) {
         //for the first instruction
         if (this.FAddress == 0) {
             this.FAddress = FAddress;
             address = FAddress;
-            line=0;
+            
         } else//for other instruction
         {
             address += 4;
-            line++;
+            
         }
         instruction = ins;
-//        this.line = line;
+        this.line = Line;
 //        Constants.Instruction[0] = "firstInstruction";
         ReadIns(instruction.toCharArray());
         operationToBinary();
@@ -332,7 +332,7 @@ public class Instruction {
 
     private void SaveLabel(){
         if(!this.label.equals("")){
-            Constants.l.addLabel(label,address);
+            Constants.l.addLabel(label,address,line);
         }
     }
     
