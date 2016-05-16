@@ -119,10 +119,10 @@ public class ALU {
     }
     
      
-    public void BranchJump(String ToJump){
-        if(this.ZreoFlag==1){
-            
-            Console.address=Constants.l.SearchAddress(ToJump);
-        }
-    }
+//    public void BranchJump(String ToJump){
+//        if(this.ZreoFlag==1){
+//            
+//            Console.address=Constants.l.SearchAddress(ToJump);
+//        }
+//    }
 }
