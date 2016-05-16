@@ -38,14 +38,15 @@ public class Console {
             IM.setInstructionMemory(address);
             cu.setControlUnit(IM.getControlUnit());
             Reg.setRegisters(IM.getRS(), IM.getRT(), cu.RegWrite);
-            int x=Constants.makeAddressToBranch(address, IM.getSignExtend());
+            System.out.println(IM.getOperation());
             ALUcontrol.setSALUControl(cu.ALUOp, Constants.BinaryToString(IM.getALUControl()));
             ALU.setALU(Reg.ReturnData1(), Constants.Mux(Reg.ReturnData2(),Constants.BinToInt(Constants.signExtend(IM.getSignExtend())),cu.ALUSrc), ALUcontrol.getALUOutput());
+            Constants.JumpOfBranch(ALU.getZeroFlag(), IM.getOperation(), address-4, IM.LineToJump);
             DM.setDataMemory(ALU.getALUResult(), Reg.ReturnData2(), cu.MemRead, cu.MemWrite);
             Reg.setWrtData(Constants.Mux(ALU.getALUResult(),DM.getReadData(),cu.MemtoReg), Constants.Mux(IM.getRT(),IM.getRD(),cu.RegDest));
                 
             System.out.println(Constants.Memory[3]);
-           
+            System.out.println();
         }//
             Constants.l.printAll();
     }
