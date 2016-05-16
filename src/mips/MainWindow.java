@@ -58,14 +58,20 @@ class InstructionPanel extends JPanel {
                         if (s.equals("lw") || s.endsWith("sw")){
                         removeAll();
                         add(oprationCb);
+                        rsCb.setBounds(150, 20, 100, 30);
                         add(rsCb);
-                        add(rtCb);
+                        rsTf.setBounds(300, 20, 100, 30);
                         add(rsTf);
+                        rtCb.setBounds(450, 20, 100, 30);
+                        add(rtCb);
                         }else {
                         removeAll();
                         add(oprationCb);
+                        rsCb.setBounds(150, 20, 100, 30);
                         add(rsCb);
+                        rtCb.setBounds(300, 20, 100, 30);
                         add(rtCb);
+                        rsTf.setBounds(450, 20, 100, 30);
                         add(rsTf);
                         }
                             
@@ -73,13 +79,17 @@ class InstructionPanel extends JPanel {
                     case "RFormate":
                         removeAll();
                         add(oprationCb);
+                        rdCb.setBounds(150, 20, 100, 30);
                         add(rsCb);
+                        rsCb.setBounds(300, 20, 100, 30);
                         add(rtCb);
+                        rtCb.setBounds(450, 20, 100, 30);
                         add(rdCb);
                         break;
                     case "JFormate":
                         removeAll();
                         add(oprationCb);
+                        rsTf.setBounds(150, 20, 100, 30);
                         add(rsTf);
                         break;
 
