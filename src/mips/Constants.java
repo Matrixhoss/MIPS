@@ -101,7 +101,7 @@ public class Constants {
         int i=size-1;
             
         try{
-        if(n>0)
+        if(n>0 || size<7)
             while (n > 0) {
             a[size - 1] = n % 2;
             n = n / 2;
@@ -182,7 +182,7 @@ public class Constants {
        public static int BinToInt(int[] x) {
         int neg;
         int y = 0;
-        if(x[0]==1){
+        if(x[0]==1 && x.length>7){
             y-= Math.pow(2, x.length-1);
             neg=1;
         }
