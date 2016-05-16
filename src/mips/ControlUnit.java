@@ -178,5 +178,7 @@ public void setControlUnit(int[] input){
     }
     
     
+    
+    
     // "nor" , "bne"
 }

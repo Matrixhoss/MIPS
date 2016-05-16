@@ -33,9 +33,7 @@ public class InstructionMemory {
         this.Operation=ins.opration;
         this.Label=ins.label;
         this.ToJump=ins.JumpTo;
-        for (int i = 31,j = 15; i > 16;j--, i--) {
-            this.SignExtend[j] = ins.InstructionBinary[i];
-        }
+        this.SignExtend = ins.constantBinary;
         if(Operation.equals("beq")||Operation.equals("bne")){
             //calculate the line that branch jump to
             this.LineToJump=ins.LineToJump;

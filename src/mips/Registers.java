@@ -45,6 +45,7 @@ public class Registers {
         RegWrt = RegWrite;
         int LocReg1 = Constants.BinToInt(Reg1);
         int LocReg2 = Constants.BinToInt(Reg2);
+        System.out.println(Constants.ANSI_PURPLE+LocReg1+Constants.ANSI_RESET);
         // int LocWrtReg=Constants.BinToInt(WrtReg);
 
         for (int i = 0; i <= Constants.reg.length; i++) {//Obtaining the value of ReadData1

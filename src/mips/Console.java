@@ -44,7 +44,7 @@ public class Console {
             DM.setDataMemory(ALU.getALUResult(), Reg.ReturnData2(), cu.MemRead, cu.MemWrite);
             Reg.setWrtData(Constants.Mux(ALU.getALUResult(),DM.getReadData(),cu.MemtoReg), Constants.Mux(IM.getRT(),IM.getRD(),cu.RegDest));
                 
-            System.out.println(Registers.$s0);
+            System.out.println(Constants.Memory[3]);
            
         }//
             Constants.l.printAll();

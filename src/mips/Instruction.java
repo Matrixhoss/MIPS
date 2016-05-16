@@ -12,8 +12,8 @@ public class Instruction {
     int rsAddress = 0;
     int rtAddress = 0;
     int rdAddress = 0;
-    int LineToJump=0;//line that branch jump to
-    public  int line = 0;
+    int LineToJump = 0;//line that branch jump to
+    public int line = 0;
     int[] ControlSignal = new int[6];
     private static int address = 0;
     String of;
@@ -52,16 +52,16 @@ public class Instruction {
     String rd;
     String label = null;
 
-    public Instruction(int FAddress, String ins,int Line) {
+    public Instruction(int FAddress, String ins, int Line) {
         //for the first instruction
         if (this.FAddress == 0) {
             this.FAddress = FAddress;
             address = FAddress;
-            
+
         } else//for other instruction
         {
             address += 4;
-            
+
         }
         instruction = ins;
         this.line = Line;
@@ -76,7 +76,7 @@ public class Instruction {
         System.out.println(Constants.BinToInt(rdAddressBinary));
         System.out.println(Constants.BinToInt(rsAddressBinary));
         System.out.println(Constants.BinToInt(rtAddressBinary));
-        System.out.println("Label  : "+this.label);
+        System.out.println("Label  : " + this.label);
         System.out.println(Constants.BinToInt(FunctionBinary));
         System.out.println(Registers.$s0);
 //        for(int i=0;i<6;i++){
@@ -330,12 +330,12 @@ public class Instruction {
 
     }
 
-    private void SaveLabel(){
-        if(!this.label.equals("")){
-            Constants.l.addLabel(label,address,line);
+    private void SaveLabel() {
+        if (!this.label.equals("")) {
+            Constants.l.addLabel(label, address, line);
         }
     }
-    
+
     private void IFormatSet(char[] instruction, int i) {
 
         // rt check 
@@ -377,7 +377,11 @@ public class Instruction {
                     i++;
                 }
                 i++;
-                IFormatConstant = Integer.parseInt(getString(addressChar));
+                if (addressChar.get(0).equals('-')) {
+                    IFormatConstant = (Integer.parseInt(getString(addressChar)));
+                } else {
+                    IFormatConstant = Integer.parseInt(getString(addressChar));
+                }
                 System.out.println("The Constant " + IFormatConstant);
 
                 while (instruction[i] != ')') {
@@ -459,7 +463,12 @@ public class Instruction {
                     JumpTo = getString(addressChar);
                     System.out.println("The Instruction is  jump for " + JumpTo + "\n");
                 } else {
+                    if (addressChar.get(0).equals('-')) {
+                        addressChar.remove(0);
+                    IFormatConstant = -1*(Integer.parseInt(getString(addressChar)));
+                } else {
                     IFormatConstant = Integer.parseInt(getString(addressChar));
+                }
                     System.out.println("The Constant is " + IFormatConstant + " in line " + (line + 1) + '\n');
                 }
             } catch (NumberFormatException e) {
@@ -580,6 +589,7 @@ public class Instruction {
             rsAddressBinary = Constants.getBin(rsAddress, 5);
             rtAddressBinary = Constants.getBin(rtAddress, 5);
             constantBinary = Constants.getBin(IFormatConstant, 16);
+           
         }
 
     }

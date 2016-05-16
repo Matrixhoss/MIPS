@@ -200,11 +200,11 @@ public class Constants {
         int arr[] = {0};
         if (a.length == 16) {
             arr = Constants.getBin(x, 32);
-            if (a[0] == 1) {
+            /*if (a[0] == 1) {
                 for (int i = 0; i < 16; i++) {
                     arr[i] = 1;
                 }
-            }
+            }*/
             return arr;
         } else {
             System.out.println("Binary must be 16 bits");
