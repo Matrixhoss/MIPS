@@ -120,7 +120,7 @@ public void setControlUnit(int[] input){
         this.MemtoReg=1;
         this.ALUOp="00";
         this.ALUSrc=1;
-        this.MemWrite=1;
+        this.MemWrite=0;
         this.RegWrite=1;
     }
     void GenerateSaveSignals(){
@@ -130,7 +130,7 @@ public void setControlUnit(int[] input){
         this.MemtoReg=1;
         this.ALUOp="00";
         this.ALUSrc=1;
-        this.MemWrite=0;
+        this.MemWrite=1;
         this.RegWrite=1;
     }
     void GenerateBeqSignals(){

@@ -32,7 +32,7 @@ public class Console {
         Constants.FristAddress = FAddress;
         address=FAddress;
         FileOrConsole();
-        
+        Constants.Memory[15] = 77 ;
             
             while(address<ins.size()*4+FAddress){
             IM.setInstructionMemory(address);
@@ -41,10 +41,10 @@ public class Console {
             int x=Constants.makeAddressToBranch(address, IM.getSignExtend());
             ALUcontrol.setSALUControl(cu.ALUOp, Constants.BinaryToString(IM.getALUControl()));
             ALU.setALU(Reg.ReturnData1(), Constants.Mux(Reg.ReturnData2(),Constants.BinToInt(Constants.signExtend(IM.getSignExtend())),cu.ALUSrc), ALUcontrol.getALUOutput());
-            DM.setDataMemory(ALU.getALUResult(), Reg.ReturnData2(), cu.MemRead, cu.MemRead);
+            DM.setDataMemory(ALU.getALUResult(), Reg.ReturnData2(), cu.MemRead, cu.MemWrite);
             Reg.setWrtData(Constants.Mux(ALU.getALUResult(),DM.getReadData(),cu.MemtoReg), Constants.Mux(IM.getRT(),IM.getRD(),cu.RegDest));
                 
-            System.out.println(Registers.$t1);
+            System.out.println(Registers.$s0);
            
         }//
             Constants.l.printAll();

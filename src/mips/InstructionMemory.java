@@ -41,6 +41,8 @@ public class InstructionMemory {
             this.LineToJump=ins.LineToJump;
         }
         Console.address+=4;
+        
+        
     }
 
     public int[] getRT() {
