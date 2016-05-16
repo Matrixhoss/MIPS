@@ -57,8 +57,8 @@ public class Constants {
             return 0;
         }
     }
-    public static int OrGate(int x,int y){
-        if(x==0&&y==0)
+    public static int XorGate(int x,int y){
+        if((x==0&&y==0)||(x==1&&y==1))
             return 0;
         else
             return 1;
@@ -295,7 +295,7 @@ public class Constants {
     }
     
     public static void JumpOfBranch(int ZeroFlag,String Operation,int address,int LineToJump,int Branch,int InvertBranch){
-        int CheckBranch=Constants.OrGate(InvertBranch, ZeroFlag);
+        int CheckBranch=Constants.XorGate(InvertBranch, ZeroFlag);
         int BranchAndZero=Constants.AndGate(Branch, CheckBranch);
         int AddressJump=Constants.makeAddressToBranch(address, Constants.getBin(LineToJump, 16));
         Console.address=Constants.Mux(address+4, AddressJump, BranchAndZero);
