@@ -124,7 +124,6 @@ public class Constants {
         }
         }
         catch (ArrayIndexOutOfBoundsException ex){
-            ex.printStackTrace();
         }
    
         
