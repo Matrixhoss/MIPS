@@ -33,12 +33,13 @@ public class Console {
         address=FAddress;
         FileOrConsole();
         Constants.Memory[15] = 77 ;
-            
+            Constants.l.printAll();
             while(address<ins.size()*4+FAddress){
             IM.setInstructionMemory(address);
-            cu.setControlUnit(IM.getControlUnit());
+            System.out.println("Operation : "+IM.getOperation());
+            cu.setControlUnit(IM.getControlUnit(),IM.Format);
+            Constants.CheckJump(IM.getAddressToJump(), cu.Jump, address-4, IM.getOperation());
             Reg.setRegisters(IM.getRS(), IM.getRT(), cu.RegWrite);
-            System.out.println(IM.getOperation());
             ALUcontrol.setSALUControl(cu.ALUOp, Constants.BinaryToString(IM.getALUControl()));
             ALU.setALU(Reg.ReturnData1(), Constants.Mux(Reg.ReturnData2(),Constants.BinToInt(Constants.signExtend(IM.getSignExtend())),cu.ALUSrc), ALUcontrol.getALUOutput());
             Constants.JumpOfBranch(ALU.getZeroFlag(), IM.getOperation(), address-4, IM.LineToJump,cu.Branch,cu.InvetBranch);

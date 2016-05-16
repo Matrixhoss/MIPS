@@ -18,6 +18,8 @@ public class InstructionMemory {
     private String Operation;
     private String Label;
     private String ToJump;
+    private int AddressToJump;
+    public String Format;
 
     int LineToJump=0; //line that branch jump to
 
@@ -40,6 +42,10 @@ public class InstructionMemory {
             this.calcLine(address);
             ins.LineToJump=this.LineToJump;
         }
+        if(Operation.equals("j")||Operation.equals("jal")||Operation.equals("jr")){
+            this.getJumpAddress();
+        }
+        this.Format=ins.of;
         Console.address+=4;
         
         
@@ -73,6 +79,10 @@ public class InstructionMemory {
         return this.address;
     }
     
+    public int getAddressToJump() {
+        return this.AddressToJump;
+    }
+    
     public String getOperation() {
         return this.Operation;
     }
@@ -100,11 +110,16 @@ public class InstructionMemory {
             this.SignExtend[j] = ins.InstructionBinary[i];
         }
         this.ToJump=ins.JumpTo;
+        
         if(Operation.equals("beq")||Operation.equals("bne")){
             this.calcLine(address);
             ins.LineToJump=this.LineToJump;
-            
         }
+        
+        if(Operation.equals("j")||Operation.equals("jal")||Operation.equals("jr")){
+            this.getJumpAddress();
+        }
+            this.Format=ins.of;
             Console.address+=4;
     }
     //Function to calculate how many lines we need to jump
@@ -112,7 +127,12 @@ public class InstructionMemory {
         if(this.Operation.equals("beq")||this.Operation.equals("bne")){
             int L2=Constants.l.SearchLine(ToJump);
             this.LineToJump=L2-this.line;
-            System.out.println("LineToJump : "+LineToJump);
         }
+    }
+    //Function to get address to jump
+    public void getJumpAddress(){
+            this.AddressToJump=Constants.l.SearchAddress(ToJump);
+            System.out.println("AddressToJump: "+AddressToJump);
+            ins.AddressToJump=this.AddressToJump;
     }
 }

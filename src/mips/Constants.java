@@ -284,7 +284,6 @@ public class Constants {
         int AddressToBranch,SignExAndShift15T0;
         SignExAndShift15T0=Constants.LineToBranch(Instruction15T0);
         AddressToBranch=SignExAndShift15T0+Address;
-        System.out.println("Address to branch: "+AddressToBranch);
         return AddressToBranch;
     }
     
@@ -292,7 +291,6 @@ public class Constants {
         int AddressToBranch,SignExAndShift15T0;
         SignExAndShift15T0=Constants.LineToBranch(Instruction15T0);
         AddressToBranch=SignExAndShift15T0+Address;
-        System.out.println("Address to branch: "+AddressToBranch);
         return AddressToBranch;
     }
     
@@ -301,8 +299,35 @@ public class Constants {
         int BranchAndZero=Constants.AndGate(Branch, CheckBranch);
         int AddressJump=Constants.makeAddressToBranch(address, Constants.getBin(LineToJump, 16));
         Console.address=Constants.Mux(address+4, AddressJump, BranchAndZero);
-        System.out.println("Address To Jump : "+Console.address);
         
+    }
+    public static void Jump(int AddressToJump,int Jump,int address){
+            Console.address=Constants.Mux(address+4,AddressToJump,Jump); 
+//            System.out.print("Address +4= "+(address+4)+"address for Jump: "+AddressToJump);
+    }
+    public static void JumpAtLink(int AddressToJump,int Jump,int address){
+            
+            Registers.$ra=Constants.Mux(0,address,Jump);
+            System.out.println("$ra: "+Registers.$ra+"  Jump: "+Jump);
+            Console.address=Constants.Mux(address+4,AddressToJump,Jump);
+            
+        }    
+    public static void JumpR(int AddressToJump,int Jump,int address){
+        
+            Console.address=Constants.Mux(address+4,AddressToJump,Jump);
+    }
+    public static void CheckJump(int AddressToJump,int Jump,int address,String operation){
+        switch(operation){
+            case"j":
+                Jump(AddressToJump, Jump, address);
+                break;
+            case"jal":
+                JumpAtLink(AddressToJump, Jump, address);
+                break;
+            case"jr":
+                JumpR(AddressToJump, Jump, address);
+                break;
+        }
     }
     
 }
@@ -365,6 +390,7 @@ class TotalLabel {
     public int SearchAddress(String Label) {
         for (int i = 0; i < Total.size(); i++) {
             if (Label.equals(this.Total.get(i).getLabel())) {
+                System.out.println("AddressToJump: "+this.Total.get(i).getAddress());
                 return this.Total.get(i).getAddress();
             }
         }

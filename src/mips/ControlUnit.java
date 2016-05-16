@@ -17,6 +17,7 @@ public class ControlUnit {
     public int Jump;
     public int JumpReturn;
     public int InvetBranch=0;
+    public String Format;
 //        this.RegDest;
 //        this.Branch;
 //        this.MemRead;
@@ -26,16 +27,17 @@ public class ControlUnit {
 //        this.MemWrite;
 //        this.RegWrite;
 
-public void setControlUnit(String input){
+public void setControlUnit(String input,String Format){
     this.Jump=0;
     this.JumpReturn=0;
-    generateSignals(input);
+    this.Format=Format;
+    generateSignals(input,Format);
 }
-public void setControlUnit(int[] input){
+public void setControlUnit(int[] input,String Format){
     this.JumpReturn=0;
     this.Jump=0;
-    
-    generateSignals(IntArrayToString(input));
+    this.Format=Format;
+    generateSignals(IntArrayToString(input),Format);
 }
         public String IntArrayToString(int[] x){
             String output="";
@@ -44,15 +46,22 @@ public void setControlUnit(int[] input){
             }
             return output;
         }
-        public void generateSignals(String input){
+        public void generateSignals(String input,String Format){
         this.input= input;
         System.out.println("Current string value:"+this.input);
-        
+        if(Format.equals("RFormat")){
         switch(this.input){
             case "000000":
                 //RFormat
                 GenerateRFormatSignals();
                 break;
+            case "100111":
+                //nor operation
+                break;    
+            }
+        }
+        if(Format.equals("IFormat")){
+            switch(this.input){    
             case "001000":
                 //addi
                 GenerateIFormatSignals();
@@ -69,17 +78,27 @@ public void setControlUnit(int[] input){
                 //branch if equal
                 GenerateBeqSignals();
                 break;
-            case "100111":
-                //nor operation
-                break;
             case "000101":
                 //branch if not equal
+                GenerateBneSignals();
                 break;
+            }  
+        }     
+        if(Format.equals("JFormat")){
+            switch(this.input){
             case "000010":
                 //jump
                 GenerateJumpSignals();
                 break;
-                
+            case "000011":
+                //jumpAtLink
+                GenerateJaLSignals();
+                break;
+            case "001000":
+                //jumpReturn
+                GenerateJumpRSignals();
+                break;    
+            }
         }
         System.out.println("Signals: RegtDest="+this.RegDest+ " RegWrite="+this.RegWrite);
     }
@@ -109,9 +128,10 @@ public void setControlUnit(int[] input){
         this.MemRead=0;
         this.MemtoReg=0;
         this.ALUOp="00";
-        this.ALUSrc=1;
+        this.ALUSrc=0;
         this.MemWrite=0;
-        this.RegWrite=1;
+        this.RegWrite=0;
+        this.Jump=1;
     }
     void GenerateLoadSingals(){
         this.RegDest=0;

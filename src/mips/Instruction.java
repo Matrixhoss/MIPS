@@ -13,6 +13,7 @@ public class Instruction {
     int rtAddress = 0;
     int rdAddress = 0;
     int LineToJump = 0;//line that branch jump to
+    int AddressToJump;
     public int line = 0;
     int[] ControlSignal = new int[6];
     private static int address = 0;
@@ -493,7 +494,7 @@ public class Instruction {
 
         }
         try {
-            JumpTo = LineChar.toString();
+            JumpTo = getString(LineChar);
             System.out.println("Jump to line " + JumpTo + 1 + '\n');
         } catch (NumberFormatException e) {
             System.out.println(Constants.ANSI_RED + "Jump address must be number in line" + (line + 1) + Constants.ANSI_RESET);
