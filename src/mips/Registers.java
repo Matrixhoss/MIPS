@@ -47,7 +47,7 @@ public class Registers {
         int LocReg2 = Constants.BinToInt(Reg2);
         System.out.println(Constants.ANSI_PURPLE+LocReg1+Constants.ANSI_RESET);
         // int LocWrtReg=Constants.BinToInt(WrtReg);
-
+        
         for (int i = 0; i <= Constants.reg.length; i++) {//Obtaining the value of ReadData1
             if (i == LocReg1) {
                 this.ReadData1 = getValue(i);
@@ -151,62 +151,91 @@ public class Registers {
 
             case "$at":
                 $at = x;
+                break;
             case "$v0":
                 $v0 = x;
+                break;
             case "$v1":
                 $v1 = x;
+                break;
             case "$a0":
                 $a0 = x;
+                break;
             case "$a1":
                 $a1 = x;
+                break;
             case "$a2":
                 $a2 = x;
+                break;
             case "$a3":
                 $a3 = x;
+                break;
             case "$t0":
                 $t0 = x;
+                break;
             case "$t1":
                 $t1 = x;
+                break;
             case "$t2":
                 $t2 = x;
+                break;
             case "$t3":
                 $t3 = x;
+                break;
             case "$t4":
                 $t4 = x;
+                break;
             case "$t5":
                 $t5 = x;
+                break;
             case "$t6":
                 $t6 = x;
+                break;
             case "$t7":
                 $t7 = x;
+                break;
             case "$s0":
                 $s0 = x;
+                break;
             case "$s1":
                 $s1 = x;
+                break;
             case "$s2":
                 $s2 = x;
+                break;
             case "$s3":
                 $s3 = x;
+                break;
             case "$s4":
                 $s4 = x;
+                break;
             case "$s5":
                 $s5 = x;
+                break;
             case "$s6":
                 $s6 = x;
+                break;
             case "$s7":
                 $s7 = x;
+                break;
             case "$t8":
                 $t8 = x;
+                break;
             case "$t9":
                 $t9 = x;
+                break;
             case "$gp":
                 $gp = x;
+                break;
             case "$sp":
                 $sp = x;
+                break;
             case "$fp":
                 $fp = x;
+                break;
             case "$ra":
                 $ra = x;
+                break;
 
         }
 
@@ -223,6 +252,7 @@ public class Registers {
     public void setWrtData(int data, int[] WrtReg) {
         this.WrtData = data;
         this.WrtReg = WrtReg;
+        System.out.println("WriteData1: "+this.WrtData);
         if (this.RegWrt == 1) {
             for (int i = 0; i < Constants.reg.length; i++) {
 
@@ -231,6 +261,7 @@ public class Registers {
                         System.out.println(Constants.ANSI_RED + "Cant Write in reg $0" + Constants.ANSI_RESET);
                         return;
                     }
+                    
                     setValue(i, WrtData);
                 }
             }

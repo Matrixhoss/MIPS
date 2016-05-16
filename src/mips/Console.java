@@ -44,7 +44,7 @@ public class Console {
             Constants.JumpOfBranch(ALU.getZeroFlag(), IM.getOperation(), address-4, IM.LineToJump);
             DM.setDataMemory(ALU.getALUResult(), Reg.ReturnData2(), cu.MemRead, cu.MemWrite);
             Reg.setWrtData(Constants.Mux(ALU.getALUResult(),DM.getReadData(),cu.MemtoReg), Constants.Mux(IM.getRT(),IM.getRD(),cu.RegDest));
-                
+            System.out.println("St0=  "+Registers.$t0+"St4=  "+Registers.$t4);    
             System.out.println(Constants.Memory[3]);
             System.out.println();
         }//

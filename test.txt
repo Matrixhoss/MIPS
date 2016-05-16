@@ -1,6 +1,5 @@
-beq $a0,$a0,l1
-sub $s0,$s3,$s2
-l1:add $s1,$s3,$s4
-sub $s0,$s3,$s2
+sw $t0 , 4($t4)
+add $t0 , $v0,$v0
+add $s3 , $t0 ,$t0
+lw $t0 , 4($t4)
 end
-

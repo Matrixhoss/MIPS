@@ -73,9 +73,9 @@ public class Instruction {
         SaveLabel();
         System.out.println(address);
 //        System.out.println(this.line);
-        System.out.println(Constants.BinToInt(rdAddressBinary));
-        System.out.println(Constants.BinToInt(rsAddressBinary));
-        System.out.println(Constants.BinToInt(rtAddressBinary));
+        System.out.println("rd = "+Constants.BinToInt(rdAddressBinary));
+        System.out.println("rs ="+Constants.BinToInt(rsAddressBinary));
+        System.out.println("rt ="+Constants.BinToInt(rtAddressBinary));
         System.out.println("Label  : " + this.label);
         System.out.println(Constants.BinToInt(FunctionBinary));
         System.out.println(Registers.$s0);
