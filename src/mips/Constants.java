@@ -275,12 +275,27 @@ public class Constants {
         return SignExAndShift15T0;
     }
     
+    public static int makeAddressToJump(int Address,int[] Instruction15T0){
+        int AddressToBranch,SignExAndShift15T0;
+        SignExAndShift15T0=Constants.LineToBranch(Instruction15T0);
+        AddressToBranch=SignExAndShift15T0+Address;
+        System.out.println("Address to branch: "+AddressToBranch);
+        return AddressToBranch;
+    }
+    
     public static int makeAddressToBranch(int Address,int[] Instruction15T0){
         int AddressToBranch,SignExAndShift15T0;
         SignExAndShift15T0=Constants.LineToBranch(Instruction15T0);
         AddressToBranch=SignExAndShift15T0+Address;
         System.out.println("Address to branch: "+AddressToBranch);
         return AddressToBranch;
+    }
+    
+    public static void JumpOfBranch(int ZeroFlag,String Operation,int address,int LineToJump){
+        if((Operation.equals("beq")&&ZeroFlag==1)||(Operation.equals("bne")&&ZeroFlag==0)){
+            Console.address=Constants.makeAddressToBranch(address, Constants.getBin(LineToJump, 16));
+            System.out.println("Address To Jump : "+Console.address);
+        }
     }
     
 }
@@ -348,6 +363,16 @@ class TotalLabel {
         }
 
         return Console.address;
+    }
+    
+    public int SearchLine(String Label) {
+        for (int i = 0; i < Total.size(); i++) {
+            if (Label.equals(this.Total.get(i).getLabel())) {
+                return this.Total.get(i).getLine();
+            }
+        }
+
+        return -1;
     }
 
     public void printAll() {
