@@ -1,3 +1,6 @@
-add $s1,$s3,$s4
+beq $a0,$a0,l1
+sub $s0,$s3,$s2
 l1:add $s1,$s3,$s4
+sub $s0,$s3,$s2
 end
+
