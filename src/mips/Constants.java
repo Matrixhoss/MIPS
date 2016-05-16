@@ -96,7 +96,6 @@ public class Constants {
 //    }
     
     public static int[] getBin(int n, int size) {
-        
         int[] a = new int[size];
         int i=size-1;
             
@@ -182,12 +181,16 @@ public class Constants {
        public static int BinToInt(int[] x) {
         int neg;
         int y = 0;
+        
         if(x[0]==1 && x.length>7){
+            if(x.length>31)
+            y++;
             y-= Math.pow(2, x.length-1);
             neg=1;
         }
+        
         else neg=0;
-        for (int i = x.length - 1; i >= neg; i--) {
+        for (int i = x.length-1; i >= neg; i--) {
             y += x[i] * Math.pow(2, x.length - i - 1);
         }
         return y;
