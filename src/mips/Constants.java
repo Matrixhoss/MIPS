@@ -57,7 +57,12 @@ public class Constants {
             return 0;
         }
     }
-
+    public static int OrGate(int x,int y){
+        if(x==0&&y==0)
+            return 0;
+        else
+            return 1;
+    }
     public static int[] IntToBin(int x, String Type) {
         int size = 0;
         int[] y = new int[size];
@@ -291,11 +296,13 @@ public class Constants {
         return AddressToBranch;
     }
     
-    public static void JumpOfBranch(int ZeroFlag,String Operation,int address,int LineToJump){
-        if((Operation.equals("beq")&&ZeroFlag==1)||(Operation.equals("bne")&&ZeroFlag==0)){
-            Console.address=Constants.makeAddressToBranch(address, Constants.getBin(LineToJump, 16));
-            System.out.println("Address To Jump : "+Console.address);
-        }
+    public static void JumpOfBranch(int ZeroFlag,String Operation,int address,int LineToJump,int Branch,int InvertBranch){
+        int CheckBranch=Constants.OrGate(InvertBranch, ZeroFlag);
+        int BranchAndZero=Constants.AndGate(Branch, CheckBranch);
+        int AddressJump=Constants.makeAddressToBranch(address, Constants.getBin(LineToJump, 16));
+        Console.address=Constants.Mux(address+4, AddressJump, BranchAndZero);
+        System.out.println("Address To Jump : "+Console.address);
+        
     }
     
 }
