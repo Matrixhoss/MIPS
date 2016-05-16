@@ -16,7 +16,7 @@ public class ControlUnit {
     public int RegWrite;
     public int Jump;
     public int JumpReturn;
-
+    public int InvetBranch=0;
 //        this.RegDest;
 //        this.Branch;
 //        this.MemRead;
@@ -142,6 +142,7 @@ public void setControlUnit(int[] input){
         this.ALUSrc=0;
         this.MemWrite=0;
         this.RegWrite=0;
+        this.InvetBranch=0;
     }
     void GenerateJumpSignals(){
         this.RegDest=0;
@@ -155,14 +156,15 @@ public void setControlUnit(int[] input){
         this.Jump=1;
     }
     void GenerateBneSignals(){
-//        this.RegDest=0;
-//        this.Branch=1;
-//        this.MemRead=0;
-//        this.MemtoReg=1;
-//        this.ALUOp="01";
-//        this.ALUSrc=0;
-//        this.MemWrite=0;
-//        this.RegWrite=0;
+        this.RegDest=0;
+        this.Branch=1;
+        this.MemRead=0;
+        this.MemtoReg=1;
+        this.ALUOp="01";
+        this.ALUSrc=0;
+        this.MemWrite=0;
+        this.RegWrite=0;
+        this.InvetBranch=1;
     }
     void GenerateJumpRSignals(){
         this.RegDest=0;

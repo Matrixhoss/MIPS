@@ -41,7 +41,7 @@ public class Console {
             System.out.println(IM.getOperation());
             ALUcontrol.setSALUControl(cu.ALUOp, Constants.BinaryToString(IM.getALUControl()));
             ALU.setALU(Reg.ReturnData1(), Constants.Mux(Reg.ReturnData2(),Constants.BinToInt(Constants.signExtend(IM.getSignExtend())),cu.ALUSrc), ALUcontrol.getALUOutput());
-            Constants.JumpOfBranch(ALU.getZeroFlag(), IM.getOperation(), address-4, IM.LineToJump);
+            Constants.JumpOfBranch(ALU.getZeroFlag(), IM.getOperation(), address-4, IM.LineToJump,cu.Branch,cu.InvetBranch);
             DM.setDataMemory(ALU.getALUResult(), Reg.ReturnData2(), cu.MemRead, cu.MemWrite);
             Reg.setWrtData(Constants.Mux(ALU.getALUResult(),DM.getReadData(),cu.MemtoReg), Constants.Mux(IM.getRT(),IM.getRD(),cu.RegDest));
             System.out.println("St0=  "+Registers.$t0+"St4=  "+Registers.$t4);    
