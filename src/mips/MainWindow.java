@@ -49,21 +49,20 @@ class InstructionPanel extends JPanel {
                 }
                 for (int i = 0; i < Constants.JFormat.length; i++) {
                     if (s.equals(Constants.JFormat[i])) {
-                        check = "IFormate";
+                        check = "JFormate";
                     }
                 }
 
                 switch (check) {
                     case "IFormate":
                         if (s.equals("lw") || s.endsWith("sw")){
-                        //removeAll();
+                        removeAll();
                         add(oprationCb);
                         add(rsCb);
                         add(rtCb);
-                        add(rdCb);
                         add(rsTf);
                         }else {
-                        //removeAll();
+                        removeAll();
                         add(oprationCb);
                         add(rsCb);
                         add(rtCb);
