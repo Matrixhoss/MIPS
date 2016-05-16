@@ -94,30 +94,68 @@ public class Constants {
 //        }
 //        return a;
 //    }
+    
     public static int[] getBin(int n, int size) {
-
+        
         int[] a = new int[size];
-        boolean neg = false;
-        if (n < 0) {
-            n *= -1;
-            neg = true;
-        }
-        try {
+        int i=size-1;
+            
+        try{
+        if(n>0)
             while (n > 0) {
-                a[size - 1] = n % 2;
-                n = n / 2;
-                size--;
-            }
-            if (neg) {
-                a[0] = 1;
-            }
-//        else a[0]=0;
-
-        } catch (ArrayIndexOutOfBoundsException ex) {
-
+            a[size - 1] = n % 2;
+            n = n / 2;
+            size--;
         }
+        else {
+            a[0]=1;
+            int j=1;
+            int temp=-(int)Math.pow(2, i);
+            i--;
+            while(temp!=n){
+                if((temp+(Math.pow(2, i)))<=n){
+                    int x = (int)Math.pow(2,i);
+                    temp+=x;
+                    a[j]=1;
+                }
+                else a[j]=0;
+                i--;
+                j++;}
+        }
+        }
+        catch (ArrayIndexOutOfBoundsException ex){
+            ex.printStackTrace();
+        }
+   
+        
         return a;
-    }
+        }
+    
+    
+//    public static int[] getBin(int n, int size) {
+//
+//        int[] a = new int[size];
+//        boolean neg = false;
+//        if (n < 0) {
+//            n *= -1;
+//            neg = true;
+//        }
+//        try {
+//            while (n > 0) {
+//                a[size - 1] = n % 2;
+//                n = n / 2;
+//                size--;
+//            }
+//            if (neg) {
+//                a[0] = 1;
+//            }
+////        else a[0]=0;
+//
+//        } catch (ArrayIndexOutOfBoundsException ex) {
+//
+//        }
+//        return a;
+//    }
 
 //   public static int BinToInt(int[] x) {
 //        int y = 0;
@@ -126,18 +164,33 @@ public class Constants {
 //        }
 //        return y;
 //    }
-    public static int BinToInt(int[] x) {
+    
+//    public static int BinToInt(int[] x) {
+//        int y = 0;
+//        int numplus = 0;
+//        int nummul = 1;
+//        if (x[0] == 1 && x.length > 6) {
+//            numplus = 1;
+//            nummul = -1;
+//        }
+//        for (int i = x.length - 1; i >= 0 + numplus; i--) {
+//            y += x[i] * Math.pow(2, x.length - i - 1);
+//        }
+//        y *= nummul;
+//        return y;
+//    }
+    
+       public static int BinToInt(int[] x) {
+        int neg;
         int y = 0;
-        int numplus = 0;
-        int nummul = 1;
-        if (x[0] == 1 && x.length > 6) {
-            numplus = 1;
-            nummul = -1;
+        if(x[0]==1){
+            y-= Math.pow(2, x.length-1);
+            neg=1;
         }
-        for (int i = x.length - 1; i >= 0 + numplus; i--) {
+        else neg=0;
+        for (int i = x.length - 1; i >= neg; i--) {
             y += x[i] * Math.pow(2, x.length - i - 1);
         }
-        y *= nummul;
         return y;
     }
 
@@ -200,11 +253,11 @@ public class Constants {
         int arr[] = {0};
         if (a.length == 16) {
             arr = Constants.getBin(x, 32);
-            if (a[0] == 1) {
+            /*if (a[0] == 1) {
                 for (int i = 0; i < 16; i++) {
                     arr[i] = 1;
                 }
-            }
+            }*/
             return arr;
         } else {
             System.out.println("Binary must be 16 bits");
