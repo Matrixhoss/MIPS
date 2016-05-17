@@ -50,11 +50,12 @@ public class Console {
             Constants.JumpOfBranch(ALU.getZeroFlag(), IM.getOperation(), address-4, IM.LineToJump,cu.Branch,cu.InvetBranch);
             DM.setDataMemory(ALU.getALUResult(), Reg.ReturnData2(), cu.MemRead, cu.MemWrite);
             Reg.setWrtData(Constants.Mux(ALU.getALUResult(),DM.getReadData(),cu.MemtoReg), Constants.Mux(IM.getRT(),IM.getRD(),cu.RegDest));
-            System.out.println("Ss0=  "+Registers.$v0 + "   " + i++);    
+            System.out.println("Ss0=  "+Registers.$v0 + "   " + address);    
            // System.out.println(Constants.Memory[3]);
             System.out.println();
         }//
             Constants.l.printAll();
+            
     }
 
     // check the user use file or console to run the programe 

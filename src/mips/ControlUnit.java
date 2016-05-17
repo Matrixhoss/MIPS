@@ -151,7 +151,7 @@ public void setControlUnit(int[] input,String Format){
         this.ALUOp="00";
         this.ALUSrc=1;
         this.MemWrite=1;
-        this.RegWrite=1;
+        this.RegWrite=0;
     }
     void GenerateBeqSignals(){
         this.RegDest=0;
