@@ -32,7 +32,12 @@ public class Console {
         Constants.FristAddress = FAddress;
         address=FAddress;
         FileOrConsole();
-        Constants.Memory[15] = 77 ;
+       Registers.$a0 = 5;
+       Registers.$a1 = 35;
+       Registers.$a2 = 11;
+       Registers.$a3 = 11;
+       Registers.$t9 = 1;
+       int i = 1;
             Constants.l.printAll();
             while(address<ins.size()*4+FAddress){
             IM.setInstructionMemory(address);
@@ -45,8 +50,8 @@ public class Console {
             Constants.JumpOfBranch(ALU.getZeroFlag(), IM.getOperation(), address-4, IM.LineToJump,cu.Branch,cu.InvetBranch);
             DM.setDataMemory(ALU.getALUResult(), Reg.ReturnData2(), cu.MemRead, cu.MemWrite);
             Reg.setWrtData(Constants.Mux(ALU.getALUResult(),DM.getReadData(),cu.MemtoReg), Constants.Mux(IM.getRT(),IM.getRD(),cu.RegDest));
-            System.out.println("St0=  "+Registers.$t0+"St4=  "+Registers.$t4);    
-            System.out.println(Constants.Memory[3]);
+            System.out.println("Ss0=  "+Registers.$v0 + "   " + i++);    
+           // System.out.println(Constants.Memory[3]);
             System.out.println();
         }//
             Constants.l.printAll();

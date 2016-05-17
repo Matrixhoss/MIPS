@@ -1,7 +1,16 @@
-beq $t0,$t0,l1
-add $s3 , $t0 ,$t0
-l1: sub $t2,$t1,$s0
-jal l2
-add $s3 , $t0 ,$t0
-l2: sub $t2,$t1,$s0
+fact: addi $sp, $sp, -8
+sw $ra, 4($sp)
+sw $a0, 0($sp)
+slt $t0, $a0, $t9
+beq $t0, $0, L1
+addi $v0, $0, 1
+addi $sp, $sp, 8
+j oo
+L1: addi $a0, $a0, -1
+jal fact
+lw $a0, 0($sp)
+lw $ra, 4($sp)
+addi $sp, $sp, 8
+j oo
+oo:addi $s8,$s7,0
 end

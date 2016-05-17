@@ -21,6 +21,7 @@ public class ALU {
     final String ALUnor = "1100";
 
     public void setALU(int Data1, int Data2, String ALUControl) {
+        this.ZreoFlag = 0 ;
         this.Data1 = Data1;
         this.Data2 = Data2;
         this.ALUControl = ALUControl;
@@ -63,6 +64,7 @@ public class ALU {
     }
     
     public void setALU(int d1[], int d2[], String ALUControl) {
+        this.ZreoFlag = 0 ;
         this.Data1 = Constants.BinToInt(d1);
         this.Data2 = Constants.BinToInt(d2);
         this.ALUControl = ALUControl;

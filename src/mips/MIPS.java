@@ -10,9 +10,13 @@ public class MIPS {
 
 
     public static void main(String[] args) {
-     MainWindow w = new MainWindow() ;
-    
-   Console c = new Console();
+//     MainWindow w = new MainWindow() ;
+    //MipsTxtWindow f = new MipsTxtWindow();
+  Console c = new Console();
+
+
+        
+        
 //   int x[]={0};
 //   int y[]={0};
 //    x=Constants.IntToBin(32768,"16bits");

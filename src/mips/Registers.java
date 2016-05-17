@@ -32,7 +32,7 @@ public class Registers {
     public static int $k1 = 27;
     public static int $k2 = 28;
     public static int $gp = 29;
-    public static int $sp = 30;
+    public static int $sp = 3600;
     public static int $fp = 31;
     public static int $ra = 32;
     private int ReadData1;
