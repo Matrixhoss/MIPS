@@ -102,7 +102,7 @@ public class InputGUI extends javax.swing.JFrame {
         jMenuBar1.add(jMenu2);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Abdo el Fashee5 Simulation");
+        setTitle("Assembly Simulator ");
         setResizable(false);
 
         jPanel4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
