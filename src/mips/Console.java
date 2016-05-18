@@ -32,7 +32,7 @@ public class Console {
         Constants.FristAddress = FAddress;
         address=FAddress;
         FileOrConsole();
-       Registers.$ra=80; 
+       Registers.$ra=84; 
        Registers.$a0 = 0;
        Registers.$a1 = 0;
        Registers.$a2 = 0;
@@ -41,8 +41,10 @@ public class Console {
        int i = 1;
             Constants.l.printAll();
             while(address<ins.size()*4+FAddress){
+            System.out.println("Address to next Instruction:"+address);
             IM.setInstructionMemory(address);
             System.out.println("Operation : "+IM.getOperation());
+            System.out.println("Address to next Instruction:"+address);
             cu.setControlUnit(IM.getControlUnit(),IM.Format);
             Constants.CheckJump(IM.getAddressToJump(), cu.Jump, address-4, IM.getOperation());
             Reg.setRegisters(IM.getRS(), IM.getRT(), cu.RegWrite);

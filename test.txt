@@ -1,4 +1,4 @@
-fib: beq $a0, $0, baseCase
+fib: beq $a0, $0, baseCase1
 addi $t0, $0, 1
 beq $a0, $t0, baseCase2
 addi $a0, $a0, -1
@@ -15,8 +15,9 @@ add $v0, $v0, $t0
 lw $ra,4($sp)
 addi $sp, $sp, 8
 jr $ra
-baseCase1:addi $v0,$0,0
+baseCase1: addi $v0,$0,0
 jr $ra
-baseCase2:addi $v0,$0,1
+baseCase2: addi $v0,$0,1
 jr $ra
+add $t9,$t9,$t9
 end

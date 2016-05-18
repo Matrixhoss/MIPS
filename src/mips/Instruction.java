@@ -74,6 +74,7 @@ public class Instruction {
         SaveLabel();
         System.out.println(address);
 //        System.out.println(this.line);
+        System.out.println("this Line :"+this.line);
         System.out.println("rd = "+Constants.BinToInt(rdAddressBinary));
         System.out.println("rs ="+Constants.BinToInt(rsAddressBinary));
         System.out.println("rt ="+Constants.BinToInt(rtAddressBinary));
