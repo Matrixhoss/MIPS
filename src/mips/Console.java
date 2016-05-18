@@ -14,7 +14,7 @@ public class Console {
     private int numofins = 0;
     private String read = "";
     Scanner sc = new Scanner(System.in);
-    private int selectionCode = 1;
+    private int selectionCode = 2;
 
     private InstructionMemory IM = new InstructionMemory();
     private Registers Reg = new Registers();
@@ -68,6 +68,31 @@ public class Console {
     public void FileOrConsole() {
         // if selectionCode = 1 then the user use file system 
         if (selectionCode == 1) {
+            try {
+                FileReader fr = new FileReader("test.txt");
+                BufferedReader br = new BufferedReader(fr);
+                System.out.println("Enter the instructions and when you're done type end");
+                //while the user dont type end the system take the line and pt it on LinkedList 
+                while (true) {
+                    read = br.readLine();
+                    if (read.equals("end")) {
+                        break;
+                    }
+                    ins.add(read + " ");
+                    Constants.Instructions[numofins] = new Instruction(FAddress, ins.get(numofins), numofins);
+
+                    numofins++;
+                }
+                br.close();
+                fr.close();
+
+            } catch (FileNotFoundException e) {
+                System.out.println("error");
+            } catch (IOException e) {
+                System.out.println("error");
+            }
+
+        }if (selectionCode == 2) {
             try {
                 FileReader fr = new FileReader("test.txt");
                 BufferedReader br = new BufferedReader(fr);
