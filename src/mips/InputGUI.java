@@ -623,6 +623,9 @@ public class InputGUI extends javax.swing.JFrame {
         } catch (IOException ex) {
             Logger.getLogger(InputGUI.class.getName()).log(Level.SEVERE, null, ex);
         }
+        catch (NullPointerException ex){
+            JOptionPane.showMessageDialog(null, "No file was loaded in order to save it.");
+        }
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
