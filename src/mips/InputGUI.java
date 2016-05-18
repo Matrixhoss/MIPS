@@ -420,10 +420,11 @@ public class InputGUI extends javax.swing.JFrame {
 
         jMenu4.setText("Help");
 
-        jMenuItem3.setText("jMenuItem3");
+        jMenuItem3.setText("Usage Guide");
         jMenu4.add(jMenuItem3);
 
-        jMenuItem4.setText("jMenuItem4");
+        jMenuItem4.setText("Help");
+        jMenuItem4.setToolTipText("");
         jMenu4.add(jMenuItem4);
 
         jMenuBar2.add(jMenu4);
