@@ -220,9 +220,18 @@ public void setControlUnit(int[] input,String Format){
         this.ALUSrc=1;
         this.MemWrite=0;
         this.RegWrite=1;
-        this.Mult=1;
     }
     void GenerateSltISignals(){
+       this.RegDest=0;
+        this.Branch=0;
+        this.MemRead=0;
+        this.MemtoReg=0;
+        this.ALUOp="00";
+        this.ALUSrc=1;
+        this.MemWrite=0;
+        this.RegWrite=1;
+    }
+    void GenerateSltUSignals(){
        this.RegDest=0;
         this.Branch=0;
         this.MemRead=0;
