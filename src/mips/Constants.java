@@ -15,7 +15,7 @@ public class Constants {
     public static final String[] RFormat = {"add", "sub", "and", "or", "nor", "slt", "sltu"};
     public static final String[] JFormat = {"j", "jal", "jr"};
     public static Instruction[] Instructions = new Instruction[1000];
-    public static int[] Memory = new int[1000];
+    public static int[] Memory = new int[4000];
     public static int FristAddress = 0;
 
     //Console Color
@@ -105,8 +105,8 @@ public class Constants {
         int i=size-1;
             
         try{
-        if(n>0 || size<7)
-            while (n > 0) {
+        if(n>=0 || size<7)
+            while (n >= 0) {
             a[size - 1] = n % 2;
             n = n / 2;
             size--;

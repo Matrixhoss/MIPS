@@ -121,6 +121,8 @@ public void setControlUnit(int[] input,String Format){
         this.ALUSrc=1;
         this.MemWrite=0;
         this.RegWrite=1;
+        this.Jump =0;
+        this.JumpReturn = 0;
     }
     void GenerateJaLSignals(){
         this.RegDest=0;
