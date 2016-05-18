@@ -578,6 +578,10 @@ public class Instruction {
                 OperationBinary = Constants.getBin(9, 6);
                 FunctionBinary = Constants.getBin(0, 6);
                 break;
+             case "mul":
+                OperationBinary = Constants.getBin(0, 6);
+                FunctionBinary = Constants.getBin(24, 6);
+                break;    
         }
 
     }
