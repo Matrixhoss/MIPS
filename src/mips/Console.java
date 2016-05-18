@@ -22,7 +22,45 @@ public class Console {
     private ControlUnit cu = new ControlUnit();
     private ALUControl ALUcontrol = new ALUControl();
     private DataMemory DM = new DataMemory();
+    
+    public Console(int PCValue) {
 
+        // Scanner s = new Scanner (System.in);
+        System.out.println("Initializing Mips Simolator ");
+        Constants.FristAddress = PCValue;
+        address = FAddress;
+        FileOrConsole();
+        Registers.$ra = 84;
+        Registers.$a0 = 9;
+        Registers.$a1 = 0;
+        Registers.$a2 = 0;
+        Registers.$a3 = 0;
+        Registers.$v0 = 0;
+        
+        int i = 1;
+        Constants.l.printAll();
+        while (address < ins.size() * 4 + FAddress) {
+            System.out.println("Address to next Instruction:" + address);
+            IM.setInstructionMemory(address);
+            
+            System.out.println("Operation : " + IM.getOperation());
+            System.out.println("Address to next Instruction:" + address);
+            cu.setControlUnit(IM.getControlUnit(), IM.Format);
+            Constants.CheckJump(IM.getAddressToJump(), cu.Jump, address - 4, IM.getOperation());
+            Reg.setRegisters(IM.getRS(), IM.getRT(), cu.RegWrite);
+            ALUcontrol.setSALUControl(cu.ALUOp, Constants.BinaryToString(IM.getALUControl()));
+            ALU.setALU(Reg.ReturnData1(), Constants.Mux(Reg.ReturnData2(), Constants.BinToInt(Constants.signExtend(IM.getSignExtend())), cu.ALUSrc), ALUcontrol.getALUOutput());
+            Constants.JumpOfBranch(ALU.getZeroFlag(), IM.getOperation(), address - 4, IM.LineToJump, cu.Branch, cu.InvetBranch);
+            DM.setDataMemory(ALU.getALUResult(), Reg.ReturnData2(), cu.MemRead, cu.MemWrite);
+            Reg.setWrtData(Constants.Mux(ALU.getALUResult(), DM.getReadData(), cu.MemtoReg), Constants.Mux(IM.getRT(), IM.getRD(), cu.RegDest));
+            System.out.println("Ss0=  " + Registers.$v0 + "   " + address);
+            System.out.println("Ss0=  " + Registers.$sp);
+            // System.out.println(Constants.Memory[3]);
+            System.out.println();
+        }//
+        Constants.l.printAll();
+
+    }
     public Console() {
 
         // Scanner s = new Scanner (System.in);
