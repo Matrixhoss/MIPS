@@ -314,7 +314,7 @@ public class Constants {
         }    
     public static void JumpR(int AddressToJump,int Jump,int address){
         
-            Console.address=Constants.Mux(address+4,AddressToJump,Jump);
+            Console.address=Constants.Mux(address+4,AddressToJump+4,Jump);
     }
     public static void CheckJump(int AddressToJump,int Jump,int address,String operation){
         switch(operation){
@@ -325,7 +325,7 @@ public class Constants {
                 JumpAtLink(AddressToJump, Jump, address);
                 break;
             case"jr":
-                JumpR(AddressToJump, Jump, address);
+                JumpR(Registers.$ra, Jump, address);
                 break;
         }
     }
