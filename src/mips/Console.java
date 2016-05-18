@@ -32,11 +32,12 @@ public class Console {
         Constants.FristAddress = FAddress;
         address=FAddress;
         FileOrConsole();
-       Registers.$a0 = 5;
-       Registers.$a1 = 35;
-       Registers.$a2 = 11;
-       Registers.$a3 = 11;
-       Registers.$t9 = 1;
+       Registers.$ra=80; 
+       Registers.$a0 = 0;
+       Registers.$a1 = 0;
+       Registers.$a2 = 0;
+       Registers.$a3 = 0;
+       Registers.$t9 = 0;
        int i = 1;
             Constants.l.printAll();
             while(address<ins.size()*4+FAddress){
