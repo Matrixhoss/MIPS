@@ -70,9 +70,9 @@ public class Console {
         Constants.FristAddress = FAddress;
         address = FAddress;
         FileOrConsole();
-        Registers.$ra = 84;
-        Registers.$a0 = 9;
-        Registers.$a1 = 0;
+        Registers.$ra = 60;
+        Registers.$a0 = 10;
+        Registers.$t9 = 1;
         Registers.$a2 = 0;
         Registers.$a3 = 0;
         Registers.$v0 = 0;

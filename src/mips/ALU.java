@@ -19,6 +19,10 @@ public class ALU {
     final String ALUsub = "0110";
     final String ALUslt = "0111";
     final String ALUnor = "1100";
+    final String ALUmul = "1111";
+    
+   
+    
 
     public void setALU(int Data1, int Data2, String ALUControl) {
         this.ZreoFlag = 0 ;
@@ -55,6 +59,9 @@ public class ALU {
                 break;
             case ALUnor:
                 ALUResult = Constants.BinToInt(Constants.nor(Data1InBinary, Data2InBinary));
+                break;
+                case ALUmul:
+                ALUResult = Data1 * Data2;
                 break;
             default:
                 System.out.println("Error in inputs in ALU ");

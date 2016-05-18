@@ -263,6 +263,7 @@ public class Registers {
                     }
                     
                     setValue(i, WrtData);
+                    
                     break;
                 }
             }

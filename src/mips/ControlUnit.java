@@ -17,6 +17,7 @@ public class ControlUnit {
     public int Jump;
     public int JumpReturn;
     public int InvetBranch=0;
+    public int Mult=0;
     public String Format;
 //        this.RegDest;
 //        this.Branch;
@@ -57,14 +58,15 @@ public void setControlUnit(int[] input,String Format){
                 break;
             case "100111":
                 //nor operation
-                break;    
+                break;
             }
+            
         }
         if(Format.equals("IFormat")){
             switch(this.input){    
             case "001000":
                 //addi
-                GenerateIFormatSignals();
+                GenerateAddISignals();
                 break;
             case "100011":
                 //Load instruction
@@ -82,7 +84,16 @@ public void setControlUnit(int[] input,String Format){
                 //branch if not equal
                 GenerateBneSignals();
                 break;
-            }  
+            case "000000":
+                //Shift Left
+                GenerateSllSignals();
+                break;
+            case "001010":
+                //branch if not equal
+                GenerateSllSignals();
+                break;  
+            }
+            
         }     
         if(Format.equals("JFormat")){
             switch(this.input){
@@ -112,7 +123,7 @@ public void setControlUnit(int[] input,String Format){
         this.MemWrite=0;
         this.RegWrite=1;
     }
-    void GenerateIFormatSignals(){
+    void GenerateAddISignals(){
         this.RegDest=0;
         this.Branch=0;
         this.MemRead=0;
@@ -200,9 +211,37 @@ public void setControlUnit(int[] input,String Format){
         this.Jump=1;
         this.JumpReturn=1;
     }
+    void GenerateSllSignals(){
+       this.RegDest=0;
+        this.Branch=0;
+        this.MemRead=0;
+        this.MemtoReg=0;
+        this.ALUOp="10";
+        this.ALUSrc=1;
+        this.MemWrite=0;
+        this.RegWrite=1;
+    }
+    void GenerateSltISignals(){
+       this.RegDest=0;
+        this.Branch=0;
+        this.MemRead=0;
+        this.MemtoReg=0;
+        this.ALUOp="00";
+        this.ALUSrc=1;
+        this.MemWrite=0;
+        this.RegWrite=1;
+    }
+    void GenerateSltUSignals(){
+       this.RegDest=0;
+        this.Branch=0;
+        this.MemRead=0;
+        this.MemtoReg=0;
+        this.ALUOp="00";
+        this.ALUSrc=1;
+        this.MemWrite=0;
+        this.RegWrite=1;
+    }
     
     
-    
-    
-    // "nor" , "bne"
+    // "nor"
 }
