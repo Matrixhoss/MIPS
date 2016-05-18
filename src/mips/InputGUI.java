@@ -26,6 +26,7 @@ public class InputGUI extends javax.swing.JFrame {
     /**
      * Creates new form InputGUI
      */
+    private JFileChooser chooser;
     public InputGUI() {
         initComponents();
     }
@@ -538,7 +539,9 @@ public class InputGUI extends javax.swing.JFrame {
         try {
             fw = new FileWriter("test1.txt");
             fw.write(jTextArea1.getText());
+            fw.close();
             Console s = new Console();
+            
 // TODO add your handling code here:
         } catch (IOException ex) {
             Logger.getLogger(InputGUI.class.getName()).log(Level.SEVERE, null, ex);
@@ -552,18 +555,18 @@ public class InputGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        JFileChooser chooser = new JFileChooser();
+        chooser = new JFileChooser();
         int returnVal = chooser.showOpenDialog(null);
         if (returnVal == JFileChooser.APPROVE_OPTION) {
             try {
-                FileReader fr = new FileReader(chooser.getSelectedFile().getName());
+                FileReader fr = new FileReader(chooser.getSelectedFile().getPath());
                 BufferedReader br = new BufferedReader(fr);
+                jTextArea2.setText(jTextArea2.getText()+"File Loaded from "+ chooser.getSelectedFile().getPath());
                 try {
                     jTextArea1.setText(br.readLine());
                     while(br.ready()){
                         jTextArea1.setText(jTextArea1.getText()+"\n"+br.readLine());
                     }
-                    
                 } catch (IOException ex) {
                     Logger.getLogger(InputGUI.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -574,7 +577,15 @@ public class InputGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-        // TODO add your handling code here:
+        try {
+            FileWriter fw = new FileWriter(chooser.getSelectedFile().getPath());                     
+            fw.write(jTextArea1.getText());
+            jTextArea2.setText(jTextArea2.getText()+"File Saved to path: "+ chooser.getSelectedFile().getPath());
+            fw.close();
+// TODO add your handling code here:
+        } catch (IOException ex) {
+            Logger.getLogger(InputGUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     /**
