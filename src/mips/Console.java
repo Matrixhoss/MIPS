@@ -15,7 +15,7 @@ public class Console {
     private String read = "";
     Scanner sc = new Scanner(System.in);
     Scanner s = new Scanner(System.in);
-    private int selectionCode = 1;
+    private int selectionCode = 0;
 
     private InstructionMemory IM = new InstructionMemory();
     private Registers Reg = new Registers();
@@ -23,7 +23,7 @@ public class Console {
     private ControlUnit cu = new ControlUnit();
     private ALUControl ALUcontrol = new ALUControl();
     private DataMemory DM = new DataMemory();
-    
+
     public static int LAddress;//Last Address 
     
     public Console(int PCValue) {
@@ -33,26 +33,27 @@ public class Console {
         Constants.FristAddress = PCValue;
         address = FAddress;
         FileOrConsole();
-        Registers.$ra =LAddress;
+        Registers.$ra = LAddress;
         Registers.$a0 = 10;
         Registers.$a1 = 0;
         Registers.$a2 = 0;
         Registers.$a3 = 0;
         Registers.$t9 = 4;
-        
+
         int i = 1;
         Constants.l.printAll();
         while (address < ins.size() * 4 + FAddress) {
             IM.setInstructionMemory(address);
             System.out.println("Operation : " + IM.getOperation());
-            if(!IM.getOperation().equals("end")){
+            if (!IM.getOperation().equals("end")) {
                 cu.setControlUnit(IM.getControlUnit(), IM.Format);
-                if(IM.getOperation().equals("slu"))
-                    cu.UnSigned=1;
+                if (IM.getOperation().equals("slu")) {
+                    cu.UnSigned = 1;
+                }
                 Constants.CheckJump(IM.getAddressToJump(), cu.Jump, address - 4, IM.getOperation());
                 Reg.setRegisters(IM.getRS(), IM.getRT(), cu.RegWrite);
                 ALUcontrol.setSALUControl(cu.ALUOp, Constants.BinaryToString(IM.getALUControl()));
-                ALU.setALU(Reg.ReturnData1(), Constants.Mux(Reg.ReturnData2(), Constants.BinToInt(Constants.signExtend(IM.getSignExtend())), cu.ALUSrc), ALUcontrol.getALUOutput(),cu.UnSigned);
+                ALU.setALU(Reg.ReturnData1(), Constants.Mux(Reg.ReturnData2(), Constants.BinToInt(Constants.signExtend(IM.getSignExtend())), cu.ALUSrc), ALUcontrol.getALUOutput(), cu.UnSigned);
                 Constants.JumpOfBranch(ALU.getZeroFlag(), IM.getOperation(), address - 4, IM.LineToJump, cu.Branch, cu.InvetBranch);
                 DM.setDataMemory(ALU.getALUResult(), Reg.ReturnData2(), cu.MemRead, cu.MemWrite);
                 Reg.setWrtData(Constants.Mux(ALU.getALUResult(), DM.getReadData(), cu.MemtoReg), Constants.Mux(IM.getRT(), IM.getRD(), cu.RegDest));
@@ -60,14 +61,59 @@ public class Console {
                 System.out.println("Ss0=  " + Registers.$sp);
                 // System.out.println(Constants.Memory[3]);
                 System.out.println();
-            }
-            else
+            } else {
                 break;
+            }
         }//
         Constants.l.printAll();
 
     }
-    
+
+
+    public Console(int PCValue,int SelectionCode) {
+        this.selectionCode=SelectionCode;
+        // Scanner s = new Scanner (System.in);
+        System.out.println("Initializing Mips Simolator ");
+        Constants.FristAddress = PCValue;
+        address = FAddress;
+        FileOrConsole();
+        Registers.$ra = LAddress;
+        Registers.$a0 = 10;
+        Registers.$a1 = 0;
+        Registers.$a2 = 0;
+        Registers.$a3 = 0;
+        Registers.$t9 = 4;
+
+        int i = 1;
+        Constants.l.printAll();
+        while (address < ins.size() * 4 + FAddress) {
+            IM.setInstructionMemory(address);
+            System.out.println("Operation : " + IM.getOperation());
+            if (!IM.getOperation().equals("end")) {
+                cu.setControlUnit(IM.getControlUnit(), IM.Format);
+                if (IM.getOperation().equals("slu")) {
+                    cu.UnSigned = 1;
+                }
+                Constants.CheckJump(IM.getAddressToJump(), cu.Jump, address - 4, IM.getOperation());
+                Reg.setRegisters(IM.getRS(), IM.getRT(), cu.RegWrite);
+                ALUcontrol.setSALUControl(cu.ALUOp, Constants.BinaryToString(IM.getALUControl()));
+                ALU.setALU(Reg.ReturnData1(), Constants.Mux(Reg.ReturnData2(), Constants.BinToInt(Constants.signExtend(IM.getSignExtend())), cu.ALUSrc), ALUcontrol.getALUOutput(), cu.UnSigned);
+                Constants.JumpOfBranch(ALU.getZeroFlag(), IM.getOperation(), address - 4, IM.LineToJump, cu.Branch, cu.InvetBranch);
+                DM.setDataMemory(ALU.getALUResult(), Reg.ReturnData2(), cu.MemRead, cu.MemWrite);
+                Reg.setWrtData(Constants.Mux(ALU.getALUResult(), DM.getReadData(), cu.MemtoReg), Constants.Mux(IM.getRT(), IM.getRD(), cu.RegDest));
+                System.out.println("Ss0=  " + Registers.$s1 + "   " + address);
+                System.out.println("Ss0=  " + Registers.$sp);
+                // System.out.println(Constants.Memory[3]);
+                System.out.println();
+            } else {
+                break;
+            }
+        }//
+        Constants.l.printAll();
+
+    }
+
+
     public Console() {
         // Scanner s = new Scanner (System.in);
         System.out.println("Initializing Mips Simolator ");
@@ -84,33 +130,33 @@ public class Console {
         Registers.$v0 = 0;
         Registers.$t0 = 0;
         Registers.$t1 = 1;
-        
-        
+
         int i = 1;
         Constants.l.printAll();
-        while (address !=LAddress) {
-            System.out.println("dfasdfa : "+address);
+        while (address != LAddress) {
+            System.out.println("dfasdfa : " + address);
             IM.setInstructionMemory(address);
-            if(!IM.getOperation().equals("end ")){
-            System.out.println("Operation : " + IM.getOperation());
-            System.out.println("Address to next Instruction:" + address);
-            cu.setControlUnit(IM.getControlUnit(), IM.Format);
-            if(IM.getOperation().equals("slu"))
-                cu.UnSigned=1;
-            Constants.CheckJump(IM.getAddressToJump(), cu.Jump, address - 4, IM.getOperation());
-            Reg.setRegisters(IM.getRS(), IM.getRT(), cu.RegWrite);
-            ALUcontrol.setSALUControl(cu.ALUOp, Constants.BinaryToString(IM.getALUControl()));
-            ALU.setALU(Reg.ReturnData1(), Constants.Mux(Reg.ReturnData2(), Constants.BinToInt(Constants.signExtend(IM.getSignExtend())), cu.ALUSrc), ALUcontrol.getALUOutput() , cu.UnSigned);
-            Constants.JumpOfBranch(ALU.getZeroFlag(), IM.getOperation(), address - 4, IM.LineToJump, cu.Branch, cu.InvetBranch);
-            DM.setDataMemory(ALU.getALUResult(), Reg.ReturnData2(), cu.MemRead, cu.MemWrite);
-            Reg.setWrtData(Constants.Mux(ALU.getALUResult(), DM.getReadData(), cu.MemtoReg), Constants.Mux(IM.getRT(), IM.getRD(), cu.RegDest));
-            System.out.println("Ss0=  " + Registers.$s0 + ",$s1= " + Registers.$s1);
-            System.out.println("Ss0=  " + Registers.$sp);
-            // System.out.println(Constants.Memory[3]);
-            System.out.println();
-            }
-            else
+            if (!IM.getOperation().equals("end ")) {
+                System.out.println("Operation : " + IM.getOperation());
+                System.out.println("Address to next Instruction:" + address);
+                cu.setControlUnit(IM.getControlUnit(), IM.Format);
+                if (IM.getOperation().equals("slu")) {
+                    cu.UnSigned = 1;
+                }
+                Constants.CheckJump(IM.getAddressToJump(), cu.Jump, address - 4, IM.getOperation());
+                Reg.setRegisters(IM.getRS(), IM.getRT(), cu.RegWrite);
+                ALUcontrol.setSALUControl(cu.ALUOp, Constants.BinaryToString(IM.getALUControl()));
+                ALU.setALU(Reg.ReturnData1(), Constants.Mux(Reg.ReturnData2(), Constants.BinToInt(Constants.signExtend(IM.getSignExtend())), cu.ALUSrc), ALUcontrol.getALUOutput(), cu.UnSigned);
+                Constants.JumpOfBranch(ALU.getZeroFlag(), IM.getOperation(), address - 4, IM.LineToJump, cu.Branch, cu.InvetBranch);
+                DM.setDataMemory(ALU.getALUResult(), Reg.ReturnData2(), cu.MemRead, cu.MemWrite);
+                Reg.setWrtData(Constants.Mux(ALU.getALUResult(), DM.getReadData(), cu.MemtoReg), Constants.Mux(IM.getRT(), IM.getRD(), cu.RegDest));
+                System.out.println("Ss0=  " + Registers.$s0 + ",$s1= " + Registers.$s1);
+                System.out.println("Ss0=  " + Registers.$sp);
+                // System.out.println(Constants.Memory[3]);
+                System.out.println();
+            } else {
                 break;
+            }
         }//
         Constants.l.printAll();
 
@@ -128,8 +174,8 @@ public class Console {
                 while (true) {
                     read = br.readLine();
                     if (read.equals("end")) {
-                    ins.add(read + " ");
-                    Constants.Instructions[numofins] = new Instruction(FAddress, ins.get(numofins), numofins);
+                        ins.add(read + " ");
+                        Constants.Instructions[numofins] = new Instruction(FAddress, ins.get(numofins), numofins);
                         break;
                     }
                     ins.add(read + " ");
@@ -146,7 +192,8 @@ public class Console {
                 System.out.println("error");
             }///
 
-        }if (selectionCode == 2) {
+        }
+        if (selectionCode == 2) {
             try {
                 FileReader fr = new FileReader("test.txt");
                 BufferedReader br = new BufferedReader(fr);
@@ -156,7 +203,7 @@ public class Console {
                     read = br.readLine();
                     if (read.equals("end")) {
                         ins.add(read + " ");
-                    Constants.Instructions[numofins] = new Instruction(FAddress, ins.get(numofins), numofins);
+                        Constants.Instructions[numofins] = new Instruction(FAddress, ins.get(numofins), numofins);
                         break;
                     }
                     ins.add(read + " ");
@@ -177,24 +224,22 @@ public class Console {
         else if (selectionCode == 0) {
             System.out.println("Enter the instructions and you're done type end");
             //while the user dont type end the system take the line and pt it on LinkedList 
-             while (true) {
-                    read = s.nextLine();
-                    if (read.equals("end")) {
-                        ins.add(read + " ");
-                        break;
-                    }
+            while (true) {
+                read = s.nextLine();
+                if (read.equals("end")) {
                     ins.add(read + " ");
+                    break;
                 }
-             for (int i = 0; i < ins.size(); i++) {
-             Constants.Instructions[i] = new Instruction(FAddress, ins.get(i), i);
-             }
+                ins.add(read + " ");
+            }
+            for (int i = 0; i < ins.size(); i++) {
+                Constants.Instructions[i] = new Instruction(FAddress, ins.get(i), i);
+            }
 
         }
     }
-    
-    
-    public void read (){
-    
-    
+
+    public void read() {
+
     }
 }

@@ -675,7 +675,7 @@ public class InputGUI extends javax.swing.JFrame {
 
             fw.close();
             try {
-                Console s = new Console(Integer.parseInt(jTextField2.getText()));
+                Console s = new Console(Integer.parseInt(jTextField2.getText()),1);
             } catch (NumberFormatException ex) {
                 JOptionPane.showMessageDialog(null, "Please enter the PC counter value");
             }
