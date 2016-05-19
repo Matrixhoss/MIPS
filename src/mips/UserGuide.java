@@ -42,7 +42,7 @@ public class UserGuide extends javax.swing.JFrame {
         jTextArea1.setEditable(false);
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
-        jTextArea1.setText("1. the Memory Initialization must follow the format:\n[LocationNum] [Data]\nex. \"12 100\" will save the value 100 in memory location 12.\n\n2. the Memory Location value must\nbe a multiple of 4.\n\n3. Memory Location value must not exceed 3996.\n\n4. The save button currently only saves after you load a file (so works as just updating loaded files)\n\n");
+        jTextArea1.setText("1. the Memory Initialization must follow the format:\n[LocationNum] [Data]\nex. \"12 100\" will save the value 100 in memory location 12.\n\n2. the Memory Location value must be a multiple of 4.\n\n3. Memory Location value must not exceed 3996.\n\n4. The save button currently only saves after you load a file (so works as just updating loaded files)\n\n5. You can initialze saved registers (s0 to s6) to any value you want.\n\n6. The instructions written in the middle follow the normal format \n(ex. \"add $s0,$s1,$s2\" \"Loop: add $s0,$s1,$s2)\n\n7. make sure to specify the current Program Counter value before running the program.\n\n");
         jTextArea1.setWrapStyleWord(true);
         jScrollPane1.setViewportView(jTextArea1);
 
@@ -53,8 +53,8 @@ public class UserGuide extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 834, Short.MAX_VALUE))
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 817, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 817, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -62,9 +62,8 @@ public class UserGuide extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(15, 15, 15)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 226, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGap(17, 17, 17)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 356, Short.MAX_VALUE))
         );
 
         pack();
