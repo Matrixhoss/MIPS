@@ -18,6 +18,9 @@ public class ALUControl {
         if (op.equals("01")) {
             aluinput = "0110";
         }
+        if (op.equals("11")) {
+            aluinput = "0111";
+        }
         if (op.equals("10")) {
             switch (function) {
                 case "100000":

@@ -14,7 +14,7 @@ public class Console {
     private int numofins = 0;
     private String read = "";
     Scanner sc = new Scanner(System.in);
-    private int selectionCode = 2;
+    private int selectionCode = 1;
 
     private InstructionMemory IM = new InstructionMemory();
     private Registers Reg = new Registers();
@@ -31,7 +31,7 @@ public class Console {
         address = FAddress;
         FileOrConsole();
         Registers.$ra = 84;
-        Registers.$a0 = 9;
+        Registers.$a0 = 10;
         Registers.$a1 = 0;
         Registers.$a2 = 0;
         Registers.$a3 = 0;
@@ -42,18 +42,17 @@ public class Console {
         while (address < ins.size() * 4 + FAddress) {
             System.out.println("Address to next Instruction:" + address);
             IM.setInstructionMemory(address);
-            
             System.out.println("Operation : " + IM.getOperation());
             System.out.println("Address to next Instruction:" + address);
             cu.setControlUnit(IM.getControlUnit(), IM.Format);
             Constants.CheckJump(IM.getAddressToJump(), cu.Jump, address - 4, IM.getOperation());
             Reg.setRegisters(IM.getRS(), IM.getRT(), cu.RegWrite);
             ALUcontrol.setSALUControl(cu.ALUOp, Constants.BinaryToString(IM.getALUControl()));
-            ALU.setALU(Reg.ReturnData1(), Constants.Mux(Reg.ReturnData2(), Constants.BinToInt(Constants.signExtend(IM.getSignExtend())), cu.ALUSrc), ALUcontrol.getALUOutput());
+            ALU.setALU(Reg.ReturnData1(), Constants.Mux(Reg.ReturnData2(), Constants.BinToInt(Constants.signExtend(IM.getSignExtend())), cu.ALUSrc), ALUcontrol.getALUOutput(),cu.UnSigmed);
             Constants.JumpOfBranch(ALU.getZeroFlag(), IM.getOperation(), address - 4, IM.LineToJump, cu.Branch, cu.InvetBranch);
             DM.setDataMemory(ALU.getALUResult(), Reg.ReturnData2(), cu.MemRead, cu.MemWrite);
             Reg.setWrtData(Constants.Mux(ALU.getALUResult(), DM.getReadData(), cu.MemtoReg), Constants.Mux(IM.getRT(), IM.getRD(), cu.RegDest));
-            System.out.println("Ss0=  " + Registers.$v0 + "   " + address);
+            System.out.println("Ss0=  " + Registers.$s1 + "   " + address);
             System.out.println("Ss0=  " + Registers.$sp);
             // System.out.println(Constants.Memory[3]);
             System.out.println();
@@ -61,8 +60,8 @@ public class Console {
         Constants.l.printAll();
 
     }
+    
     public Console() {
-
         // Scanner s = new Scanner (System.in);
         System.out.println("Initializing Mips Simolator ");
         System.out.println("Enter the frist address ");
@@ -71,11 +70,14 @@ public class Console {
         address = FAddress;
         FileOrConsole();
         Registers.$ra = 60;
-        Registers.$a0 = 10;
+        Registers.$a0 = 6;
         Registers.$t9 = 1;
         Registers.$a2 = 0;
         Registers.$a3 = 0;
         Registers.$v0 = 0;
+        Registers.$t0 = 0;
+        Registers.$t1 = 1;
+        
         
         int i = 1;
         Constants.l.printAll();
@@ -89,7 +91,7 @@ public class Console {
             Constants.CheckJump(IM.getAddressToJump(), cu.Jump, address - 4, IM.getOperation());
             Reg.setRegisters(IM.getRS(), IM.getRT(), cu.RegWrite);
             ALUcontrol.setSALUControl(cu.ALUOp, Constants.BinaryToString(IM.getALUControl()));
-            ALU.setALU(Reg.ReturnData1(), Constants.Mux(Reg.ReturnData2(), Constants.BinToInt(Constants.signExtend(IM.getSignExtend())), cu.ALUSrc), ALUcontrol.getALUOutput());
+            ALU.setALU(Reg.ReturnData1(), Constants.Mux(Reg.ReturnData2(), Constants.BinToInt(Constants.signExtend(IM.getSignExtend())), cu.ALUSrc), ALUcontrol.getALUOutput() , cu.UnSigmed);
             Constants.JumpOfBranch(ALU.getZeroFlag(), IM.getOperation(), address - 4, IM.LineToJump, cu.Branch, cu.InvetBranch);
             DM.setDataMemory(ALU.getALUResult(), Reg.ReturnData2(), cu.MemRead, cu.MemWrite);
             Reg.setWrtData(Constants.Mux(ALU.getALUResult(), DM.getReadData(), cu.MemtoReg), Constants.Mux(IM.getRT(), IM.getRD(), cu.RegDest));
@@ -170,5 +172,11 @@ public class Console {
             }
 
         }
+    }
+    
+    
+    public void read (){
+    
+    
     }
 }
