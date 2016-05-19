@@ -497,7 +497,7 @@ public class InputGUI extends javax.swing.JFrame {
                     jTextArea2.setText(jTextArea2.getText() + "\n" + "Value: " + Integer.parseInt(linesplit[1]) + " is saved at Memory Location: " + Integer.parseInt(linesplit[0]));
                 }
             } catch (NumberFormatException ex) {
-                JOptionPane.showMessageDialog(null, "invalid input");
+                JOptionPane.showMessageDialog(null, ex.getMessage().substring(18, ex.getMessage().length())+" is not a valid integer, skipping");
             }
 
         }
@@ -546,7 +546,7 @@ public class InputGUI extends javax.swing.JFrame {
             jTextArea2.setText(jTextArea2.getText() + "\n" + "Value: " + Integer.parseInt(jTextField13.getText()) + " is saved in register $s6");
 
         } catch (NumberFormatException ex) {
-            JOptionPane.showMessageDialog(null, "invalid input");
+            JOptionPane.showMessageDialog(null, ex.getMessage().substring(18, ex.getMessage().length())+" is not a valid integer, please enter a valid integer then try again");
         }
         //        jTextFiled1 //$s0;
         //        jTextFiled8 //$s1
