@@ -122,7 +122,7 @@ public class Console {
                     Constants.Instructions[numofins] = new Instruction(FAddress, ins.get(numofins), numofins);
 
                     numofins++;
-                }//
+                }
                 br.close();
                 fr.close();
 
@@ -130,7 +130,7 @@ public class Console {
                 System.out.println("error");
             } catch (IOException e) {
                 System.out.println("error");
-            }
+            }///
 
         }if (selectionCode == 2) {
             try {
