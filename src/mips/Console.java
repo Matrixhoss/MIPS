@@ -70,7 +70,7 @@ public class Console {
         address = FAddress;
         FileOrConsole();
         Registers.$ra = 60;
-        Registers.$a0 = 6;
+        Registers.$a0 = 7;
         Registers.$t9 = 1;
         Registers.$a2 = 0;
         Registers.$a3 = 0;
@@ -122,7 +122,7 @@ public class Console {
                     Constants.Instructions[numofins] = new Instruction(FAddress, ins.get(numofins), numofins);
 
                     numofins++;
-                }
+                }//
                 br.close();
                 fr.close();
 
