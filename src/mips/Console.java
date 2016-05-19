@@ -147,6 +147,8 @@ public class Console {
                 while (true) {
                     read = br.readLine();
                     if (read.equals("end")) {
+                        ins.add(read + " ");
+                    Constants.Instructions[numofins] = new Instruction(FAddress, ins.get(numofins), numofins);
                         break;
                     }
                     ins.add(read + " ");
