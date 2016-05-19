@@ -491,7 +491,7 @@ public class InputGUI extends javax.swing.JFrame {
                 if ((Integer.parseInt(linesplit[0]) % 4 != 0) || Integer.parseInt(linesplit[0]) > 3996) {
                     JOptionPane.showMessageDialog(null, linesplit[0] + " is not a Valid Memory Location");
                 } else {
-                    
+
                     Constants.Memory[Integer.parseInt(linesplit[0])] = Integer.parseInt(linesplit[1]);
                     System.out.println(Constants.Memory[Integer.parseInt(linesplit[0])]);
                     jTextArea2.setText(jTextArea2.getText() + "\n" + "Value: " + Integer.parseInt(linesplit[1]) + " is saved at Memory Location: " + Integer.parseInt(linesplit[0]));
@@ -499,7 +499,7 @@ public class InputGUI extends javax.swing.JFrame {
             } catch (NumberFormatException ex) {
                 JOptionPane.showMessageDialog(null, "invalid input");
             }
-            
+
         }
 
     }//GEN-LAST:event_jButton3ActionPerformed
@@ -544,7 +544,7 @@ public class InputGUI extends javax.swing.JFrame {
             jTextArea2.setText(jTextArea2.getText() + "\n" + "Value: " + Integer.parseInt(jTextField12.getText()) + " is saved in register $s5");
             Registers.$s6 = Integer.parseInt(jTextField13.getText());
             jTextArea2.setText(jTextArea2.getText() + "\n" + "Value: " + Integer.parseInt(jTextField13.getText()) + " is saved in register $s6");
-            
+
         } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(null, "invalid input");
         }
@@ -571,13 +571,17 @@ public class InputGUI extends javax.swing.JFrame {
         MessageConsole mc = new MessageConsole(jTextArea2);
         mc.redirectOut();
         try {
-            fw = new FileWriter("test1.txt");
+            if (chooser.getSelectedFile().getPath() == null) {
+                fw = new FileWriter("test1.txt");
+            } else {
+                fw = new FileWriter(chooser.getSelectedFile().getPath());
+            }
             fw.write(jTextArea1.getText());
-            
+
             fw.close();
-            try{
-            Console s = new Console(Integer.parseInt(jTextField2.getText()));}
-            catch (NumberFormatException ex){
+            try {
+                Console s = new Console(Integer.parseInt(jTextField2.getText()));
+            } catch (NumberFormatException ex) {
                 JOptionPane.showMessageDialog(null, "Please enter the PC counter value");
             }
 
@@ -617,15 +621,14 @@ public class InputGUI extends javax.swing.JFrame {
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
         try {
-            FileWriter fw = new FileWriter(chooser.getSelectedFile().getPath());            
+            FileWriter fw = new FileWriter(chooser.getSelectedFile().getPath());
             fw.write(jTextArea1.getText());
             jTextArea2.setText(jTextArea2.getText() + "\nFile Saved to path: " + chooser.getSelectedFile().getPath());
             fw.close();
 // TODO add your handling code here:
         } catch (IOException ex) {
             Logger.getLogger(InputGUI.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        catch (NullPointerException ex){
+        } catch (NullPointerException ex) {
             JOptionPane.showMessageDialog(null, "No file was loaded in order to save it.");
         }
     }//GEN-LAST:event_jMenuItem2ActionPerformed
