@@ -28,7 +28,6 @@ public class Console {
     
     public Console(int PCValue) {
 
-        this.selectionCode=SelectionCode;
         // Scanner s = new Scanner (System.in);
         System.out.println("Initializing Mips Simolator ");
         Constants.FristAddress = PCValue;
@@ -114,10 +113,8 @@ public class Console {
 
 
     public Console() {
-        this.selectionCode=SelectionCode;
         // Scanner s = new Scanner (System.in);
         System.out.println("Initializing Mips Simolator ");
-        Constants.FristAddress = PCValue;
         address = FAddress;
         FileOrConsole();
         Registers.$ra = LAddress-4;
