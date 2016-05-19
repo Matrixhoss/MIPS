@@ -310,7 +310,7 @@ public class InputGUI extends javax.swing.JFrame {
                 .addGap(50, 50, 50))
         );
 
-        jTabbedPane2.addTab("Memory Initialization  ", jPanel3);
+        jTabbedPane2.addTab("Memory Initialization", jPanel3);
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
@@ -568,6 +568,8 @@ public class InputGUI extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         FileWriter fw = null;
+        MessageConsole mc = new MessageConsole(jTextArea2);
+        mc.redirectOut();
         try {
             fw = new FileWriter("test1.txt");
             fw.write(jTextArea1.getText());
@@ -598,7 +600,7 @@ public class InputGUI extends javax.swing.JFrame {
             try {
                 FileReader fr = new FileReader(chooser.getSelectedFile().getPath());
                 BufferedReader br = new BufferedReader(fr);
-                jTextArea2.setText(jTextArea2.getText() + "File Loaded from " + chooser.getSelectedFile().getPath());
+                jTextArea2.setText(jTextArea2.getText() + "\nFile Loaded from " + chooser.getSelectedFile().getPath());
                 try {
                     jTextArea1.setText(br.readLine());
                     while (br.ready()) {
@@ -617,7 +619,7 @@ public class InputGUI extends javax.swing.JFrame {
         try {
             FileWriter fw = new FileWriter(chooser.getSelectedFile().getPath());            
             fw.write(jTextArea1.getText());
-            jTextArea2.setText(jTextArea2.getText() + "File Saved to path: " + chooser.getSelectedFile().getPath());
+            jTextArea2.setText(jTextArea2.getText() + "\nFile Saved to path: " + chooser.getSelectedFile().getPath());
             fw.close();
 // TODO add your handling code here:
         } catch (IOException ex) {
