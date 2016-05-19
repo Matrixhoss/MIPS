@@ -445,17 +445,20 @@ public class MainWindow extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         String operation = jList1.getSelectedValue();
-        String rd = jList2.getSelectedValue();;
-        String rs = jList3.getSelectedValue();;
-        String rt = jList4.getSelectedValue();;
+        String rd = jList2.getSelectedValue();
+        String rs = jList3.getSelectedValue();
+        String rt = jList4.getSelectedValue();
         String constant = jTextField1.getText();
         String label = jTextField6.getText();
         String jumplabel = jTextField7.getText();
 
         for (int i = 0; i < Constants.RFormat.length; i++) {
             if (jList1.getSelectedValue().equals(Constants.RFormat[i])) {
+                
+                System.out.println("RFormat index:"+i);
                 if (jTextField6.getText().isEmpty()) {
-                    Ins = (operation + " " + rd + "," + rs + "," + rt + "");
+                    Ins = (operation + " " + rd + "," + rs + "," + rt + "\n" +
+"                    Ins = (label + \":\" + operation + \" \" + rd + \",\" + rs +");
                 } else {
                     Ins = (label + ":" + operation + " " + rd + "," + rs + "," + rt + "");
                     
@@ -464,6 +467,7 @@ public class MainWindow extends javax.swing.JFrame {
         }
         for (int i = 0; i < Constants.JFormat.length; i++) {
             if (jList1.getSelectedValue().equals(Constants.JFormat[i])) {
+                System.out.println("JFormat index:"+i);
                 if (jTextField6.getText().isEmpty()) {
                     Ins = (operation + " " + jumplabel + "");
                 } else {
@@ -475,7 +479,10 @@ public class MainWindow extends javax.swing.JFrame {
 
         for (int i = 0; i < Constants.IFormat.length; i++) {
             if (jList1.getSelectedValue().equals(Constants.IFormat[i])) {
-                if (jList1.getSelectedValue().equals("lw") || jList1.getSelectedValue().equals("sw")) {
+                
+                System.out.println("IFormat index:"+i);
+                System.out.println(jList1.getSelectedValue());
+                if ((jList1.getSelectedValue().equals("lw")) || (jList1.getSelectedValue().equals("sw"))) {
                     if (jTextField6.getText().isEmpty()) {
                         Ins = (operation + " " + rd + "," + constant + "(" + rs + ")");
                     } else {
