@@ -11,7 +11,8 @@ public class MIPS {
 
 
     public static void main(String[] args) {
-   //  MainWindow w = new MainWindow() ;
+    MainWindow w = new MainWindow() ;
+    w.setVisible(true);
 //    MipsTxtWindow f = new MipsTxtWindow();
  Console c = new Console();
     

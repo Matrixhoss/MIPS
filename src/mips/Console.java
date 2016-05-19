@@ -37,7 +37,7 @@ public class Console {
         Registers.$a1 = 0;
         Registers.$a2 = 0;
         Registers.$a3 = 0;
-        Registers.$v0 = 0;
+        Registers.$t9 = 4;
         
         int i = 1;
         Constants.l.printAll();
