@@ -75,6 +75,7 @@ public class Console {
         // Scanner s = new Scanner (System.in);
         System.out.println("Initializing Mips Simolator ");
         Constants.FristAddress = PCValue;
+        FAddress=PCValue;
         address = FAddress;
         FileOrConsole();
         Registers.$ra = LAddress-4;
