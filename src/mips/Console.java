@@ -15,7 +15,7 @@ public class Console {
     private String read = "";
     Scanner sc = new Scanner(System.in);
     Scanner s = new Scanner(System.in);
-    private int selectionCode = 0;
+    private int selectionCode = 1;
 
     private InstructionMemory IM = new InstructionMemory();
     private Registers Reg = new Registers();
