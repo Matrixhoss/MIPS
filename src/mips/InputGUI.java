@@ -453,6 +453,11 @@ public class InputGUI extends javax.swing.JFrame {
         jMenu4.setText("Help");
 
         jMenuItem3.setText("Usage Guide");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
         jMenu4.add(jMenuItem3);
 
         jMenuItem4.setText("Help");
@@ -640,6 +645,15 @@ public class InputGUI extends javax.swing.JFrame {
     private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField2ActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+UserGuide x= new UserGuide();
+x.setResizable(false);
+x.setVisible(true);
+
+x.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     /**
      * @param args the command line arguments
