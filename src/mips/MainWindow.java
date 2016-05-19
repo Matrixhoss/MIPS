@@ -113,6 +113,11 @@ public class MainWindow extends javax.swing.JFrame {
         jLabel4.setText("Register rt");
 
         jButton2.setText("Add instruction");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jTextField2.setText("Initial address");
         jTextField2.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -387,6 +392,10 @@ public class MainWindow extends javax.swing.JFrame {
         jTextArea1.append("$fp: "+Registers.$fp+"\n");
         jTextArea1.append("$ra: "+Registers.$ra+"\n");
     }//GEN-LAST:event_jMenuItem3ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
