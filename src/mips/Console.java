@@ -88,7 +88,6 @@ public class Console {
         Constants.l.printAll();
         while (address !=LAddress) {
             IM.setInstructionMemory(address);
-            System.out.println("Operation : " + IM.getOperation());
             if (!IM.getOperation().equals("end")) {
                 cu.setControlUnit(IM.getControlUnit(), IM.Format);
                 if (IM.getOperation().equals("slu")) {
@@ -101,9 +100,6 @@ public class Console {
                 Constants.JumpOfBranch(ALU.getZeroFlag(), IM.getOperation(), address - 4, IM.LineToJump, cu.Branch, cu.InvetBranch);
                 DM.setDataMemory(ALU.getALUResult(), Reg.ReturnData2(), cu.MemRead, cu.MemWrite);
                 Reg.setWrtData(Constants.Mux(ALU.getALUResult(), DM.getReadData(), cu.MemtoReg), Constants.Mux(IM.getRT(), IM.getRD(), cu.RegDest));
-                System.out.println("Ss0=  " + Registers.$s1 + "   " + address);
-                System.out.println("Ss0=  " + Registers.$sp);
-                // System.out.println(Constants.Memory[3]);
                 System.out.println();
             } else {
                 break;

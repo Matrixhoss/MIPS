@@ -45,6 +45,7 @@ public class InstructionMemory {
         if(Operation.equals("beq")||Operation.equals("bne")){
             //calculate the line that branch jump to
             this.calcLine(address);
+            System.out.println("Branch[15-0]= "+LineToJump);
             ins.LineToJump=this.LineToJump;
         }
         if(Operation.equals("j")||Operation.equals("jal")||Operation.equals("jr")){
@@ -138,7 +139,10 @@ public class InstructionMemory {
     //Function to get address to jump
     public void getJumpAddress(){
             this.AddressToJump=Constants.l.SearchAddress(ToJump);
-            System.out.println("AddressToJump: "+AddressToJump);
+            if(Operation.equals("jr"))
+                System.out.println("AddressToJump: "+Registers.$ra);
+            else
+                System.out.println("AddressToJump: "+AddressToJump);
             ins.AddressToJump=this.AddressToJump;
     }
 }

@@ -84,10 +84,13 @@ public class Instruction {
         System.out.println(address);
 //        System.out.println(this.line);
         System.out.println("this Line :"+this.line);
-        System.out.println("rd = "+Constants.BinToInt(rdAddressBinary));
-        System.out.println("rs ="+Constants.BinToInt(rsAddressBinary));
-        System.out.println("rt ="+Constants.BinToInt(rtAddressBinary));
+        System.out.println("rd(Instruction[25-21])= "+Constants.BinToInt(rdAddressBinary));
+        System.out.println("rs(Instruction[20-16])= "+Constants.BinToInt(rsAddressBinary));
+        System.out.println("rt(Instruction[20-16])= "+Constants.BinToInt(rtAddressBinary));
+        System.out.println("Operation(Instruction[31-26])= "+Constants.BinToInt(OperationBinary));
+        System.out.println("Function(Instruction[5-0])= "+Constants.BinToInt(FunctionBinary));
         System.out.println("Label  : " + this.label);
+        System.out.println("rs :");
         System.out.println(Constants.BinToInt(FunctionBinary));
         System.out.println(Registers.$s0);
 //        for(int i=0;i<6;i++){
