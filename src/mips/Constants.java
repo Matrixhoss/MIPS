@@ -182,12 +182,15 @@ public class Constants {
 //        y *= nummul;
 //        return y;
 //    }
-    
-       public static int BinToInt(int[] x) {
+    public static int BinToInt(int[] x){
+        int y =BinToInt(x,false);
+        return y;
+    }
+       public static int BinToInt(int[] x,boolean isUnsigned) {
         int neg;
         int y = 0;
         
-        if(x[0]==1 && x.length>7){
+        if(x[0]==1 && x.length>7 && !isUnsigned){
             if(x.length>31)
             y++;
             y-= Math.pow(2, x.length-1);
