@@ -6,10 +6,12 @@
 package mips;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.stage.FileChooser;
@@ -668,17 +670,24 @@ public class InputGUI extends javax.swing.JFrame {
         MessageConsole mc = new MessageConsole(jTextArea2);
         mc.redirectOut();
         try {
+            try{File f = new File("test.txt");
+            f.delete();}
+            catch(Exception ex){}
             if (!chooser.isEnabled()) {
-                fw = new FileWriter("test1.txt");
+                fw = new FileWriter("test.txt");
             } else {
                 fw = new FileWriter(chooser.getSelectedFile().getPath());
             }
+            
             fw.write(jTextArea1.getText());
             fw.close();
             try {
                 Console s = new Console(Integer.parseInt(jTextField2.getText()), 1);
             } catch (NumberFormatException ex) {
                 JOptionPane.showMessageDialog(null, "Please enter the PC counter value");
+            }
+            catch (Exception ex){
+                
             }
 
 // TODO add your handling code here:
