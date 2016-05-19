@@ -17,8 +17,9 @@ public class ControlUnit {
     public int JumpReturn;
     public int InvetBranch = 0;
     public int Mult = 0;
+    public int Unsign=0;
     public String Format;
-    public int UnSigmed;
+    public int UnSigmed=0;
 //        this.RegDest;
 //        this.Branch;
 //        this.MemRead;
@@ -322,5 +323,6 @@ public class ControlUnit {
         this.JumpReturn = 0;
         this.UnSigmed = 1;
     }
+    
     // "nor"
 }
