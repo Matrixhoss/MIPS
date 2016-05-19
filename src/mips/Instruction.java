@@ -66,7 +66,15 @@ public class Instruction {
         }
         instruction = ins;
         this.line = Line;
-//        Constants.Instruction[0] = "firstInstruction";
+
+        if(ins.equals("end ")){
+            Console.LAddress=address;
+            this.opration="end";
+            this.label="end";
+            SaveLabel();
+        }
+        else{
+        //        Constants.Instruction[0] = "firstInstruction"; 
         ReadIns(instruction.toCharArray());
         operationToBinary();
         RegToBinary();
@@ -98,6 +106,7 @@ public class Instruction {
             System.out.print(InstructionBinary[i]);
         }
         System.out.println();
+        }
     }
 
     private void InsToBinary() {

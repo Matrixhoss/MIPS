@@ -28,6 +28,4 @@ mul $v0, $a0, $v0
 
 jr $ra
 
-addi $t8,$t8,0
-
 end

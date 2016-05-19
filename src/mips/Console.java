@@ -23,6 +23,8 @@ public class Console {
     private ALUControl ALUcontrol = new ALUControl();
     private DataMemory DM = new DataMemory();
     
+    public static int LAddress;//Last Address 
+    
     public Console(int PCValue) {
 
         // Scanner s = new Scanner (System.in);
@@ -30,7 +32,7 @@ public class Console {
         Constants.FristAddress = PCValue;
         address = FAddress;
         FileOrConsole();
-        Registers.$ra = 84;
+        Registers.$ra =LAddress;
         Registers.$a0 = 10;
         Registers.$a1 = 0;
         Registers.$a2 = 0;
@@ -40,24 +42,26 @@ public class Console {
         int i = 1;
         Constants.l.printAll();
         while (address < ins.size() * 4 + FAddress) {
-            System.out.println("Address to next Instruction:" + address);
             IM.setInstructionMemory(address);
             System.out.println("Operation : " + IM.getOperation());
-            System.out.println("Address to next Instruction:" + address);
-            cu.setControlUnit(IM.getControlUnit(), IM.Format);
-            if(IM.getOperation().equals("slu"))
-                cu.UnSigned=1;
-            Constants.CheckJump(IM.getAddressToJump(), cu.Jump, address - 4, IM.getOperation());
-            Reg.setRegisters(IM.getRS(), IM.getRT(), cu.RegWrite);
-            ALUcontrol.setSALUControl(cu.ALUOp, Constants.BinaryToString(IM.getALUControl()));
-            ALU.setALU(Reg.ReturnData1(), Constants.Mux(Reg.ReturnData2(), Constants.BinToInt(Constants.signExtend(IM.getSignExtend())), cu.ALUSrc), ALUcontrol.getALUOutput(),cu.UnSigned);
-            Constants.JumpOfBranch(ALU.getZeroFlag(), IM.getOperation(), address - 4, IM.LineToJump, cu.Branch, cu.InvetBranch);
-            DM.setDataMemory(ALU.getALUResult(), Reg.ReturnData2(), cu.MemRead, cu.MemWrite);
-            Reg.setWrtData(Constants.Mux(ALU.getALUResult(), DM.getReadData(), cu.MemtoReg), Constants.Mux(IM.getRT(), IM.getRD(), cu.RegDest));
-            System.out.println("Ss0=  " + Registers.$s1 + "   " + address);
-            System.out.println("Ss0=  " + Registers.$sp);
-            // System.out.println(Constants.Memory[3]);
-            System.out.println();
+            if(!IM.getOperation().equals("end")){
+                cu.setControlUnit(IM.getControlUnit(), IM.Format);
+                if(IM.getOperation().equals("slu"))
+                    cu.UnSigned=1;
+                Constants.CheckJump(IM.getAddressToJump(), cu.Jump, address - 4, IM.getOperation());
+                Reg.setRegisters(IM.getRS(), IM.getRT(), cu.RegWrite);
+                ALUcontrol.setSALUControl(cu.ALUOp, Constants.BinaryToString(IM.getALUControl()));
+                ALU.setALU(Reg.ReturnData1(), Constants.Mux(Reg.ReturnData2(), Constants.BinToInt(Constants.signExtend(IM.getSignExtend())), cu.ALUSrc), ALUcontrol.getALUOutput(),cu.UnSigned);
+                Constants.JumpOfBranch(ALU.getZeroFlag(), IM.getOperation(), address - 4, IM.LineToJump, cu.Branch, cu.InvetBranch);
+                DM.setDataMemory(ALU.getALUResult(), Reg.ReturnData2(), cu.MemRead, cu.MemWrite);
+                Reg.setWrtData(Constants.Mux(ALU.getALUResult(), DM.getReadData(), cu.MemtoReg), Constants.Mux(IM.getRT(), IM.getRD(), cu.RegDest));
+                System.out.println("Ss0=  " + Registers.$s1 + "   " + address);
+                System.out.println("Ss0=  " + Registers.$sp);
+                // System.out.println(Constants.Memory[3]);
+                System.out.println();
+            }
+            else
+                break;
         }//
         Constants.l.printAll();
 
@@ -71,8 +75,8 @@ public class Console {
         Constants.FristAddress = FAddress;
         address = FAddress;
         FileOrConsole();
-        Registers.$ra = 60;
-        Registers.$a0 = 7;
+        Registers.$ra = LAddress;
+        Registers.$a0 = 10;
         Registers.$t9 = 1;
         Registers.$a2 = 0;
         Registers.$a3 = 0;
@@ -84,9 +88,9 @@ public class Console {
         int i = 1;
         Constants.l.printAll();
         while (address < ins.size() * 4 + FAddress) {
-            System.out.println("Address to next Instruction:" + address);
+            System.out.println("dfasdfa : "+address);
             IM.setInstructionMemory(address);
-            
+            if(!IM.getOperation().equals("end")){
             System.out.println("Operation : " + IM.getOperation());
             System.out.println("Address to next Instruction:" + address);
             cu.setControlUnit(IM.getControlUnit(), IM.Format);
@@ -103,6 +107,9 @@ public class Console {
             System.out.println("Ss0=  " + Registers.$sp);
             // System.out.println(Constants.Memory[3]);
             System.out.println();
+            }
+            else
+                break;
         }//
         Constants.l.printAll();
 
