@@ -29,6 +29,8 @@ public class InputGUI extends javax.swing.JFrame {
     private JFileChooser chooser;
 
     public InputGUI() {
+        chooser = new JFileChooser();
+        chooser.setEnabled(false);
         initComponents();
     }
 
@@ -584,7 +586,7 @@ public class InputGUI extends javax.swing.JFrame {
                     jTextArea2.setText(jTextArea2.getText() + "\n" + "Value: " + Integer.parseInt(linesplit[1]) + " is saved at Memory Location: " + Integer.parseInt(linesplit[0]));
                 }
             } catch (NumberFormatException ex) {
-                JOptionPane.showMessageDialog(null, ex.getMessage().substring(18, ex.getMessage().length())+" is not a valid integer, skipping");
+                JOptionPane.showMessageDialog(null, ex.getMessage().substring(18, ex.getMessage().length()) + " is not a valid integer, skipping");
             }
 
         }
@@ -641,7 +643,7 @@ public class InputGUI extends javax.swing.JFrame {
             jTextArea2.setText(jTextArea2.getText() + "\n" + "Value: " + Integer.parseInt(jTextField17.getText()) + " is saved in register $a3");
 
         } catch (NumberFormatException ex) {
-            JOptionPane.showMessageDialog(null, ex.getMessage().substring(18, ex.getMessage().length())+" is not a valid integer, please enter a valid integer then try again");
+            JOptionPane.showMessageDialog(null, ex.getMessage().substring(18, ex.getMessage().length()) + " is not a valid integer, please enter a valid integer then try again");
         }
         //        jTextFiled1 //$s0;
         //        jTextFiled8 //$s1
@@ -666,16 +668,15 @@ public class InputGUI extends javax.swing.JFrame {
         MessageConsole mc = new MessageConsole(jTextArea2);
         mc.redirectOut();
         try {
-            if (chooser.getSelectedFile().getPath() == null) {
+            if (!chooser.isEnabled()) {
                 fw = new FileWriter("test1.txt");
             } else {
                 fw = new FileWriter(chooser.getSelectedFile().getPath());
             }
             fw.write(jTextArea1.getText());
-
             fw.close();
             try {
-                Console s = new Console(Integer.parseInt(jTextField2.getText()),1);
+                Console s = new Console(Integer.parseInt(jTextField2.getText()), 1);
             } catch (NumberFormatException ex) {
                 JOptionPane.showMessageDialog(null, "Please enter the PC counter value");
             }
@@ -683,17 +684,17 @@ public class InputGUI extends javax.swing.JFrame {
 // TODO add your handling code here:
         } catch (IOException ex) {
             Logger.getLogger(InputGUI.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            try {
-                fw.close();
-            } catch (IOException ex) {
-                Logger.getLogger(InputGUI.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
+        }// finally {
+        // try {
+        //    fw.close();
+        //  } catch (IOException ex) {
+        //    Logger.getLogger(InputGUI.class.getName()).log(Level.SEVERE, null, ex);
+        // } 
+        // }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        chooser = new JFileChooser();
+        chooser.setEnabled(true);
         int returnVal = chooser.showOpenDialog(null);
         if (returnVal == JFileChooser.APPROVE_OPTION) {
             try {
@@ -737,11 +738,11 @@ public class InputGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField2ActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-UserGuide x= new UserGuide();
-x.setResizable(false);
-x.setVisible(true);
+        UserGuide x = new UserGuide();
+        x.setResizable(false);
+        x.setVisible(true);
 
-x.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        x.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
