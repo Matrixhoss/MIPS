@@ -45,10 +45,12 @@ public class Console {
             System.out.println("Operation : " + IM.getOperation());
             System.out.println("Address to next Instruction:" + address);
             cu.setControlUnit(IM.getControlUnit(), IM.Format);
+            if(IM.getOperation().equals("slu"))
+                cu.UnSigned=1;
             Constants.CheckJump(IM.getAddressToJump(), cu.Jump, address - 4, IM.getOperation());
             Reg.setRegisters(IM.getRS(), IM.getRT(), cu.RegWrite);
             ALUcontrol.setSALUControl(cu.ALUOp, Constants.BinaryToString(IM.getALUControl()));
-            ALU.setALU(Reg.ReturnData1(), Constants.Mux(Reg.ReturnData2(), Constants.BinToInt(Constants.signExtend(IM.getSignExtend())), cu.ALUSrc), ALUcontrol.getALUOutput(),cu.UnSigmed);
+            ALU.setALU(Reg.ReturnData1(), Constants.Mux(Reg.ReturnData2(), Constants.BinToInt(Constants.signExtend(IM.getSignExtend())), cu.ALUSrc), ALUcontrol.getALUOutput(),cu.UnSigned);
             Constants.JumpOfBranch(ALU.getZeroFlag(), IM.getOperation(), address - 4, IM.LineToJump, cu.Branch, cu.InvetBranch);
             DM.setDataMemory(ALU.getALUResult(), Reg.ReturnData2(), cu.MemRead, cu.MemWrite);
             Reg.setWrtData(Constants.Mux(ALU.getALUResult(), DM.getReadData(), cu.MemtoReg), Constants.Mux(IM.getRT(), IM.getRD(), cu.RegDest));
@@ -88,10 +90,12 @@ public class Console {
             System.out.println("Operation : " + IM.getOperation());
             System.out.println("Address to next Instruction:" + address);
             cu.setControlUnit(IM.getControlUnit(), IM.Format);
+            if(IM.getOperation().equals("slu"))
+                cu.UnSigned=1;
             Constants.CheckJump(IM.getAddressToJump(), cu.Jump, address - 4, IM.getOperation());
             Reg.setRegisters(IM.getRS(), IM.getRT(), cu.RegWrite);
             ALUcontrol.setSALUControl(cu.ALUOp, Constants.BinaryToString(IM.getALUControl()));
-            ALU.setALU(Reg.ReturnData1(), Constants.Mux(Reg.ReturnData2(), Constants.BinToInt(Constants.signExtend(IM.getSignExtend())), cu.ALUSrc), ALUcontrol.getALUOutput() , cu.UnSigmed);
+            ALU.setALU(Reg.ReturnData1(), Constants.Mux(Reg.ReturnData2(), Constants.BinToInt(Constants.signExtend(IM.getSignExtend())), cu.ALUSrc), ALUcontrol.getALUOutput() , cu.UnSigned);
             Constants.JumpOfBranch(ALU.getZeroFlag(), IM.getOperation(), address - 4, IM.LineToJump, cu.Branch, cu.InvetBranch);
             DM.setDataMemory(ALU.getALUResult(), Reg.ReturnData2(), cu.MemRead, cu.MemWrite);
             Reg.setWrtData(Constants.Mux(ALU.getALUResult(), DM.getReadData(), cu.MemtoReg), Constants.Mux(IM.getRT(), IM.getRD(), cu.RegDest));

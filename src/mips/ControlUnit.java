@@ -17,9 +17,8 @@ public class ControlUnit {
     public int JumpReturn;
     public int InvetBranch = 0;
     public int Mult = 0;
-    public int Unsign=0;
     public String Format;
-    public int UnSigmed=0;
+    public int UnSigned=0;
 //        this.RegDest;
 //        this.Branch;
 //        this.MemRead;
@@ -141,7 +140,7 @@ public class ControlUnit {
         this.ALUSrc = 0;
         this.MemWrite = 0;
         this.RegWrite = 1;
-        this.UnSigmed = 0;
+        this.UnSigned = 0;
     }
 
     void GenerateAddISignals() {
@@ -155,7 +154,7 @@ public class ControlUnit {
         this.RegWrite = 1;
         this.Jump = 0;
         this.JumpReturn = 0;
-        this.UnSigmed = 0;
+        this.UnSigned = 0;
     }
 
     void GenerateJaLSignals() {
@@ -168,7 +167,7 @@ public class ControlUnit {
         this.MemWrite = 0;
         this.RegWrite = 0;
         this.Jump = 1;
-        this.UnSigmed = 0;
+        this.UnSigned = 0;
     }
 
     void GenerateLoadSingals() {
@@ -180,7 +179,7 @@ public class ControlUnit {
         this.ALUSrc = 1;
         this.MemWrite = 0;
         this.RegWrite = 1;
-        this.UnSigmed = 0;
+        this.UnSigned = 0;
     }
 
     void GenerateSaveSignals() {
@@ -192,7 +191,7 @@ public class ControlUnit {
         this.ALUSrc = 1;
         this.MemWrite = 1;
         this.RegWrite = 0;
-        this.UnSigmed = 0;
+        this.UnSigned = 0;
     }
 
     void GenerateBeqSignals() {
@@ -205,7 +204,7 @@ public class ControlUnit {
         this.MemWrite = 0;
         this.RegWrite = 0;
         this.InvetBranch = 0;
-        this.UnSigmed = 0;
+        this.UnSigned = 0;
     }
 
     void GenerateJumpSignals() {
@@ -218,7 +217,7 @@ public class ControlUnit {
         this.MemWrite = 0;
         this.RegWrite = 0;
         this.Jump = 1;
-        this.UnSigmed = 0;
+        this.UnSigned = 0;
     }
 
     void GenerateBneSignals() {
@@ -231,7 +230,7 @@ public class ControlUnit {
         this.MemWrite = 0;
         this.RegWrite = 0;
         this.InvetBranch = 1;
-        this.UnSigmed = 0;
+        this.UnSigned = 0;
     }
 
     void GenerateJumpRSignals() {
@@ -245,7 +244,7 @@ public class ControlUnit {
         this.RegWrite = 0;
         this.Jump = 1;
         this.JumpReturn = 1;
-        this.UnSigmed = 0;
+        this.UnSigned = 0;
     }
 
     void GenerateSllSignals() {
@@ -257,7 +256,7 @@ public class ControlUnit {
         this.ALUSrc = 1;
         this.MemWrite = 0;
         this.RegWrite = 1;
-        this.UnSigmed = 0;
+        this.UnSigned = 0;
     }
 
     void GenerateSltISignals() {
@@ -269,7 +268,7 @@ public class ControlUnit {
         this.ALUSrc = 1;
         this.MemWrite = 0;
         this.RegWrite = 1;
-        this.UnSigmed = 0;
+        this.UnSigned = 0;
     }
 
     void GenerateSltUSignals() {
@@ -281,7 +280,7 @@ public class ControlUnit {
         this.ALUSrc = 1;
         this.MemWrite = 0;
         this.RegWrite = 1;
-        this.UnSigmed = 1;
+        this.UnSigned = 1;
     }
 
     void GenerateSLTUSignals() {
@@ -293,7 +292,7 @@ public class ControlUnit {
         this.ALUSrc = 0;
         this.MemWrite = 0;
         this.RegWrite = 1;
-        this.UnSigmed = 1;
+        this.UnSigned = 1;
     }
 
     void GenerateSLTISignals() {
@@ -307,7 +306,7 @@ public class ControlUnit {
         this.RegWrite = 1;
         this.Jump = 0;
         this.JumpReturn = 0;
-        this.UnSigmed = 0;
+        this.UnSigned = 0;
     }
 
     void GenerateSLTUISignals() {
@@ -321,7 +320,7 @@ public class ControlUnit {
         this.RegWrite = 1;
         this.Jump = 0;
         this.JumpReturn = 0;
-        this.UnSigmed = 1;
+        this.UnSigned = 1;
     }
     
     // "nor"

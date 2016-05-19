@@ -28,7 +28,7 @@ public class Pipeline {
     public void EX() {
         Constants.CheckJump(IM.getAddressToJump(), cu.Jump, address - 4, IM.getOperation());
         ALUcontrol.setSALUControl(cu.ALUOp, Constants.BinaryToString(IM.getALUControl()));
-        ALU.setALU(Reg.ReturnData1(), Constants.Mux(Reg.ReturnData2(), Constants.BinToInt(SignExtend), cu.ALUSrc), ALUcontrol.getALUOutput(),cu.UnSigmed);
+        ALU.setALU(Reg.ReturnData1(), Constants.Mux(Reg.ReturnData2(), Constants.BinToInt(SignExtend), cu.ALUSrc), ALUcontrol.getALUOutput(),cu.UnSigned);
         Constants.JumpOfBranch(ALU.getZeroFlag(), IM.getOperation(), address - 4, IM.LineToJump, cu.Branch, cu.InvetBranch);
 
     }

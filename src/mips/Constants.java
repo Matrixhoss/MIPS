@@ -333,12 +333,6 @@ public class Constants {
                 break;
         }
     }
-    public static int makeUnsign(String operation){
-        if(operation.equals("slu")||operation.equals("slui"))
-            return 1;
-        else
-            return 0;
-    }
 }
 
 
