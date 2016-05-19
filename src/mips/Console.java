@@ -14,7 +14,8 @@ public class Console {
     private int numofins = 0;
     private String read = "";
     Scanner sc = new Scanner(System.in);
-    private int selectionCode = 1;
+    Scanner s = new Scanner(System.in);
+    private int selectionCode = 0;
 
     private InstructionMemory IM = new InstructionMemory();
     private Registers Reg = new Registers();
@@ -176,15 +177,17 @@ public class Console {
         else if (selectionCode == 0) {
             System.out.println("Enter the instructions and you're done type end");
             //while the user dont type end the system take the line and pt it on LinkedList 
-            while (true) {
-                read = sc.nextLine();
-                if (read.equals("end")) {
-                    break;
+             while (true) {
+                    read = s.nextLine();
+                    if (read.equals("end")) {
+                        ins.add(read + " ");
+                        break;
+                    }
+                    ins.add(read + " ");
                 }
-                ins.add(read + " ");
-                InstructionMemory.Instruction[address] = ins.getLast();
-                numofins++;
-            }
+             for (int i = 0; i < ins.size(); i++) {
+             Constants.Instructions[i] = new Instruction(FAddress, ins.get(i), i);
+             }
 
         }
     }
