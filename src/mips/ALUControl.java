@@ -41,6 +41,9 @@ public class ALUControl {
                 case "011000" : 
                   aluinput = "1111";
                    break;
+                case "000000" : 
+                  aluinput = "1000";
+                   break;   
             
             }
             

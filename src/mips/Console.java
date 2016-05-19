@@ -76,8 +76,8 @@ public class Console {
         address = FAddress;
         FileOrConsole();
         Registers.$ra = LAddress;
-        Registers.$a0 = 10;
-        Registers.$t9 = 1;
+        Registers.$s0 = 2;
+        Registers.$s1 = 2;
         Registers.$a2 = 0;
         Registers.$a3 = 0;
         Registers.$v0 = 0;
@@ -87,10 +87,10 @@ public class Console {
         
         int i = 1;
         Constants.l.printAll();
-        while (address < ins.size() * 4 + FAddress) {
+        while (address !=LAddress) {
             System.out.println("dfasdfa : "+address);
             IM.setInstructionMemory(address);
-            if(!IM.getOperation().equals("end")){
+            if(!IM.getOperation().equals("end ")){
             System.out.println("Operation : " + IM.getOperation());
             System.out.println("Address to next Instruction:" + address);
             cu.setControlUnit(IM.getControlUnit(), IM.Format);
@@ -103,7 +103,7 @@ public class Console {
             Constants.JumpOfBranch(ALU.getZeroFlag(), IM.getOperation(), address - 4, IM.LineToJump, cu.Branch, cu.InvetBranch);
             DM.setDataMemory(ALU.getALUResult(), Reg.ReturnData2(), cu.MemRead, cu.MemWrite);
             Reg.setWrtData(Constants.Mux(ALU.getALUResult(), DM.getReadData(), cu.MemtoReg), Constants.Mux(IM.getRT(), IM.getRD(), cu.RegDest));
-            System.out.println("Ss0=  " + Registers.$v0 + "   " + address);
+            System.out.println("Ss0=  " + Registers.$s0 + ",$s1= " + Registers.$s1);
             System.out.println("Ss0=  " + Registers.$sp);
             // System.out.println(Constants.Memory[3]);
             System.out.println();

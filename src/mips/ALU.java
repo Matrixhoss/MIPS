@@ -19,6 +19,7 @@ public class ALU {
     final String ALUslt = "0111";
     final String ALUnor = "1100";
     final String ALUmul = "1111";
+    final String ALUsll = "1000";
 
     public void setALU(int Data1, int Data2, String ALUControl, int UnSign) {
         this.ZreoFlag = 0;
@@ -55,6 +56,9 @@ public class ALU {
                 break;
             case ALUmul:
                 ALUResult = Data1 * Data2;
+                break;
+            case ALUsll:
+                ALUResult = Data1 * Data2*2;
                 break;
             default:
                 System.out.println("Error in inputs in ALU ");
@@ -141,14 +145,19 @@ public class ALU {
             } else {
                 ALUResult = 0;
             }
-
         }
-
+    }
+        private void sll(){
+            if(Data2>0)
+                ALUResult=Data1*Data2*2;
+            else if(Data2==0)
+                ALUResult=Data1;
+    } 
 //    public void BranchJump(String ToJump){
 //        if(this.ZreoFlag==1){
 //            
 //            Console.address=Constants.l.SearchAddress(ToJump);
 //        }
 //    }
-    }
+    
 }

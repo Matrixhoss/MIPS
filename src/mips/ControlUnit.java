@@ -257,6 +257,7 @@ public class ControlUnit {
         this.MemWrite = 0;
         this.RegWrite = 1;
         this.UnSigned = 0;
+        this.Mult=1;
     }
 
     void GenerateSltISignals() {
