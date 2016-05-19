@@ -26,7 +26,6 @@ public class InstructionMemory {
     private Instruction ins;
 
     public void setInstructionMemory(int address) {
-        System.out.println("Address error: "+address);
         this.ins = Constants.Instructions[(address-Console.FAddress)/4];
         if(ins.opration.equals("end")){
         

@@ -49,7 +49,7 @@ public class ALUControl {
             
 
         }
-    
+        System.out.println("AluControl Result: "+aluinput);
     }
 
      public String getALUOutput (){

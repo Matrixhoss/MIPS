@@ -293,7 +293,7 @@ public class Constants {
     public static int makeAddressToBranch(int Address,int[] Instruction15T0){
         int AddressToBranch,SignExAndShift15T0;
         SignExAndShift15T0=Constants.LineToBranch(Instruction15T0);
-        System.out.println("SignExAndShift15T0: "+SignExAndShift15T0);
+        System.out.println("SignExAndShift15T0 For Branch: "+SignExAndShift15T0);
         AddressToBranch=SignExAndShift15T0+Address;
         return AddressToBranch;
     }
@@ -303,7 +303,6 @@ public class Constants {
         int BranchAndZero=Constants.AndGate(Branch, CheckBranch);
         int AddressJump=Constants.makeAddressToBranch(address, Constants.getBin(LineToJump, 16));
         Console.address=Constants.Mux(address+4, AddressJump, BranchAndZero);
-        System.out.println("BranchAndZero: "+BranchAndZero+"\n AddressJump: "+AddressJump+"\n Address+4:  "+(address+4)+"\n LineToJump: "+LineToJump);
     }
     public static void Jump(int AddressToJump,int Jump,int address){
             Console.address=Constants.Mux(address+4,AddressToJump,Jump); 
@@ -312,7 +311,6 @@ public class Constants {
     public static void JumpAtLink(int AddressToJump,int Jump,int address){
             
             Registers.$ra=Constants.Mux(0,address,Jump);
-            System.out.println("$ra: "+Registers.$ra+"  Jump: "+Jump);
             Console.address=Constants.Mux(address+4,AddressToJump,Jump);
             
         }    

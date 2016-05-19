@@ -64,7 +64,9 @@ public class ALU {
                 System.out.println("Error in inputs in ALU ");
                 break;
         }
-
+        System.out.println("ReadData1:"+Data1+",ReadData2:"+Data2);
+        System.out.println("AluResult:"+ALUResult);
+        
     }
 
     public void setALU(int d1[], int d2[], String ALUControl, int UnSign) {
@@ -110,7 +112,8 @@ public class ALU {
                 System.out.println("Error in inputs in ALU ");
                 break;
         }
-
+        System.out.println("ReadData1:"+Data1+",ReadData2:"+Data2);
+        System.out.println("AluResult:"+ALUResult);
     }
 
     public int getALUResult() {
