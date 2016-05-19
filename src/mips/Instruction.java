@@ -90,7 +90,6 @@ public class Instruction {
         System.out.println("Operation(Instruction[31-26])= "+Constants.BinToInt(OperationBinary));
         System.out.println("Function(Instruction[5-0])= "+Constants.BinToInt(FunctionBinary));
         System.out.println("Label  : " + this.label);
-        System.out.println("rs :");
         System.out.println(Constants.BinToInt(FunctionBinary));
         System.out.println(Registers.$s0);
 //        for(int i=0;i<6;i++){
@@ -105,7 +104,7 @@ public class Instruction {
 //        for(int i=0;i<16;i++){
 //            System.out.print(constantBinary[i]);
 //        }
-        System.out.println();
+        System.out.println("Instruction: ");
         for (int i = 0; i < 32; i++) {
             System.out.print(InstructionBinary[i]);
         }

@@ -15,7 +15,7 @@ public class Console {
     private String read = "";
     Scanner sc = new Scanner(System.in);
     Scanner s = new Scanner(System.in);
-    private int selectionCode = 0;
+    private int selectionCode = 1;
 
     private InstructionMemory IM = new InstructionMemory();
     private Registers Reg = new Registers();
@@ -47,7 +47,8 @@ public class Console {
             IM.setInstructionMemory(address);
             if (!IM.getOperation().equals("end")) {
                 cu.setControlUnit(IM.getControlUnit(), IM.Format);
-                System.out.println("Jump:"+cu.Jump+",RegDst:"+cu.RegDest+",Branch:"+cu.Branch+",MemRead:"+cu.MemRead+",MemtoReg:"+cu.MemtoReg+",MemWrite:"+cu);
+                System.out.println("Jump:"+cu.Jump+",RegDst:"+cu.RegDest+",Branch:"+cu.Branch+",MemRead:"+cu.MemRead+",MemtoReg:"+cu.MemtoReg+",MemWrite:"+cu.MemWrite+",ALUSrc:"+cu.ALUSrc+"RegWrite:"+cu.RegWrite);
+                System.out.print("AluOP:"+cu.ALUOp);
                 if (IM.getOperation().equals("slu")) {
                     cu.UnSigned = 1;
                 }
@@ -90,7 +91,8 @@ public class Console {
             IM.setInstructionMemory(address);
             if (!IM.getOperation().equals("end")) {
                 cu.setControlUnit(IM.getControlUnit(), IM.Format);
-                System.out.println("Jump:"+cu.Jump+",RegDst:"+cu.RegDest+",Branch:"+cu.Branch+",MemRead:"+cu.MemRead+",MemtoReg:"+cu.MemtoReg+",MemWrite:"+cu);
+                System.out.println("Jump:"+cu.Jump+",RegDst:"+cu.RegDest+",Branch:"+cu.Branch+",MemRead:"+cu.MemRead+",MemtoReg:"+cu.MemtoReg+",MemWrite:"+cu.MemWrite+",ALUSrc:"+cu.ALUSrc+"RegWrite:"+cu.RegWrite);
+                System.out.print("AluOP:"+cu.ALUOp);
                 if (IM.getOperation().equals("slu")) {
                     cu.UnSigned = 1;
                 }
@@ -113,12 +115,15 @@ public class Console {
 
 
     public Console() {
-        // Scanner s = new Scanner (System.in);
-        System.out.println("Initializing Mips Simolator ");
+       System.out.println("Initializing Mips Simolator ");
+        System.out.println("Enter the frist address ");
+        FAddress = sc.nextInt();
+        Constants.FristAddress = FAddress;
         address = FAddress;
         FileOrConsole();
+
         Registers.$ra = LAddress-4;
-        Registers.$a0 = 10;
+        Registers.$a0 = 6;
         Registers.$a1 = 0;
         Registers.$a2 = 0;
         Registers.$a3 = 0;
@@ -131,7 +136,8 @@ public class Console {
             IM.setInstructionMemory(address);
             if (!IM.getOperation().equals("end")) {
                 cu.setControlUnit(IM.getControlUnit(), IM.Format);
-                System.out.println("Jump:"+cu.Jump+",RegDst:"+cu.RegDest+",Branch:"+cu.Branch+",MemRead:"+cu.MemRead+",MemtoReg:"+cu.MemtoReg+",MemWrite:"+cu);
+                System.out.println("Jump:"+cu.Jump+",RegDst:"+cu.RegDest+",Branch:"+cu.Branch+",MemRead:"+cu.MemRead+",MemtoReg:"+cu.MemtoReg+",MemWrite:"+cu.MemWrite+",ALUSrc:"+cu.ALUSrc+"RegWrite:"+cu.RegWrite);
+                System.out.print("AluOP:"+cu.ALUOp);
                 if (IM.getOperation().equals("slu")) {
                     cu.UnSigned = 1;
                 }
