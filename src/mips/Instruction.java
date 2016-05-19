@@ -72,6 +72,7 @@ public class Instruction {
             this.opration="end";
             this.label="end";
             SaveLabel();
+            
         }
         else{
         //        Constants.Instruction[0] = "firstInstruction"; 

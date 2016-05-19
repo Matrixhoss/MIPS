@@ -13,4 +13,5 @@ lw $ra, 4($sp)
 addi $sp, $sp, 8
 mul $v0, $a0, $v0
 jr $ra
+addi $t9,$t9,2
 end

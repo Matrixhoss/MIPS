@@ -53,7 +53,7 @@ public class InstructionMemory {
         this.Format=ins.of;
         
         
-        } 
+        }
         Console.address+=4;
     }
 
