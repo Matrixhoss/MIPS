@@ -179,9 +179,12 @@ public class Instruction {
 
         label = getString(labelChar);
         opration = getString(oprationChar);
-
         Lo:
         for (int j = 0; j < Constants.oprations.length; j++) {
+            if(opration.equals("end")){
+                System.out.println(Constants.ANSI_CYAN+"End of Instructions"+Constants.ANSI_RESET);
+                break;
+            }
             if (opration.equals(Constants.oprations[j])) {
                 opFound = true;
                 System.out.println(Constants.ANSI_GREEN + "opration is found" + Constants.ANSI_RESET);
@@ -220,6 +223,7 @@ public class Instruction {
         } // end of for 
 
         // if opration not found in Constant oprations 
+        if (!opration.equals("end")){
         if (opFound == false) {
 
             System.out.println(Constants.ANSI_RED + "The optation is Not found in line " + (line + 1) + Constants.ANSI_RESET);
@@ -237,7 +241,7 @@ public class Instruction {
         if (of.equals("JFormat")) {
             JFormatSet(instruction, i);
         }// end if of Jformat
-
+        }// end of check end
     }
 
     // set RForamte values
